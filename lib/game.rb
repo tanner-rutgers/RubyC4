@@ -1,7 +1,9 @@
-class Game
+require 'test/unit'
+
+class Game < Test::Unit::TestCase
 	def initialize(players)
 		# -- Pre Condiditions -- #
-		assert(players.kind_of(Array)
+		assert(players.is_a?Array)
 		assert(players.size >0)
 		players.each {|x| assert(x.kind_of(String))}
 				
@@ -27,7 +29,7 @@ class Game
 	end
 	def currentTurn?(player)
 		# -- Pre Conditions -- #
-		assert(player.kind_of?(String))
+		assert(player.is_a?Player)
 		assert(players.include?(player))
 		
 		# -- Code -- #
@@ -45,13 +47,13 @@ class Game
 	end
 	def createBoard(rowSize, colSize)	
 		# -- Pre Conditions -- #
-		assert(rowSize.kind_of?(Integer))
-		assert(colSize.kind_of?(Integer))
+		assert(rowSize.is_a?(Integer))
+		assert(colSize.is_a?(Integer))
 
 		# -- Code -- #
 
 		# -- Post Conditions -- #
-		assert_equal(@board.size,rowSize)
+		assert_equal(@board.size, [rowSize, colSize])
 		@board.each { |x| assert_equal(x.size,colSize)}
 	end
 end

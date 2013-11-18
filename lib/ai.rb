@@ -1,6 +1,6 @@
 require 'test/unit'
 
-class Player < Test::Unit::TestCase
+class AI < Test::Unit::TestCase
 	def initialize(name,winCondition,pieces)
 		# -- Pre Conditions -- #
 		assert(name.is_a?(String))
@@ -28,8 +28,4 @@ class Player < Test::Unit::TestCase
 		assert_equal(board.numTokens(colNumber), tokens_before_addition + 1)
 		assert_equal(board[colNumber][tokens_before_addition],self)
 	end
-
-    def hasWon?(board)
-      assert(!@winCondition.nil?)
-    end
 end

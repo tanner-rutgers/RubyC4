@@ -1,46 +1,32 @@
-
-def initialize()
-	#load persistent settings
-	@win = false
-	@current_player_index = nil
-	@current_screen_index = nil
-	@players = Array.new
-	@screens = Array.new
-	@model = new Model
+Class GameController
+	def initialize()
+		@game = Game.new
 	
-	play()
-end
+		play()
+	end
 
-def play()
-	#MAIN GAME CODE
-end
+	def play()
+		  # -- Pre Conditions -- #
+		  assert(!@game.board.nil?)
 
-def win?()
-	return @win
-end
 
-def push()
-	#push next screen, update @current_screen
-end
+		  # -- Code -- #
 
-def update_board(x, y, val)
-	#board[x][y] = val
-end
+		  # -- Post Conditions -- #
+		  assert(!@game.currentPlayersTurn.nil?)
+		  assert(@game.players.include?(@currentPlayersTurn))
+		end
 
-def update_setting(setting, val) 
-	#settings should be a hash or enumerated array
-end
+	def win?()
+		return @win
+	end
 
-def load_persistent()
-	#load persistent settings
-end
+	def push()
+		#push next screen, update @current_screen
+	end
 
-def save_persistent()
-	#save persistent settings
+	def get_controller()
+		return self
+	end
 end
-
-def get_controller()
-	return self
-end
-
 

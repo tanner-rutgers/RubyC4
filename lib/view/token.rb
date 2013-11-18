@@ -1,3 +1,5 @@
+require 'test/unit'
+
 class Token
 
   include Test::Unit::Assertions

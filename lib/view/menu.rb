@@ -1,3 +1,5 @@
+require 'test/unit'
+
 class Menu
   include Observer
   include Test::Unit::Assertions

@@ -1,3 +1,5 @@
+require 'test/unit'
+
 class Game
 
   include Observer

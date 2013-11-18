@@ -1,3 +1,4 @@
+require 'test/unit'
 require_relative 'observer.rb'
 
 class Board

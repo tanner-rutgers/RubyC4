@@ -1,4 +1,6 @@
-class Game
+require 'test/unit'
+
+class Game < Test::Unit::TestCase
 	def initialize(players)
 		# -- Pre Condiditions -- #
 		assert(players.kind_of(Array)

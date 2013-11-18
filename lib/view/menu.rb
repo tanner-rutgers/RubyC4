@@ -7,6 +7,7 @@ class Menu
     #NA
 
     # Post-conditions / Class-invariants #
+    assert(!@models.nil?, "Models array not initialized")
     #NA
   end
 

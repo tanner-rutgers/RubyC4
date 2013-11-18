@@ -1,14 +1,16 @@
-class WinCondition
-  include Test::Unit::TestCase
+module Model
 
-  def initialize(pattern)
-    assert(patter.is_a?Array)
+  class WinCondition
+    include Test::Unit::TestCase
 
-    assert_equal(@pattern, pattern)
+    def initialize(pattern)
+      assert(patter.is_a?Array)
+
+      assert_equal(@pattern, pattern)
+    end
+
+    def hasWon?(board)
+
+    end
   end
-
-  def hasWon?(board)
-
-  end
-
 end

@@ -1,4 +1,4 @@
-class Player
+class Token
 
   include Test::Unit::Assertions
 

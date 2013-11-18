@@ -1,16 +1,11 @@
-require_relative 'observable.rb'
-
-class GameController
-	include Observable
-	
-	def initialize()
-	  
+Class GameController
+	def initialize()	  
 	  # -- Pre Conditions -- #
 
 	  # -- Code -- #
 		@game = Game.new
 		@win = false
-
+		@current_screen = nil;
 		play()
 
 	  # -- Post Conditions -- #
@@ -31,17 +26,25 @@ class GameController
 	end
 
 	def win?()
-		return @win
+	  # -- Pre Conditions -- #
+	  assert(!@win.nil?)
+	  return @win
+
+	  # -- Post Conditions -- #
 	end
 
-	def push()
+	def push(screen)
+		assert(!screen.nil?)
+		assert(screen.is_a?View)
 		#push next screen, update @current_screen
+		
 	end
 
 	def get_controller()
 	    # -- Pre Conditions -- #
 	    assert(!self.is_a?GameController)
 		return self
+	    # -- Post Conditions -- #
 	end
 end
 

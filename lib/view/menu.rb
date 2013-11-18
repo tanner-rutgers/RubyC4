@@ -1,3 +1,5 @@
+require 'test/unit'
+
 class Menu
   include Observer
   include Test::Unit::Assertions
@@ -7,6 +9,7 @@ class Menu
     #NA
 
     # Post-conditions / Class-invariants #
+    assert(!@models.nil?, "Models array not initialized")
     #NA
   end
 

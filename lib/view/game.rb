@@ -1,3 +1,5 @@
+require 'test/unit'
+
 class Game
 
   include Observer
@@ -8,6 +10,9 @@ class Game
 
     # Post-conditions / Class-invariants #
     assert(!@builder.nil?, "GTK builder was not initialized")
+    assert(!@models.nil?, "Models array not initialized")
+    assert(!@board.nil?, "Board view not initialized")
+    assert(!@menu.nil?, "Menu view not initialized")
   end
 
   def update

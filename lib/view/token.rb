@@ -1,3 +1,5 @@
+require 'test/unit'
+
 class Token
 
   include Test::Unit::Assertions
@@ -10,9 +12,14 @@ class Token
     #Postconditions
     assert_equal(@player, player)
     assert_equal(@tokenColor, tokenColor)
+    assert(!@models.nil?, "Models array not initialized")
   end
 
-  def update()
+  def update
+    # Pre-conditions #
+    #NA
 
+    # Post-conditions #
+    #NA
   end
 end

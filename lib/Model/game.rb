@@ -2,7 +2,7 @@ require 'test/unit'
 
 module Model
   class Game < Test::Unit::TestCase
-    def initialize(players)
+    def initialize()
       # -- Pre Condiditions -- #
       assert(players.is_a?Array)
       assert(players.size >0)
@@ -10,24 +10,18 @@ module Model
 
 
       # -- Code -- #
-      @players = players
+      @players = Array.new
+	  @board = Board.new
+	  @settings = Array.new
 
       # -- Post Conditions -- #
-      assert_equal(@players,players)
+      assert(@players.is_a?Array)
+	  assert(@settings.is_a?Array)
       assert(!@board.nil?)
 
     end
-    def startGame()
-      # -- Pre Conditions -- #
-      assert(!@board.nil?)
 
 
-      # -- Code -- #
-
-      # -- Post Conditions -- #
-      assert(!@currentPlayersTurn.nil?)
-      assert(@players.include?(@currentPlayersTurn))
-    end
     def currentTurn?(player)
       # -- Pre Conditions -- #
       assert(player.is_a?Player)
@@ -38,6 +32,8 @@ module Model
       # -- Post Conditions -- #
       #    None
     end
+
+
     def endTurn()
 
       current = @currentPlayersTurn
@@ -46,13 +42,15 @@ module Model
       # -- Post Conditions --#
       assert(@currentPlayersTurn != current)
     end
+
+
     def createBoard(rowSize, colSize)
       # -- Pre Conditions -- #
       assert(rowSize.is_a?(Integer))
       assert(colSize.is_a?(Integer))
 
       # -- Code -- #
-
+      
       # -- Post Conditions -- #
       assert_equal(@board.size, [rowSize, colSize])
       @board.each { |x| assert_equal(x.size,colSize)}

@@ -1,5 +1,7 @@
 module Observer
 
-	def self.update()
+	def self.update
+
+  end
 
 end

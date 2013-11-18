@@ -4,13 +4,13 @@ class Board
 	include Observer
 	include Test::Unit::Assertions
 
-	def initialize
+	def initialize()
 		# Pre-conditions #
 
 		# Post-conditions / Class-invariants #
 		assert(!@builder.nil?, "GTK builder was not initialized")
 		assert(!@models.nil?, "Models array not initialized")
-		assert(!@)
+		assert(!@tokens.nil?, "Tokens not initialized")
 	end
 
 	def update

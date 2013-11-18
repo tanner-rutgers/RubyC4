@@ -1,4 +1,8 @@
-Class GameController
+require_relative 'observable.rb'
+
+class GameController
+	include Observable
+	
 	def initialize()
 		@game = Game.new
 	

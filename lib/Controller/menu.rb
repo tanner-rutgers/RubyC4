@@ -1,3 +1,6 @@
-class Menu < Observable
+require_relative 'observable.rb'
+
+class Menu
+	include Observable
 
 end

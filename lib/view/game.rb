@@ -8,6 +8,8 @@ class Game
 
     # Post-conditions / Class-invariants #
     assert(!@builder.nil?, "GTK builder was not initialized")
+    assert(!@board.nil?, "Board view not initialized")
+    assert(!@menu.nil?, "Menu view not initialized")
   end
 
   def update

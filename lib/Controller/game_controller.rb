@@ -4,22 +4,31 @@ class GameController
 	include Observable
 	
 	def initialize()
+	  
+	  # -- Pre Conditions -- #
+
+	  # -- Code -- #
 		@game = Game.new
-	
+		@win = false
+
 		play()
+
+	  # -- Post Conditions -- #
+		assert(!@game.nil?)
+		assert(win.false?)
 	end
 
 	def play()
-		  # -- Pre Conditions -- #
-		  assert(!@game.board.nil?)
+	  # -- Pre Conditions -- #
+	  assert(!@game.board.nil?)
 
 
-		  # -- Code -- #
+	  # -- Code -- #
 
-		  # -- Post Conditions -- #
-		  assert(!@game.currentPlayersTurn.nil?)
-		  assert(@game.players.include?(@currentPlayersTurn))
-		end
+	  # -- Post Conditions -- #
+	  assert(!@game.currentPlayersTurn.nil?)
+	  assert(@game.players.include?(@currentPlayersTurn))
+	end
 
 	def win?()
 		return @win
@@ -30,6 +39,8 @@ class GameController
 	end
 
 	def get_controller()
+	    # -- Pre Conditions -- #
+	    assert(!self.is_a?GameController)
 		return self
 	end
 end

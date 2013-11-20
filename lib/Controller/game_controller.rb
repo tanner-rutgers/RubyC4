@@ -1,4 +1,4 @@
-Class GameController
+class GameController
 	def initialize()	  
 	  # -- Pre Conditions -- #
 

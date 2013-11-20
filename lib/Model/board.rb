@@ -1,21 +1,49 @@
 require 'test/unit'
+require_relative 'player.rb'
 
 module Model
-  class Board < Test::Unit::TestCase
-    def initialize(arr)
+  class Board
+
+    include Test::Unit::Assertions
+
+    class ColumnFullException < StandardError; end
+
+    attr_reader :boardArray
+
+    def initialize(*args)
       # -- Pre Conditions -- #
-      assert(arr.kind_of?(Array))
-      assert(arr.size>0)
-      arr.each {|x| assert(x.is_a?(Array))}
-      size = arr[0].size
-      assert(size>0)
-      arr.each {|x| assert_equal(x.size,arr)}
+
+      assert(args.size == 1 && args[0].is_a?(Array) ||
+                 args.size == 2 && args[0].is_a?(Integer) && args[1].is_a?(Integer))
+
+      if(args.size == 1)
+        args[0].each {|x| assert(x.is_a?(Array))}
+        assert(args[0].size>0)
+        args[0].each {|x| assert_equal(args[0][0].size, x.size)}
+        args[0].each {|column|
+          column.each { |element|
+            assert(element.nil? || element.is_a?(Model::Player))
+          }
+        }
+      end
+
 
       # -- Code -- #
-      @boardArray = arr
+      if(args.size == 1)
+        @boardArray = args[0]
+      else
+        @boardArray = Array.new(args[1]) {Array.new(args[0])}
+      end
+
 
       # -- Post Conditions -- #
-      assert_equal(@boardArray, arr)
+      if(args.size == 1)
+        assert_equal(args[0].size, @boardArray.size)
+        assert_equal(args[0][0].size, @boardArray[0].size)
+      else
+        assert_equal(args[0], @boardArray[0].size)
+        assert_equal(args[1], @boardArray.size)
+      end
     end
 
     def addPiece(columnNumber, player)
@@ -26,25 +54,73 @@ module Model
       assert(num_tokens_before_insert>=0)
       # -- Code -- #
 
+      nextRow = numTokens(columnNumber)
+
+      raise ColumnFullException if nextRow >= @boardArray[columnNumber].size
+
+      @boardArray[columnNumber][nextRow] = player
+
       # -- Post Conditions -- #
       assert_equal(@boardArray[columnNumber][num_tokens_before_insert],player)
-      num_tokens_after_insert = numTokens(columnNumber)
-      assert_equal(num_tokens_before_insert+1, num_tokens_after_insert)
+      assert_equal(num_tokens_before_insert+1, numTokens(columnNumber))
     end
 
     def size
-      return @boardArray.size, @boardArray[0].size
+      return { :rows => @boardArray[0].size, :columns => @boardArray.size }
     end
 
-    def numTokens(column)
+    def numTokens(columnNumber)
       # -- Pre Conditions -- #
-      assert(column.is_a?Integer)
-      assert(column >= 0 && column < @boardArray.size)
+      assert(columnNumber.is_a?Integer)
+      assert(columnNumber >= 0 && columnNumber < @boardArray.size)
       # -- Code -- #
+
+      rval = @boardArray[columnNumber].count{|x| !x.nil?}
 
       # -- Post Conditions -- #
       assert(rval.is_a?(Integer))
-      assert_equal(rval, @boardArray[columnNumber].count{|x| !x.nil?})
+      assert(rval >= 0 && rval < @boardArray.size)
+
+      rval
+    end
+
+    # === Object Methods === #
+    def to_s
+      string = "Model::Board(#{size[:rows]}, #{size[:columns]})\n"
+
+      to_row_array.each{ |row|
+        row.each{ |element|
+          string += element.to_s if !element.nil?
+          string += "[Empty]" if element.nil?
+        }
+        string += "\n"
+      }
+
+      string
+    end
+
+    def eql? (other)
+      other.is_a?(Model::Board) && self == other
+    end
+
+    def == (other)
+      other.respond_to?(:boardArray) && other.boardArray == self.boardArray
+    end
+
+    def hash
+      return "Model::Board" ^ @boardArray.hash
+    end
+
+
+    private
+    def to_row_array
+      rows = Array.new(@boardArray[0].size) {Array.new}
+      @boardArray.each{|column|
+        column.each_with_index { |element, rowNum|
+          rows[rowNum].push(element)
+        }
+      }
+      rows
     end
   end
 end

@@ -2,7 +2,9 @@ require 'test/unit'
 
 module Model
 
-  class Player < Test::Unit::TestCase
+  class Player
+    include Test::Unit::Assertions
+
     def initialize(name,winCondition,pieces)
       # -- Pre Conditions -- #
       assert(name.is_a?(String))
@@ -11,20 +13,24 @@ module Model
       # -- Code -- #
       @pieces = pieces
       @name = name
-      @windCondition = winCondition
+      @winCondition = winCondition
 
       # -- Post Conditions -- #
       assert_equal(@pieces,pieces)
       assert_equal(@name,name)
-      assert_euqal(@winCondition,winCondition)
+      assert_equal(@winCondition,winCondition)
     end
+
     def makeMove(board,colNumber)
       # -- Pre Conditions -- #
       assert(!board.nil?)
+      assert(board.is_a?Model::Board)
       assert(colNumber.is_a?(Integer))
       assert(colNumber >= 0 && colNumber < board.colSize)
       tokens_before_addition = board.numTokens(colNumber)
       # -- Code -- #
+
+      board.addPiece(colNumber, self)
 
       # -- Post Conditions -- #
       assert_equal(board.numTokens(colNumber), tokens_before_addition + 1)

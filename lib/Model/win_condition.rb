@@ -21,7 +21,26 @@ module Model
     end
 
     def hasWon?(board)
-      #In Progress
+      boardSize = board.size
+      boardSize[:columns].times do |i|
+        boardSize[:rows].times do |j|
+          lines = board.getLines(i, j, @pattern.size)
+
+          lines.each do |line|
+            hasWon = true
+            @pattern.each_with_index do |patternElement, index|
+              hasWon &= patternElement.match?(line[index])
+            end
+
+            return hasWon if hasWon
+          end
+
+
+        end
+      end
+
+      return false
+
     end
 
     def to_s
@@ -45,7 +64,7 @@ module Model
       PatternElement.new("PLAYER") {|object| object.eql?(player)}
     end
 
-    def matches(object)
+    def match?(object)
       return @matchBlock.call(object)
     end
 

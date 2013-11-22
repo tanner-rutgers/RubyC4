@@ -46,6 +46,18 @@ module Model
       end
     end
 
+    def who(x, y)
+      boardSize = self.size
+      assert(x < boardSize[:columns] && y < boardSize[:rows])
+      assert(x >= 0 && y >=0)
+
+      rval = @boardArray[x][y]
+
+      assert(rval.is_a?Player || rval.nil?)
+
+      rval
+    end
+
     def addPiece(columnNumber, player)
       # -- Pre Conditions -- #
       assert(columnNumber > 0 && columnNumber < @boardArray.size)
@@ -84,14 +96,41 @@ module Model
       rval
     end
 
+    def getLine(x, y, x_dir, y_dir, size)
+      tokens = []
+
+      (size).times do
+        return nil if x >= @boardArray.size || y >= @boardArray[0].size || x < 0 || y < 0
+        tokens.push(@boardArray[x][y])
+
+        x+=x_dir
+        y+=y_dir
+      end
+
+      tokens
+    end
+
+    def getLines(x, y, size)
+      lines = []
+      [-1, 0, 1].repeated_permutation(2) do |p|
+        if p[0] != 0 || p[1] != 0
+          line = getLine(x, y, p[0], p[1], size)
+          lines.push(line) if !line.nil?
+        end
+
+      end
+      lines
+    end
+
     # === Object Methods === #
     def to_s
       string = "Model::Board(#{size[:rows]}, #{size[:columns]})\n"
 
       to_row_array.each{ |row|
         row.each{ |element|
-          string += element.to_s if !element.nil?
-          string += "[Empty]" if element.nil?
+          string += element.to_s + "\t" if !element.nil?
+
+          string += "[Empty]" + "\t" if element.nil?
         }
         string += "\n"
       }

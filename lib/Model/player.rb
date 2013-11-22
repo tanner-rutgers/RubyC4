@@ -37,8 +37,12 @@ module Model
       assert_equal(board[colNumber][tokens_before_addition],self)
     end
 
-      def hasWon?(board)
-        assert(!@winCondition.nil?)
-      end
+    def hasWon?(board)
+      assert(!@winCondition.nil?)
+    end
+
+    def to_s
+      @name
+    end
   end
 end

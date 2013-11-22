@@ -1,11 +1,13 @@
 require 'test/unit'
+require_relative 'win_condition.rb'
 
 module Model
 
   class Player
     include Test::Unit::Assertions
 
-    attr_accessor :winCondition
+    attr_writer :winCondition
+    attr_reader :name
 
     def initialize(name)
       # -- Pre Conditions -- #
@@ -13,6 +15,12 @@ module Model
 
       # -- Code -- #
       @name = name
+      @winCondition = WinCondition.new(
+        WinCondition::PatternElement.PLAYER(self),
+        WinCondition::PatternElement.PLAYER(self),
+        WinCondition::PatternElement.PLAYER(self),
+        WinCondition::PatternElement.PLAYER(self)
+      )
 
       # -- Post Conditions -- #
       assert_equal(@name,name)
@@ -23,7 +31,7 @@ module Model
       assert(!board.nil?)
       assert(board.is_a?Model::Board)
       assert(colNumber.is_a?(Integer))
-      assert(colNumber >= 0 && colNumber < board.colSize)
+      assert(colNumber >= 0 && colNumber < board.size[:columns])
       tokens_before_addition = board.numTokens(colNumber)
       # -- Code -- #
 
@@ -31,7 +39,7 @@ module Model
 
       # -- Post Conditions -- #
       assert_equal(board.numTokens(colNumber), tokens_before_addition + 1)
-      assert_equal(board[colNumber][tokens_before_addition],self)
+      assert_equal(board.who(colNumber,board.size[:rows] - tokens_before_addition - 1),self)
     end
 
     def hasWon?(board)
@@ -42,7 +50,7 @@ module Model
     end
 
     def to_s
-      "Model::Player #{@name}"
+      "#{@name}"
     end
   end
 end

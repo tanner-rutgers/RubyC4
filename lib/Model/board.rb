@@ -32,7 +32,7 @@ module Model
       if(args.size == 1)
         @boardArray = args[0]
       else
-        @boardArray = Array.new(args[1]) {Array.new(args[0])}
+        @boardArray = Array.new(args[0]) {Array.new(args[1])}
       end
 
 
@@ -41,8 +41,8 @@ module Model
         assert_equal(args[0].size, @boardArray.size)
         assert_equal(args[0][0].size, @boardArray[0].size)
       else
-        assert_equal(args[0], @boardArray[0].size)
-        assert_equal(args[1], @boardArray.size)
+        assert_equal(args[0], @boardArray.size)
+        assert_equal(args[1], @boardArray[0].size)
       end
     end
 
@@ -53,28 +53,35 @@ module Model
 
       rval = @boardArray[x][y]
 
-      assert(rval.is_a?Player || rval.nil?)
+      assert(rval.is_a?(Player) || rval.nil?)
 
       rval
     end
 
     def addPiece(columnNumber, player)
       # -- Pre Conditions -- #
-      assert(columnNumber > 0 && columnNumber < @boardArray.size)
-      assert(player.is_a?(String))
+      assert(columnNumber >= 0 && columnNumber < @boardArray.size)
+      assert(player.is_a?(Player))
       num_tokens_before_insert = numTokens(columnNumber)
       assert(num_tokens_before_insert>=0)
       # -- Code -- #
 
-      nextRow = numTokens(columnNumber)
+      nextRow = size[:rows] - numTokens(columnNumber) - 1
 
-      raise ColumnFullException if nextRow >= @boardArray[columnNumber].size
+      raise ColumnFullException if numTokens(columnNumber) >= @boardArray[columnNumber].size
 
       @boardArray[columnNumber][nextRow] = player
 
       # -- Post Conditions -- #
-      assert_equal(@boardArray[columnNumber][num_tokens_before_insert],player)
+      assert_equal(@boardArray[columnNumber][size[:rows] - num_tokens_before_insert - 1],player)
       assert_equal(num_tokens_before_insert+1, numTokens(columnNumber))
+    end
+
+    def isFull?
+      @boardArray.size.times do |columnNumber|
+        return false if numTokens(columnNumber) < @boardArray[columnNumber].size
+      end
+      return true
     end
 
     def size
@@ -124,8 +131,7 @@ module Model
 
     # === Object Methods === #
     def to_s
-      string = "Model::Board(#{size[:rows]}, #{size[:columns]})\n"
-
+      string = ""
       to_row_array.each{ |row|
         row.each{ |element|
           string += element.to_s + "\t" if !element.nil?
@@ -134,6 +140,7 @@ module Model
         }
         string += "\n"
       }
+      string += "Size(#{size[:rows]}, #{size[:columns]})"
 
       string
     end

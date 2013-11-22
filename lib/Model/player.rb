@@ -5,20 +5,17 @@ module Model
   class Player
     include Test::Unit::Assertions
 
-    def initialize(name,winCondition,pieces)
+    attr_accessor :winCondition
+
+    def initialize(name)
       # -- Pre Conditions -- #
       assert(name.is_a?(String))
-      assert(winCondition.is_a?(WinCondition))
 
       # -- Code -- #
-      @pieces = pieces
       @name = name
-      @winCondition = winCondition
 
       # -- Post Conditions -- #
-      assert_equal(@pieces,pieces)
       assert_equal(@name,name)
-      assert_equal(@winCondition,winCondition)
     end
 
     def makeMove(board,colNumber)
@@ -39,10 +36,13 @@ module Model
 
     def hasWon?(board)
       assert(!@winCondition.nil?)
+
+      @winCondition.hasWon?(board)
+
     end
 
     def to_s
-      @name
+      "Model::Player #{@name}"
     end
   end
 end

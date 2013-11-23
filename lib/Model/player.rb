@@ -7,14 +7,16 @@ module Model
     include Test::Unit::Assertions
 
     attr_writer :winCondition
-    attr_reader :name
+    attr_reader :name, :color
 
-    def initialize(name)
+    def initialize(name, color)
       # -- Pre Conditions -- #
       assert(name.is_a?(String))
+      assert(color.is_a?(Color))
 
       # -- Code -- #
       @name = name
+      @color = color
       @winCondition = WinCondition.new(
         WinCondition::PatternElement.PLAYER(self),
         WinCondition::PatternElement.PLAYER(self),
@@ -24,6 +26,7 @@ module Model
 
       # -- Post Conditions -- #
       assert_equal(@name,name)
+      assert_equal(@color,color)
     end
 
     def makeMove(board,colNumber)

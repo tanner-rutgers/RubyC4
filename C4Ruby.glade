@@ -513,14 +513,14 @@
             <property name="n_rows">6</property>
             <property name="n_columns">7</property>
             <child>
-              <object class="GtkImage" id="piece1">
+              <object class="GtkImage" id="piece0">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="pixbuf">empty.png</property>
               </object>
             </child>
             <child>
-              <object class="GtkImage" id="piece2">
+              <object class="GtkImage" id="piece1">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="pixbuf">empty.png</property>
@@ -531,7 +531,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkImage" id="piece3">
+              <object class="GtkImage" id="piece2">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="pixbuf">empty.png</property>
@@ -542,7 +542,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkImage" id="piece4">
+              <object class="GtkImage" id="piece3">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="pixbuf">empty.png</property>
@@ -553,7 +553,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkImage" id="piece5">
+              <object class="GtkImage" id="piece4">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="pixbuf">empty.png</property>
@@ -564,7 +564,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkImage" id="piece6">
+              <object class="GtkImage" id="piece5">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="pixbuf">empty.png</property>
@@ -572,6 +572,17 @@
               <packing>
                 <property name="top_attach">5</property>
                 <property name="bottom_attach">6</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkImage" id="piece6">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="pixbuf">empty.png</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="right_attach">2</property>
               </packing>
             </child>
             <child>
@@ -583,6 +594,8 @@
               <packing>
                 <property name="left_attach">1</property>
                 <property name="right_attach">2</property>
+                <property name="top_attach">1</property>
+                <property name="bottom_attach">2</property>
               </packing>
             </child>
             <child>
@@ -594,8 +607,8 @@
               <packing>
                 <property name="left_attach">1</property>
                 <property name="right_attach">2</property>
-                <property name="top_attach">1</property>
-                <property name="bottom_attach">2</property>
+                <property name="top_attach">2</property>
+                <property name="bottom_attach">3</property>
               </packing>
             </child>
             <child>
@@ -607,8 +620,8 @@
               <packing>
                 <property name="left_attach">1</property>
                 <property name="right_attach">2</property>
-                <property name="top_attach">2</property>
-                <property name="bottom_attach">3</property>
+                <property name="top_attach">3</property>
+                <property name="bottom_attach">4</property>
               </packing>
             </child>
             <child>
@@ -620,8 +633,8 @@
               <packing>
                 <property name="left_attach">1</property>
                 <property name="right_attach">2</property>
-                <property name="top_attach">3</property>
-                <property name="bottom_attach">4</property>
+                <property name="top_attach">4</property>
+                <property name="bottom_attach">5</property>
               </packing>
             </child>
             <child>
@@ -633,8 +646,8 @@
               <packing>
                 <property name="left_attach">1</property>
                 <property name="right_attach">2</property>
-                <property name="top_attach">4</property>
-                <property name="bottom_attach">5</property>
+                <property name="top_attach">5</property>
+                <property name="bottom_attach">6</property>
               </packing>
             </child>
             <child>
@@ -644,10 +657,8 @@
                 <property name="pixbuf">empty.png</property>
               </object>
               <packing>
-                <property name="left_attach">1</property>
-                <property name="right_attach">2</property>
-                <property name="top_attach">5</property>
-                <property name="bottom_attach">6</property>
+                <property name="left_attach">2</property>
+                <property name="right_attach">3</property>
               </packing>
             </child>
             <child>
@@ -659,6 +670,8 @@
               <packing>
                 <property name="left_attach">2</property>
                 <property name="right_attach">3</property>
+                <property name="top_attach">1</property>
+                <property name="bottom_attach">2</property>
               </packing>
             </child>
             <child>
@@ -670,8 +683,8 @@
               <packing>
                 <property name="left_attach">2</property>
                 <property name="right_attach">3</property>
-                <property name="top_attach">1</property>
-                <property name="bottom_attach">2</property>
+                <property name="top_attach">2</property>
+                <property name="bottom_attach">3</property>
               </packing>
             </child>
             <child>
@@ -683,8 +696,8 @@
               <packing>
                 <property name="left_attach">2</property>
                 <property name="right_attach">3</property>
-                <property name="top_attach">2</property>
-                <property name="bottom_attach">3</property>
+                <property name="top_attach">3</property>
+                <property name="bottom_attach">4</property>
               </packing>
             </child>
             <child>
@@ -696,8 +709,8 @@
               <packing>
                 <property name="left_attach">2</property>
                 <property name="right_attach">3</property>
-                <property name="top_attach">3</property>
-                <property name="bottom_attach">4</property>
+                <property name="top_attach">4</property>
+                <property name="bottom_attach">5</property>
               </packing>
             </child>
             <child>
@@ -709,8 +722,8 @@
               <packing>
                 <property name="left_attach">2</property>
                 <property name="right_attach">3</property>
-                <property name="top_attach">4</property>
-                <property name="bottom_attach">5</property>
+                <property name="top_attach">5</property>
+                <property name="bottom_attach">6</property>
               </packing>
             </child>
             <child>
@@ -720,10 +733,8 @@
                 <property name="pixbuf">empty.png</property>
               </object>
               <packing>
-                <property name="left_attach">2</property>
-                <property name="right_attach">3</property>
-                <property name="top_attach">5</property>
-                <property name="bottom_attach">6</property>
+                <property name="left_attach">3</property>
+                <property name="right_attach">4</property>
               </packing>
             </child>
             <child>
@@ -735,6 +746,8 @@
               <packing>
                 <property name="left_attach">3</property>
                 <property name="right_attach">4</property>
+                <property name="top_attach">1</property>
+                <property name="bottom_attach">2</property>
               </packing>
             </child>
             <child>
@@ -746,8 +759,8 @@
               <packing>
                 <property name="left_attach">3</property>
                 <property name="right_attach">4</property>
-                <property name="top_attach">1</property>
-                <property name="bottom_attach">2</property>
+                <property name="top_attach">2</property>
+                <property name="bottom_attach">3</property>
               </packing>
             </child>
             <child>
@@ -759,8 +772,8 @@
               <packing>
                 <property name="left_attach">3</property>
                 <property name="right_attach">4</property>
-                <property name="top_attach">2</property>
-                <property name="bottom_attach">3</property>
+                <property name="top_attach">3</property>
+                <property name="bottom_attach">4</property>
               </packing>
             </child>
             <child>
@@ -772,8 +785,8 @@
               <packing>
                 <property name="left_attach">3</property>
                 <property name="right_attach">4</property>
-                <property name="top_attach">3</property>
-                <property name="bottom_attach">4</property>
+                <property name="top_attach">4</property>
+                <property name="bottom_attach">5</property>
               </packing>
             </child>
             <child>
@@ -785,8 +798,8 @@
               <packing>
                 <property name="left_attach">3</property>
                 <property name="right_attach">4</property>
-                <property name="top_attach">4</property>
-                <property name="bottom_attach">5</property>
+                <property name="top_attach">5</property>
+                <property name="bottom_attach">6</property>
               </packing>
             </child>
             <child>
@@ -796,10 +809,8 @@
                 <property name="pixbuf">empty.png</property>
               </object>
               <packing>
-                <property name="left_attach">3</property>
-                <property name="right_attach">4</property>
-                <property name="top_attach">5</property>
-                <property name="bottom_attach">6</property>
+                <property name="left_attach">4</property>
+                <property name="right_attach">5</property>
               </packing>
             </child>
             <child>
@@ -811,6 +822,8 @@
               <packing>
                 <property name="left_attach">4</property>
                 <property name="right_attach">5</property>
+                <property name="top_attach">1</property>
+                <property name="bottom_attach">2</property>
               </packing>
             </child>
             <child>
@@ -822,8 +835,8 @@
               <packing>
                 <property name="left_attach">4</property>
                 <property name="right_attach">5</property>
-                <property name="top_attach">1</property>
-                <property name="bottom_attach">2</property>
+                <property name="top_attach">2</property>
+                <property name="bottom_attach">3</property>
               </packing>
             </child>
             <child>
@@ -835,8 +848,8 @@
               <packing>
                 <property name="left_attach">4</property>
                 <property name="right_attach">5</property>
-                <property name="top_attach">2</property>
-                <property name="bottom_attach">3</property>
+                <property name="top_attach">3</property>
+                <property name="bottom_attach">4</property>
               </packing>
             </child>
             <child>
@@ -848,8 +861,8 @@
               <packing>
                 <property name="left_attach">4</property>
                 <property name="right_attach">5</property>
-                <property name="top_attach">3</property>
-                <property name="bottom_attach">4</property>
+                <property name="top_attach">4</property>
+                <property name="bottom_attach">5</property>
               </packing>
             </child>
             <child>
@@ -861,8 +874,8 @@
               <packing>
                 <property name="left_attach">4</property>
                 <property name="right_attach">5</property>
-                <property name="top_attach">4</property>
-                <property name="bottom_attach">5</property>
+                <property name="top_attach">5</property>
+                <property name="bottom_attach">6</property>
               </packing>
             </child>
             <child>
@@ -872,10 +885,8 @@
                 <property name="pixbuf">empty.png</property>
               </object>
               <packing>
-                <property name="left_attach">4</property>
-                <property name="right_attach">5</property>
-                <property name="top_attach">5</property>
-                <property name="bottom_attach">6</property>
+                <property name="left_attach">5</property>
+                <property name="right_attach">6</property>
               </packing>
             </child>
             <child>
@@ -887,23 +898,12 @@
               <packing>
                 <property name="left_attach">5</property>
                 <property name="right_attach">6</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkImage" id="piece32">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="pixbuf">empty.png</property>
-              </object>
-              <packing>
-                <property name="left_attach">5</property>
-                <property name="right_attach">6</property>
                 <property name="top_attach">1</property>
                 <property name="bottom_attach">2</property>
               </packing>
             </child>
             <child>
-              <object class="GtkImage" id="piece33">
+              <object class="GtkImage" id="piece32">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="pixbuf">empty.png</property>
@@ -916,7 +916,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkImage" id="piece34">
+              <object class="GtkImage" id="piece33">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="pixbuf">empty.png</property>
@@ -929,7 +929,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkImage" id="piece35">
+              <object class="GtkImage" id="piece34">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="pixbuf">empty.png</property>
@@ -942,7 +942,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkImage" id="piece36">
+              <object class="GtkImage" id="piece35">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="pixbuf">empty.png</property>
@@ -955,7 +955,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkImage" id="piece37">
+              <object class="GtkImage" id="piece36">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="pixbuf">empty.png</property>
@@ -966,7 +966,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkImage" id="piece38">
+              <object class="GtkImage" id="piece37">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="pixbuf">empty.png</property>
@@ -979,7 +979,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkImage" id="piece39">
+              <object class="GtkImage" id="piece38">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="pixbuf">empty.png</property>
@@ -992,7 +992,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkImage" id="piece40">
+              <object class="GtkImage" id="piece39">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="pixbuf">empty.png</property>
@@ -1005,7 +1005,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkImage" id="piece41">
+              <object class="GtkImage" id="piece40">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="pixbuf">empty.png</property>
@@ -1018,7 +1018,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkImage" id="piece42">
+              <object class="GtkImage" id="piece41">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="pixbuf">empty.png</property>

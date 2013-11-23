@@ -1,19 +1,46 @@
+require 'rubygems'
+require 'gtk2'
+require 'test/unit'
+
 require_relative '../Model/game.rb'
-require_relative '../view/*'
+require_relative '../View/*'
 
 class GameController
+	include Test::Unit::Assertions
+
 	def initialize()	  
-	  # -- Pre Conditions -- #
+	  	# -- Pre Conditions -- #
 
-	  # -- Code -- #
-		@game = Game.new
-		@win = false
-		@screen_index = -1 #change this to a stack
-		@screens = Array.new
+	  	# -- Code -- #
+		if __FILE__ == $0
 
-		play()
+		  	# Initialize GTK stuff
+		  	Gtk.init
+		  	@builder = Gtk::Builder::new
+		  	@builder.add_from_file("../C4Ruby.glade")
+		  	@builder.connect_signals{ |handler| method(handler) }
 
-	  # -- Post Conditions -- #
+		  	# Initialize models
+			@game = Game.new
+
+			@win = false
+
+			# Initialize views
+			@screen_index = -1 #change this to a stack - WHY A STACK?
+			@screens = Array.new
+			gameView = View::UiGame.new(@builder, @game)
+			push(gameView)
+
+			# Initialize other controllers
+			@boardController = Board.new(gameView.board)
+			@menuController = Menu.new(gameView.menu)
+
+			Gtk.main()
+
+			#play()
+		end
+
+		# -- Post Conditions -- #
 		assert(!@game.nil?)
 	end
 
@@ -26,7 +53,8 @@ class GameController
 	  # -- Code -- #
 	  continue = true;
 	  while(continue)
-		  push(Menu.new)
+		  push(Menu.new) # WHY? 1. This is a controller, not a view
+		  				 #      2. This is an infinite stack of menus
 
 
 		#####MOARCODE
@@ -67,7 +95,7 @@ class GameController
 
 	def get_controller()
 	    # -- Pre Conditions -- #
-	    assert(!self.is_a?GameController)
+	    assert(!self.is_a?(GameController))
 		return self
 	    # -- Post Conditions -- #
 	end

@@ -4,10 +4,14 @@ class Token
 
   include Test::Unit::Assertions
 
-  def initialize(player, tokenColor)
+  attr_reader :player, :imageFile
+
+  def initialize(player)
     #Preconditions
     assert(player.is_a?Player)
-    assert(tokenColor.is_a?Color)
+
+    @player = player
+    @imageFile = "./resources/" + player.color.to_s + ".png"
 
     #Postconditions
     assert_equal(@player, player)
@@ -18,6 +22,8 @@ class Token
   def update
     # Pre-conditions #
     #NA
+
+    @imageFile = "./resources/" + player.color.to_s + ".png"
 
     # Post-conditions #
     #NA

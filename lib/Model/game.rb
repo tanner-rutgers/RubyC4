@@ -8,7 +8,7 @@ module Model
 
     class NotYourTurnException < StandardError; end
 
-    attr_reader :winner
+    attr_reader :winner, :board, :players, :currentPlayersTurn
 
     def initialize(players, board = Board.new(7, 6))
       # -- Pre Condiditions -- #

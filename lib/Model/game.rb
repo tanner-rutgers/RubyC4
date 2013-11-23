@@ -1,6 +1,7 @@
 require 'test/unit'
 require_relative 'board.rb'
 require_relative 'player.rb'
+require_relative 'settings.rb'
 
 module Model
   class Game < Test::Unit::TestCase
@@ -17,8 +18,9 @@ module Model
 
 
       # -- Code -- #
+	  @settings = Settings.new
       @players = players
-	    @board = board
+	  @board = board
       @currentPlayersTurn = players[0]
       @winner = nil
 

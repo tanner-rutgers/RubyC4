@@ -5,26 +5,30 @@ class Game
   include Observer
   include Test::Unit::Assertions
 
-  def initialize(gtkBuilder, model)
+  def initialize(builder, model, player)
     # Pre-conditions #
-    assert(gtkBuilder.is_a?Gtk::Builder, "gtkBuilder is not a Gtk::Builder")
+    assert(builder.is_a?Gtk::Builder, "builder is not a Gtk::Builder")
     assert(model.is_a?Model::Game)
+    assert(player.is_a?Model::Player)
 
-    @builder = gtkBuilder
+    @builder = builder
     @model = model
+    @player = player
 
     @menuView = View::UiMenu.new
     @settingsView = View::UiSettings.new(@model.players)
-    @boardView = View::UiBoard.new(@model)
+    @boardView = View::UiBoard.new(@model.board)
 
     @builder.get_object("window1").show()
     Gtk.main()
 
     # Post-conditions / Class-invariants #
-    assert(!@builder.nil?, "GTK builder was not initialized")
-    assert(!@models.nil?, "Models array not initialized")
-    assert(!@board.nil?, "Board view not initialized")
-    assert(!@menu.nil?, "Menu view not initialized")
+    assert_equal(@builder, builder, "GTK builder was not initialized")
+    assert_equal(@model, model, "Model was not initialized")
+    assert_equal(@player, player, "Player was not initialized")
+    assert(!@menuView.nil?)
+    assert(!@settingsView.nil?)
+    assert(!boardView.nil?)
   end
 
   def update

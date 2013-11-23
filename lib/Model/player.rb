@@ -9,14 +9,14 @@ module Model
     attr_writer :winCondition
     attr_reader :name, :color
 
-    def initialize(name, color)
+    def initialize(name, token)
       # -- Pre Conditions -- #
       assert(name.is_a?(String))
-      assert(color.is_a?(Color))
+      assert(token.is_a?(Model::Token))
 
       # -- Code -- #
       @name = name
-      @color = color
+      @token = token
       @winCondition = WinCondition.new(
         WinCondition::PatternElement.PLAYER(self),
         WinCondition::PatternElement.PLAYER(self),
@@ -26,7 +26,7 @@ module Model
 
       # -- Post Conditions -- #
       assert_equal(@name,name)
-      assert_equal(@color,color)
+      assert_equal(@token,token)
     end
 
     def makeMove(board,colNumber)

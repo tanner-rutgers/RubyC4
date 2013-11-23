@@ -17,7 +17,7 @@ class GameController
 		  	# Initialize GTK stuff
 		  	Gtk.init
 		  	@builder = Gtk::Builder::new
-		  	@builder.add_from_file("../C4Ruby.glade")
+		  	@builder.add_from_file("./C4Ruby.glade")
 		  	@builder.connect_signals{ |handler| method(handler) }
 
 		  	# Initialize models
@@ -25,15 +25,19 @@ class GameController
 
 			@win = false
 
-			# Initialize views
+			# Initialize views and controllers
 			@screen_index = -1 #change this to a stack - WHY A STACK?
 			@screens = Array.new
-			gameView = View::UiGame.new(@builder, @game)
-			push(gameView)
+			@controllers = Array.new
 
-			# Initialize other controllers
-			@boardController = Board.new(gameView.board)
-			@menuController = Menu.new(gameView.menu)
+			@game.players.each { |player| 
+				if !player.is_a?Model::Ai
+					view = View::UiGame.new(@builder, @game, player)
+					push(view)
+					controllers.add(Board.new(@builder, @game, view.board, player))
+					controllers.add(Menu.new(@builder, @game, view, player))
+				end
+			}
 
 			Gtk.main()
 

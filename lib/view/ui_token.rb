@@ -6,24 +6,52 @@ class Token
 
   attr_reader :player, :imageFile
 
-  def initialize(player)
+  def initialize(builder,boardModel,i,j)
     #Preconditions
-    assert(player.is_a?Player)
+    assert(builder.is_a?Gtk::Builder)
+    assert(boardModel.is_a?Model::Board)
+    assert(i.is_a?Numeric)
+    assert(j.is_a?Numeric)
+    assert(i >= 0 && i < boardModel.size.rows)
+    assert(j >= 0 && j < boardModel.size.columns)
 
-    @player = player
-    @imageFile = "./resources/" + player.color.to_s + ".png"
+    @builder = builder
+    @boardModel = boardModel
+    @i = i
+    @j = j
+    
+    player = @boardModel.who(i,j)
+    if player.nil? 
+      @tokenModel = Model::Token.new(:EMPTY)
+    else
+      @tokenModel = player.token
+    end
+    @tokenImage = Gtk::Image.new(Gdk::PixBuf.new(@tokenModel.imageFile))
+
+    update
 
     #Postconditions
-    assert_equal(@player, player)
-    assert_equal(@tokenColor, tokenColor)
-    assert(!@models.nil?, "Models array not initialized")
+    assert_equal(@builder, builder)
+    assert_equal(@boardModel, boardModel)
+    assert(!@tokenModel.nil?)
+    assert(!@tokenImage.nil?)
+    assert_equal(@i, i)
+    assert_equal(@j, j)
   end
 
   def update
     # Pre-conditions #
     #NA
+    
+    # Only load image file if the token has changed
+    newModel = @boardModel.who(@i, @j).token
+    if newModel != @tokenModel
+      @tokenModel = newModel
+      @tokenImage = Gtk::Image.new(Gdk::PixBuf.new(newModel.imageFile))
+    end
 
-    @imageFile = "./resources/" + player.color.to_s + ".png"
+    # Draw token
+    @builder.get_object("piece" + (@i*@boardModel.size.rows+@j).to_s).set_from_pixbuf(@tokenImage)
 
     # Post-conditions #
     #NA

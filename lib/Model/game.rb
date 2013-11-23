@@ -44,7 +44,12 @@ module Model
       #    None
     end
 
+    # Drops players value in the board, and then ends that players turn.
+    # @returns true of the move is a game ending move, otherwise false
     def makeMove(player, column)
+      assert(player.is_a?Player)
+      assert(column.is_a?Integer)
+      
       raise NotYourTurnException if !currentTurn?(player)
 
       player.makeMove(@board, column)

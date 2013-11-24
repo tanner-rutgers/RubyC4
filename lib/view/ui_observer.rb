@@ -1,6 +1,6 @@
 require 'test/unit'
 
-module Observer
+module UiObserver
 
 	def self.update
 

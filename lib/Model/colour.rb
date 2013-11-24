@@ -1,12 +1,12 @@
 module Model
   module Colour
 
-    :red
-    :blue
-    :black
-    :white
-    :green
-    :pink
+    RED = :red
+    BLUE = :blue
+    BLACK = :black
+    WHITE = :white
+    GREEN = :green
+    PINK = :pink
 
   end
 end

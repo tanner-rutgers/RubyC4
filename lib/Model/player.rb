@@ -51,7 +51,7 @@ module Model
       assert(!@winCondition.nil?)
 
       hasWon = @winCondition.hasWon?(board)
-      if (hasWon) @totalWins += 1
+      @totalWins += 1 if hasWon
 
       hasWon
     end

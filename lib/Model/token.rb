@@ -4,23 +4,22 @@ module Model
 	class Token
 		include Test::Unit::Assertions
 
-		FILEMAP = { 	:EMPTY => './resources/empty.png',
-						:RED => './resources/red.png',
-						:BLUE => './resources/blue.png',
-						:BLACK => './resources/black.png',
-						:WHITE => './resources/white.png',
-						:GREEN => './resources/green.png',
-						:PINK => './resources/pink.png' }
+		self.colourMap = Hash[Model::Colour.constants.collect{ |colour| [colour, './resources/#{colour}.png'] }]
+		self.colourMap[:empty] = './resources/empty.png'
 
 		attr_reader :imageFile
 
-		def initialize(type)
-			assert(FILEMAP.has_key?type)
+		def initialize(colour)
+			# Preconditions
+			assert(!colourMap[colour].nil? || colour.nil?)
 
-			@imageFile = FILEMAP[type]
+			if colour.nil?
+				colour = :empty
 
-			assert_equal(@type, type)
+			@imageFile = colourMap[colour]
+
+			# Postconditions
+			assert(!@imageFile.nil?)
 		end
-
 	end
 end

@@ -7,26 +7,28 @@ module Model
     include Test::Unit::Assertions
 
     attr_writer :winCondition
-    attr_reader :name, :color
+    attr_reader :name, :colour, :totalWins
 
-    def initialize(name, token)
+    def initialize(name, colour)
       # -- Pre Conditions -- #
       assert(name.is_a?(String))
-      assert(token.is_a?(Model::Token))
+      assert(Model::Colour.constants.include?colour)
 
       # -- Code -- #
       @name = name
-      @token = token
+      @colour = colour
       @winCondition = WinCondition.new(
         WinCondition::PatternElement.PLAYER(self),
         WinCondition::PatternElement.PLAYER(self),
         WinCondition::PatternElement.PLAYER(self),
         WinCondition::PatternElement.PLAYER(self)
       )
+      @totalWins = 0
 
       # -- Post Conditions -- #
       assert_equal(@name,name)
-      assert_equal(@token,token)
+      assert_equal(@colour,colour)
+      assert(@totalWins.is_a?Numeric)
     end
 
     def makeMove(board,colNumber)
@@ -48,8 +50,10 @@ module Model
     def hasWon?(board)
       assert(!@winCondition.nil?)
 
-      @winCondition.hasWon?(board)
+      hasWon = @winCondition.hasWon?(board)
+      if (hasWon) @totalWins += 1
 
+      hasWon
     end
 
     def to_s

@@ -2,18 +2,16 @@
 <interface>
   <requires lib="gtk+" version="2.24"/>
   <!-- interface-naming-policy project-wide -->
-  <object class="GtkTextBuffer" id="textbuffer1">
+  <object class="GtkTextBuffer" id="opponentWin">
     <property name="text" translatable="yes">0</property>
   </object>
-  <object class="GtkTextBuffer" id="textbuffer2">
+  <object class="GtkTextBuffer" id="playerWins">
     <property name="text" translatable="yes">0</property>
   </object>
   <object class="GtkWindow" id="window1">
     <property name="can_focus">False</property>
     <property name="border_width">2</property>
     <property name="title" translatable="yes">C4Ruby</property>
-    <property name="default_width">600</property>
-    <property name="default_height">400</property>
     <signal name="destroy" handler="gtk_main_quit" swapped="no"/>
     <child>
       <object class="GtkVBox" id="vbox1">
@@ -120,27 +118,15 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <child>
-                  <object class="GtkLabel" id="yourTurnLabel">
+                  <object class="GtkLabel" id="playerLabel">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Your turn</property>
+                    <property name="label" translatable="yes">You</property>
                   </object>
                   <packing>
                     <property name="expand">True</property>
-                    <property name="fill">True</property>
+                    <property name="fill">False</property>
                     <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkImage" id="yourTurnImg">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="pixbuf">yourturn.png</property>
-                  </object>
-                  <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
                   </packing>
                 </child>
                 <child>
@@ -160,7 +146,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkComboBox" id="colourBox">
+                      <object class="GtkComboBox" id="playerColour">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                       </object>
@@ -173,8 +159,8 @@
                   </object>
                   <packing>
                     <property name="expand">True</property>
-                    <property name="fill">True</property>
-                    <property name="position">2</property>
+                    <property name="fill">False</property>
+                    <property name="position">1</property>
                   </packing>
                 </child>
               </object>
@@ -189,10 +175,44 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <child>
-                  <object class="GtkLabel" id="gamesWonLabel">
+                  <object class="GtkHBox" id="hbox4">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Games Won</property>
+                    <child>
+                      <object class="GtkImage" id="playerTurnImage">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="stock">gtk-missing-image</property>
+                      </object>
+                      <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="playerTurnLabel">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                      </object>
+                      <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkImage" id="opponentTurnImage">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="stock">gtk-missing-image</property>
+                      </object>
+                      <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
+                        <property name="position">2</property>
+                      </packing>
+                    </child>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -205,13 +225,20 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
-                      <object class="GtkTextView" id="yourWins">
+                      <object class="GtkEntry" id="playerWin">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="editable">False</property>
-                        <property name="justification">center</property>
-                        <property name="cursor_visible">False</property>
-                        <property name="buffer">textbuffer1</property>
+                        <property name="max_length">2</property>
+                        <property name="invisible_char">•</property>
+                        <property name="width_chars">2</property>
+                        <property name="xalign">1</property>
+                        <property name="overwrite_mode">True</property>
+                        <property name="caps_lock_warning">False</property>
+                        <property name="primary_icon_activatable">False</property>
+                        <property name="secondary_icon_activatable">False</property>
+                        <property name="primary_icon_sensitive">True</property>
+                        <property name="secondary_icon_sensitive">True</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -220,25 +247,32 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="vsLabel">
+                      <object class="GtkLabel" id="gamesWonLabe">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">vs.</property>
+                        <property name="label" translatable="yes">Games Won</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
-                        <property name="fill">True</property>
+                        <property name="fill">False</property>
                         <property name="position">1</property>
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkTextView" id="opponentWins">
+                      <object class="GtkEntry" id="opponentWins">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="editable">False</property>
-                        <property name="justification">center</property>
-                        <property name="cursor_visible">False</property>
-                        <property name="buffer">textbuffer2</property>
+                        <property name="max_length">2</property>
+                        <property name="invisible_char">•</property>
+                        <property name="width_chars">2</property>
+                        <property name="overwrite_mode">True</property>
+                        <property name="invisible_char_set">True</property>
+                        <property name="caps_lock_warning">False</property>
+                        <property name="primary_icon_activatable">False</property>
+                        <property name="secondary_icon_activatable">False</property>
+                        <property name="primary_icon_sensitive">True</property>
+                        <property name="secondary_icon_sensitive">True</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -266,27 +300,15 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <child>
-                  <object class="GtkLabel" id="opponentTurnLabel">
+                  <object class="GtkLabel" id="opponentLabel">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Opponent's turn</property>
+                    <property name="label" translatable="yes">Opponent</property>
                   </object>
                   <packing>
                     <property name="expand">True</property>
                     <property name="fill">True</property>
                     <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkImage" id="opponentTurnImg">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="pixbuf">gears.png</property>
-                  </object>
-                  <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
                   </packing>
                 </child>
                 <child>
@@ -310,7 +332,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkComboBox" id="colourBo">
+                          <object class="GtkComboBox" id="opponentColour">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                           </object>
@@ -323,12 +345,12 @@
                       </object>
                       <packing>
                         <property name="expand">True</property>
-                        <property name="fill">True</property>
+                        <property name="fill">False</property>
                         <property name="position">0</property>
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkHBox" id="hbox6">
+                      <object class="GtkHBox" id="difficultyView">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <child>
@@ -357,15 +379,15 @@
                       </object>
                       <packing>
                         <property name="expand">True</property>
-                        <property name="fill">True</property>
+                        <property name="fill">False</property>
                         <property name="position">1</property>
                       </packing>
                     </child>
                   </object>
                   <packing>
                     <property name="expand">True</property>
-                    <property name="fill">True</property>
-                    <property name="position">2</property>
+                    <property name="fill">False</property>
+                    <property name="position">1</property>
                   </packing>
                 </child>
               </object>

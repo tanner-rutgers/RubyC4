@@ -1,8 +1,9 @@
 require 'test/unit'
+require_relative 'ui_observer.rb'
 
 class Token
-
   include Test::Unit::Assertions
+  include UiObserver
 
   attr_reader :player, :imageFile
 
@@ -20,20 +21,14 @@ class Token
     @i = i
     @j = j
     
-    player = @boardModel.who(i,j)
-    if player.nil? 
-      @tokenModel = Model::Token.new(:EMPTY)
-    else
-      @tokenModel = player.token
-    end
-    @tokenImage = Gtk::Image.new(Gdk::PixBuf.new(@tokenModel.imageFile))
+    @colour = @boardModel.who(i,j).nil? ? :empty : @boardModel.who(i,j).colour
+    @tokenImage = Gtk::Image.new(Gdk::PixBuf.new(Model::Token.new(@colour)))
 
     update
 
     #Postconditions
     assert_equal(@builder, builder)
     assert_equal(@boardModel, boardModel)
-    assert(!@tokenModel.nil?)
     assert(!@tokenImage.nil?)
     assert_equal(@i, i)
     assert_equal(@j, j)
@@ -43,11 +38,11 @@ class Token
     # Pre-conditions #
     #NA
     
-    # Only load image file if the token has changed
-    newModel = @boardModel.who(@i, @j).token
-    if newModel != @tokenModel
-      @tokenModel = newModel
-      @tokenImage = Gtk::Image.new(Gdk::PixBuf.new(newModel.imageFile))
+    # Only load image file if the color has changed
+    newColour = @boardModel.who(@i, @j).nil? ? :empty : @boardModel.who(@i, @j).colour
+    if newColour != @colour
+      @colour = newColour
+      @tokenImage = Gtk::Image.new(Gdk::PixBuf.new(Model::Token.new(@colour)))
     end
 
     # Draw token

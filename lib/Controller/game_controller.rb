@@ -3,7 +3,7 @@ require 'gtk2'
 require 'test/unit'
 
 require_relative '../Model/game.rb'
-require_relative '../View/*'
+require_relative '../view/ui_game.rb'
 
 class GameController
 	include Test::Unit::Assertions
@@ -30,14 +30,9 @@ class GameController
 			@screens = Array.new
 			@controllers = Array.new
 
-			@game.players.each { |player| 
-				if !player.is_a?Model::Ai
-					view = View::UiGame.new(@builder, @game, player)
-					push(view)
-					controllers.add(Board.new(@builder, @game, view.board, player))
-					controllers.add(Menu.new(@builder, @game, view, player))
-				end
-			}
+			view = View::UiGame.new(@builder, @game)
+			push(view)
+			controllers.add(Board.new(@builder, @game, view.board))
 
 			Gtk.main()
 

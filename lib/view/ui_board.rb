@@ -1,8 +1,9 @@
 require 'test/unit'
 require_relative 'ui_observer.rb'
+require_relative 'ui_token.rb'
 
 module View
-	class Board
+	class UiBoard
 		include UiObserver
 		include Test::Unit::Assertions
 
@@ -25,8 +26,8 @@ module View
 		def initializeTokens
 			@playerTokens = Array.new
 
-			0.upto(@boardModel.size.rows) { |i|
-				0.upto(@boardModel.size.columns) { |j|
+			0.upto(@boardModel.size[:rows]) { |i|
+				0.upto(@boardModel.size[:columns]) { |j|
 					@playerTokens.add(View::UiToken.new(@builder,@boardModel,i,j))
 				}
 			}

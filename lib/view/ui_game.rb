@@ -1,6 +1,7 @@
 require 'test/unit'
 
 require_relative 'ui_observer.rb'
+require_relative 'ui_board.rb'
 
 module View
     class UiGame

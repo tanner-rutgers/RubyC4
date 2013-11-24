@@ -1,10 +1,12 @@
-module Colour
+module Model
+  module Colour
 
-	:red
-	:blue
-	:black
-	:white
-	:green
-	:pink
-	
+    :red
+    :blue
+    :black
+    :white
+    :green
+    :pink
+
+  end
 end

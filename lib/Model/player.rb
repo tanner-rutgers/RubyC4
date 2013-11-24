@@ -1,5 +1,8 @@
 require 'test/unit'
 require_relative 'win_condition.rb'
+require_relative 'colour.rb'
+
+include Model
 
 module Model
 
@@ -12,7 +15,7 @@ module Model
     def initialize(name, colour)
       # -- Pre Conditions -- #
       assert(name.is_a?(String))
-      assert(Model::Colour.constants.include?colour)
+      #assert(Colour.constants.include?colour)
 
       # -- Code -- #
       @name = name

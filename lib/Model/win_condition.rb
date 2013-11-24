@@ -1,8 +1,6 @@
 require 'test/unit'
 require_relative 'player.rb'
 
-include Model
-
 module Model
 
   class WinCondition
@@ -53,11 +51,11 @@ module Model
   class PatternElement
 
     def self.ANY
-      PatternElement.new("ANY") {|object| object.is_a?Player}
+      PatternElement.new("ANY") {|object| object.is_a?(Model::Player)}
     end
 
     def self.OTHER(player)
-      PatternElement.new("OTHER") {|object| object.is_a?Player && !object.eql?(player) }
+      PatternElement.new("OTHER") {|object| object.is_a?(Model::Player) && !object.eql?(player) }
     end
 
     def self.PLAYER(player)

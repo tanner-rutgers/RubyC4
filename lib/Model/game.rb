@@ -4,7 +4,8 @@ require_relative 'player.rb'
 require_relative 'settings.rb'
 
 module Model
-  class Game < Test::Unit::TestCase
+  class Game
+    include Test::Unit::Assertions
 
     class NotYourTurnException < StandardError; end
 
@@ -14,7 +15,7 @@ module Model
       # -- Pre Condiditions -- #
       assert(players.is_a?Array)
       assert(players.size >= 2)
-      players.each {|x| assert(x.is_a?Player)}
+      players.each {|x| assert(x.is_a?Model::Player)}
 
 
       # -- Code -- #
@@ -34,7 +35,7 @@ module Model
 
     def currentTurn?(player)
       # -- Pre Conditions -- #
-      assert(player.is_a?Player)
+      assert(player.is_a?Model::Player)
       assert(@players.include?(player))
 
       # -- Code -- #

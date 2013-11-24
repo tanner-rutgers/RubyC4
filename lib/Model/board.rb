@@ -57,7 +57,7 @@ module Model
       rval = @boardArray[x][y]
 
       # -- Post Codnitions -- # 
-      assert(rval.is_a?(Player) || rval.nil?)
+      assert(rval.is_a?(Model::Player) || rval.nil?)
 
       rval
     end
@@ -66,7 +66,7 @@ module Model
     def addPiece(columnNumber, player)
       # -- Pre Conditions -- #
       assert(columnNumber >= 0 && columnNumber < @boardArray.size)
-      assert(player.is_a?(Player))
+      assert(player.is_a?(Model::Player))
       num_tokens_before_insert = numTokens(columnNumber)
       assert(num_tokens_before_insert>=0)
       

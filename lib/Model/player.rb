@@ -2,8 +2,6 @@ require 'test/unit'
 require_relative 'win_condition.rb'
 require_relative 'colour.rb'
 
-include Model
-
 module Model
 
   class Player
@@ -21,10 +19,10 @@ module Model
       @name = name
       @colour = colour
       @winCondition = WinCondition.new(
-        WinCondition::PatternElement.PLAYER(self),
-        WinCondition::PatternElement.PLAYER(self),
-        WinCondition::PatternElement.PLAYER(self),
-        WinCondition::PatternElement.PLAYER(self)
+        Model::WinCondition::PatternElement.PLAYER(self),
+        Model::WinCondition::PatternElement.PLAYER(self),
+        Model::WinCondition::PatternElement.PLAYER(self),
+        Model::WinCondition::PatternElement.PLAYER(self)
       )
       @totalWins = 0
 
@@ -37,7 +35,7 @@ module Model
     def makeMove(board,colNumber)
       # -- Pre Conditions -- #
       assert(!board.nil?)
-      assert(board.is_a?Model::Board)
+      assert(board.is_a?(Model::Board))
       assert(colNumber.is_a?(Integer))
       assert(colNumber >= 0 && colNumber < board.size[:columns])
       tokens_before_addition = board.numTokens(colNumber)

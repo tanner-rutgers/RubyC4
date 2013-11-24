@@ -15,11 +15,13 @@ module Model
 
 			if colour.nil?
 				colour = :empty
+      end
 
 			@imageFile = colourMap[colour]
 
 			# Postconditions
 			assert(!@imageFile.nil?)
+
 		end
 	end
 end

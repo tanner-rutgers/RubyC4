@@ -3,7 +3,7 @@ require 'test/unit'
 require_relative 'ui_observer.rb'
 
 module View
-  class Menu
+  class UiMenu
     include UiObserver
     include Test::Unit::Assertions
 

@@ -15,12 +15,12 @@ module Controller
       newButton   =  @builder.get_object("newButton")
       #saveButton  =  @builder.get_object("saveButton")
       #loadButton  =  @builder.get_object("loadButton")
-      exitButton  =  @builder.get_object("newButton")
+      exitButton  =  @builder.get_object("exitButton")
 
       newButton.signal_connect( "activate" ) { newButtonAction }
       #saveButton.signal_connect( "activate" ) { saveButtonAction }
       #loadButton.signal_connect( "activate" ) { loadButtonAction }
-      exitButton.signal_connect( "activate" ) { exitButtonAction }
+      exitButton.signal_connect( "activate" ) { Gtk.main_quit }
     end
 
     def newButtonAction
@@ -36,11 +36,6 @@ module Controller
     def loadButtonAction
       
       notifyAll    
-    end
-
-    def exitButtonAction
-      
-      notifyAll
     end
 
   end

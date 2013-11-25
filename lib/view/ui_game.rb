@@ -19,13 +19,13 @@ module View
 
         @builder = builder
         @model = model
+        
+        @builder.get_object("mainWindow").signal_connect( "destroy" ) { Gtk.main_quit }
 
         @views = Array.new
-
-
         @views.push(View::UiBoard.new(@builder, @model))
         @views.push(View::UiStatusInfo.new(@builder, @model))
-
+      
         # Post-conditions / Class-invariants #
         assert_equal(@builder, builder, "GTK builder was not initialized")
         assert_equal(@model, model, "Model was not initialized")

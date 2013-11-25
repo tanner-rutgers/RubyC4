@@ -1,0 +1,7 @@
+difficulty: "Medium"
+game_type: "Connect4"
+player_name: "Player1"
+player1_colour: "Colour.RED"
+player2_colour: "Colour.BLUE"
+
+

@@ -8,8 +8,10 @@ require_relative '../view/ui_game.rb'
 class GameController
 	include Test::Unit::Assertions
 
-	def initialize()	  
+	def initialize(game)	  
 	  	# -- Pre Conditions -- #
+		assert(game.is_a?Model::Game)
+
 
 	  	# -- Code -- #
 		if __FILE__ == $0
@@ -21,7 +23,7 @@ class GameController
 		  	@builder.connect_signals{ |handler| method(handler) }
 
 		  	# Initialize models
-			@game = Game.new
+			@game = game
 
 			@win = false
 

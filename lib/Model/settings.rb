@@ -12,7 +12,7 @@ module Model
 		@enum[:game_type]="Connect4"
 	    # set other settings here. all other keys will return null
 
-		read_file()
+		#read_file()
 	  end
 
 	  #returns setting value for string setting
@@ -31,13 +31,19 @@ module Model
 		valid_difficulties = Array.new(["Easy", "Medium", "Hard"])
 		valid_game_types = Array.new(["Connect4", "Otto&Toot"])
 
-		settings=YAML::load_file "../../resources/settings.yml"
+		settings=YAML::load_file(File.join(File.dirname(File.expand_path(__FILE__)), '../../resources/settings.yml')) 
 
-		valid_difficulties.each { |a| set("difficulty", a) if settings["difficulty"] == a}
-	    valid_game_types.each { |b| set("game_type", b) if settings["game_type"] == b}
-		
+		valid_difficulties.each do |a|
+            set("difficulty", a) if settings["difficulty"] == a
+        end
+	    valid_game_types.each do |b|
+            set("game_type", b) if settings["game_type"] == b
+        end
+
+
 		game = RubyC4Application.getGame
 		if (!settings["player_name"].nil?)
+
 			game.players[0].name = settings["player_name"]
 		end
 

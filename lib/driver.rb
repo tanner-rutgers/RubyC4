@@ -22,9 +22,11 @@ game = View::UiGame.new(@builder, gameModel)
 
 boardController = Controller::Board.new(@builder, gameModel, players[0])
 boardController.addObserver(game.get_view(View::UiBoard)) 
+boardController.addObserver(game.get_view(View::UiStatusInfo))
 
 aiController = Controller::AI.new(players[1], players[0], gameModel)
 aiController.addObserver(game.get_view(View::UiBoard))
+aiController.addObserver(game.get_view(View::UiStatusInfo))
 
 boardController.addObserver(aiController)
 

@@ -2,7 +2,7 @@ require 'test/unit'
 
 require_relative 'ui_observer.rb'
 require_relative 'ui_board.rb'
-
+require_relative 'ui_status_info.rb'
 
 module View
     class UiGame
@@ -22,8 +22,9 @@ module View
 
         @views = Array.new
 
+
         @views.push(View::UiBoard.new(@builder, @model.board))
-        #@views.push(View::UiStatusInfo.new(@builder, @model))
+        @views.push(View::UiStatusInfo.new(@builder, @model))
 
         # Post-conditions / Class-invariants #
         assert_equal(@builder, builder, "GTK builder was not initialized")

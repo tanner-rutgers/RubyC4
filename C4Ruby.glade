@@ -95,32 +95,6 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkMenuItem" id="gameTypeMenu">
-                        <property name="visible">True</property>
-                        <property name="label" translatable="yes">Game_Type</property>
-                        <property name="use_underline">True</property>
-                        <child type="submenu">
-                          <object class="GtkMenu" id="menu5">
-                            <property name="visible">True</property>
-                            <child>
-                              <object class="GtkMenuItem" id="connect4Button">
-                                <property name="visible">True</property>
-                                <property name="label" translatable="yes">_Connect4</property>
-                                <property name="use_underline">True</property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkMenuItem" id="Otto&amp;TootButton">
-                                <property name="visible">True</property>
-                                <property name="label" translatable="yes">_Otto&amp;Toot</property>
-                                <property name="use_underline">True</property>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
                       <object class="GtkMenuItem" id="colorMenu">
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">_Color</property>
@@ -146,13 +120,6 @@
                         </child>
                       </object>
                     </child>
-                    <child>
-                      <object class="GtkMenuItem" id="playerNameButton">
-                        <property name="visible">True</property>
-                        <property name="label" translatable="yes">Player_Names</property>
-                        <property name="use_underline">True</property>
-                      </object>
-                    </child>
                   </object>
                 </child>
               </object>
@@ -164,7 +131,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkLabel" id="turnLabel">
+          <object class="GtkLabel" id="statusLabel">
             <property name="visible">True</property>
             <property name="label" translatable="yes">[Name]'s Turn...</property>
           </object>
@@ -751,25 +718,6 @@
           </object>
           <packing>
             <property name="position">2</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkStatusbar" id="statusbar1">
-            <property name="visible">True</property>
-            <property name="spacing">2</property>
-            <child>
-              <object class="GtkLabel" id="score_status">
-                <property name="visible">True</property>
-                <property name="label" translatable="yes">Score: -1 / -1</property>
-              </object>
-              <packing>
-                <property name="position">1</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="position">3</property>
           </packing>
         </child>
       </object>

@@ -26,14 +26,15 @@ module View
       @j = j
       
       @colour = @boardModel.who(i,j).nil? ? :empty : @boardModel.who(i,j).colour
-      @tokenImage = Gtk::Image.new(Gdk::PixBuf.new(Model::Token.new(@colour)))
+      @tokenModel = Model::Token.new(@colour)
 
       update
 
       #Postconditions
       assert_equal(@builder, builder)
       assert_equal(@boardModel, boardModel)
-      assert(!@tokenImage.nil?)
+      assert(!@colour.nil?)
+      assert(!@tokenModel.nil?)
       assert_equal(@i, i)
       assert_equal(@j, j)
     end
@@ -46,11 +47,11 @@ module View
       newColour = @boardModel.who(@i, @j).nil? ? :empty : @boardModel.who(@i, @j).colour
       if newColour != @colour
         @colour = newColour
-        @tokenImage = Gtk::Image.new(Gdk::PixBuf.new(Model::Token.new(@colour)))
+        @tokenModel = Model::Token.new(@colour)
+        @builder.get_object("piece" + (@i*@boardModel.size[:rows]+@j).to_s).set_from_file(@tokenModel.imageFile)  
       end
 
       # Draw token
-      @builder.get_object("piece" + (@i*@boardModel.size[:rows]+@j).to_s).set_from_pixbuf(@tokenImage)
 
       # Post-conditions #
       #NA

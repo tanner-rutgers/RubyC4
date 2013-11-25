@@ -6,7 +6,7 @@ module UiObserver
   extend Model::Observer
 
 	def update
-    raise "Not Implemented Error"
+    #raise "Not Implemented Error"
   end
 
   def notify

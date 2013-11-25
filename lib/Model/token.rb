@@ -6,8 +6,9 @@ module Model
 	class Token
 		include Test::Unit::Assertions
 
-		@@colourMap = Hash[Model::Colour.constants.collect{ |colour| [Model::Colour.const_get(colour), "./resources/#{Model::Colour.const_get(colour)}.png"] }]
-		@@colourMap[:empty] = "./resources/empty.png"
+    @@resources_path =  File.expand_path("../../resources", File.dirname(__FILE__))
+		@@colourMap = Hash[Model::Colour.constants.collect{ |colour| [Model::Colour.const_get(colour), "#{@@resources_path}/#{Model::Colour.const_get(colour)}.png"] }]
+		@@colourMap[:empty] = "#{@@resources_path}/empty.png"
 
 		attr_reader :imageFile
 

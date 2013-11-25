@@ -37,7 +37,7 @@ module View
         # Pre-conditions #
         #NA
         @views.each { |view| view.update }
-        setCurrentTurn
+        #setCurrentTurn
         # Post-conditions #
         #NA
       end

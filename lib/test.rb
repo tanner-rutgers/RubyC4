@@ -19,8 +19,9 @@ while(!game.gameOver?)
 	r = gets
 	game.makeMove(p1,r.to_i)
 	puts game
-    puts AI.getBestMove(game.board).is_a?(Integer) 
-	game.makeMove(p2,AI.getBestMove(game.board)) if !game.gameOver?
+    val = AI.getBestMove(game.board)
+	#puts val
+    game.makeMove(p2,val) if !game.gameOver?
 	puts game
 end
 puts game

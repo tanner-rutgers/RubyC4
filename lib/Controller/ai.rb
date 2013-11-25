@@ -10,7 +10,7 @@ module Controller
     
     def initialize(player, opponent, gameModel)
       @aiPlayer = player
-      @ai = Model::AI.new(player, opponent, :easy)
+      @ai = Model::AI.new(player, opponent, 3)
       @gameModel = gameModel            
     end
     

@@ -2,7 +2,7 @@ require 'test/unit'
 require_relative 'player.rb'
 module Model
     class AI
-        def initialize(player,opponent,difficulty)
+        def initialize(opponent,player,difficulty)
         # -- Pre Conditions -- #
         
         # -- Code -- #
@@ -24,19 +24,14 @@ module Model
             test = board.clone
             begin
                 test.addPiece(x,@player)
-                value = minimax(test,2,false)
-                #puts "best value = #{bestValue} and row = #{bestMove}"
+                value = minimax(test,@difficulty,false)
                 if value > bestValue
                     bestMove = x
                     bestValue = value
                 elsif value == bestValue
                     bestMove = rand.round == 1 ? bestMove : x
                 end
-                
-                #			puts "mov = #{x} and value = #{value}"
-                rescue
-                #			puts $!
-                
+                rescue Model::Board::ColumnFullException
             end
         end
         return bestMove
@@ -49,9 +44,6 @@ end
         bestValue = 0
         newBoard = board
         if depth == 0 || board.isFull? || @player.hasWon?(board) || @opponent.hasWon?(board)
-            #puts "player.haswon = #{@player.hasWon?(board)} self.hasWon? = #{self.hasWon?(board)}"
-            #puts "depth = #{depth} and board.isFull? = #{board.isFull?}"
-            #puts board
             return 100*depth + 1 if @player.hasWon?(newBoard) && !maximizingPlayer
             return -100*depth + 1 if @opponent.hasWon?(newBoard) && maximizingPlayer
             return 0
@@ -67,7 +59,6 @@ end
                 val = minimax(newBoard,depth-1,false)
                 bestValue = [val,bestValue].max
             end
-        #puts "bestValue = #{bestValue}"
             return bestValue
         else
             bestValue = +100

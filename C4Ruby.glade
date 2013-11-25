@@ -258,13 +258,13 @@
                 <property name="n_rows">6</property>
                 <property name="n_columns">7</property>
                 <child>
-                  <object class="GtkImage" id="image1">
+                  <object class="GtkImage" id="piece00">
                     <property name="visible">True</property>
                     <property name="pixbuf">resources/empty.png</property>
                   </object>
                 </child>
                 <child>
-                  <object class="GtkImage" id="image2">
+                  <object class="GtkImage" id="piece01">
                     <property name="visible">True</property>
                     <property name="pixbuf">resources/empty.png</property>
                   </object>
@@ -274,7 +274,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkImage" id="image3">
+                  <object class="GtkImage" id="piece02">
                     <property name="visible">True</property>
                     <property name="pixbuf">resources/empty.png</property>
                   </object>
@@ -284,7 +284,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkImage" id="image4">
+                  <object class="GtkImage" id="piece03">
                     <property name="visible">True</property>
                     <property name="pixbuf">resources/empty.png</property>
                   </object>
@@ -294,7 +294,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkImage" id="image5">
+                  <object class="GtkImage" id="piece04">
                     <property name="visible">True</property>
                     <property name="pixbuf">resources/empty.png</property>
                   </object>
@@ -304,7 +304,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkImage" id="image6">
+                  <object class="GtkImage" id="piece05">
                     <property name="visible">True</property>
                     <property name="pixbuf">resources/empty.png</property>
                   </object>
@@ -315,7 +315,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkImage" id="image7">
+                  <object class="GtkImage" id="piece15">
                     <property name="visible">True</property>
                     <property name="pixbuf">resources/empty.png</property>
                   </object>
@@ -327,7 +327,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkImage" id="image8">
+                  <object class="GtkImage" id="piece14">
                     <property name="visible">True</property>
                     <property name="pixbuf">resources/empty.png</property>
                   </object>
@@ -339,7 +339,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkImage" id="image9">
+                  <object class="GtkImage" id="piece13">
                     <property name="visible">True</property>
                     <property name="pixbuf">resources/empty.png</property>
                   </object>
@@ -351,7 +351,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkImage" id="image10">
+                  <object class="GtkImage" id="piece12">
                     <property name="visible">True</property>
                     <property name="pixbuf">resources/empty.png</property>
                   </object>
@@ -363,7 +363,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkImage" id="image11">
+                  <object class="GtkImage" id="piece11">
                     <property name="visible">True</property>
                     <property name="pixbuf">resources/empty.png</property>
                   </object>
@@ -375,7 +375,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkImage" id="image12">
+                  <object class="GtkImage" id="piece10">
                     <property name="visible">True</property>
                     <property name="pixbuf">resources/empty.png</property>
                   </object>
@@ -385,7 +385,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkImage" id="image13">
+                  <object class="GtkImage" id="piece25">
                     <property name="visible">True</property>
                     <property name="pixbuf">resources/empty.png</property>
                   </object>
@@ -397,7 +397,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkImage" id="image14">
+                  <object class="GtkImage" id="piece24">
                     <property name="visible">True</property>
                     <property name="pixbuf">resources/empty.png</property>
                   </object>
@@ -409,7 +409,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkImage" id="image15">
+                  <object class="GtkImage" id="piece23">
                     <property name="visible">True</property>
                     <property name="pixbuf">resources/empty.png</property>
                   </object>
@@ -421,7 +421,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkImage" id="image16">
+                  <object class="GtkImage" id="piece22">
                     <property name="visible">True</property>
                     <property name="pixbuf">resources/empty.png</property>
                   </object>
@@ -433,7 +433,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkImage" id="image17">
+                  <object class="GtkImage" id="piece21">
                     <property name="visible">True</property>
                     <property name="pixbuf">resources/empty.png</property>
                   </object>
@@ -445,7 +445,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkImage" id="image18">
+                  <object class="GtkImage" id="piece20">
                     <property name="visible">True</property>
                     <property name="pixbuf">resources/empty.png</property>
                   </object>
@@ -455,7 +455,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkImage" id="image19">
+                  <object class="GtkImage" id="piece35">
                     <property name="visible">True</property>
                     <property name="pixbuf">resources/empty.png</property>
                   </object>
@@ -467,7 +467,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkImage" id="image20">
+                  <object class="GtkImage" id="piece34">
                     <property name="visible">True</property>
                     <property name="pixbuf">resources/empty.png</property>
                   </object>
@@ -479,7 +479,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkImage" id="image21">
+                  <object class="GtkImage" id="piece33">
                     <property name="visible">True</property>
                     <property name="pixbuf">resources/empty.png</property>
                   </object>
@@ -491,7 +491,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkImage" id="image22">
+                  <object class="GtkImage" id="piece32">
                     <property name="visible">True</property>
                     <property name="pixbuf">resources/empty.png</property>
                   </object>
@@ -503,7 +503,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkImage" id="image23">
+                  <object class="GtkImage" id="piece31">
                     <property name="visible">True</property>
                     <property name="pixbuf">resources/empty.png</property>
                   </object>
@@ -515,7 +515,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkImage" id="image24">
+                  <object class="GtkImage" id="piece30">
                     <property name="visible">True</property>
                     <property name="pixbuf">resources/empty.png</property>
                   </object>
@@ -525,7 +525,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkImage" id="image25">
+                  <object class="GtkImage" id="piece45">
                     <property name="visible">True</property>
                     <property name="pixbuf">resources/empty.png</property>
                   </object>
@@ -537,7 +537,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkImage" id="image26">
+                  <object class="GtkImage" id="piece44">
                     <property name="visible">True</property>
                     <property name="pixbuf">resources/empty.png</property>
                   </object>
@@ -549,7 +549,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkImage" id="image27">
+                  <object class="GtkImage" id="piece43">
                     <property name="visible">True</property>
                     <property name="pixbuf">resources/empty.png</property>
                   </object>
@@ -561,7 +561,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkImage" id="image28">
+                  <object class="GtkImage" id="piece42">
                     <property name="visible">True</property>
                     <property name="pixbuf">resources/empty.png</property>
                   </object>
@@ -573,7 +573,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkImage" id="image29">
+                  <object class="GtkImage" id="piece41">
                     <property name="visible">True</property>
                     <property name="pixbuf">resources/empty.png</property>
                   </object>
@@ -585,7 +585,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkImage" id="image30">
+                  <object class="GtkImage" id="piece40">
                     <property name="visible">True</property>
                     <property name="pixbuf">resources/empty.png</property>
                   </object>
@@ -595,7 +595,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkImage" id="image31">
+                  <object class="GtkImage" id="piece55">
                     <property name="visible">True</property>
                     <property name="pixbuf">resources/empty.png</property>
                   </object>
@@ -607,7 +607,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkImage" id="image32">
+                  <object class="GtkImage" id="piece54">
                     <property name="visible">True</property>
                     <property name="pixbuf">resources/empty.png</property>
                   </object>
@@ -619,7 +619,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkImage" id="image33">
+                  <object class="GtkImage" id="piece53">
                     <property name="visible">True</property>
                     <property name="pixbuf">resources/empty.png</property>
                   </object>
@@ -631,7 +631,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkImage" id="image34">
+                  <object class="GtkImage" id="piece52">
                     <property name="visible">True</property>
                     <property name="pixbuf">resources/empty.png</property>
                   </object>
@@ -643,7 +643,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkImage" id="image35">
+                  <object class="GtkImage" id="piece51">
                     <property name="visible">True</property>
                     <property name="pixbuf">resources/empty.png</property>
                   </object>
@@ -655,7 +655,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkImage" id="image36">
+                  <object class="GtkImage" id="piece50">
                     <property name="visible">True</property>
                     <property name="pixbuf">resources/empty.png</property>
                   </object>
@@ -665,7 +665,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkImage" id="image37">
+                  <object class="GtkImage" id="piece65">
                     <property name="visible">True</property>
                     <property name="pixbuf">resources/empty.png</property>
                   </object>
@@ -677,7 +677,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkImage" id="image38">
+                  <object class="GtkImage" id="piece64">
                     <property name="visible">True</property>
                     <property name="pixbuf">resources/empty.png</property>
                   </object>
@@ -689,7 +689,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkImage" id="image39">
+                  <object class="GtkImage" id="piece63">
                     <property name="visible">True</property>
                     <property name="pixbuf">resources/empty.png</property>
                   </object>
@@ -701,7 +701,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkImage" id="image40">
+                  <object class="GtkImage" id="piece62">
                     <property name="visible">True</property>
                     <property name="pixbuf">resources/empty.png</property>
                   </object>
@@ -713,7 +713,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkImage" id="image41">
+                  <object class="GtkImage" id="piece61">
                     <property name="visible">True</property>
                     <property name="pixbuf">resources/empty.png</property>
                   </object>
@@ -725,7 +725,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkImage" id="image42">
+                  <object class="GtkImage" id="piece60">
                     <property name="visible">True</property>
                     <property name="pixbuf">resources/empty.png</property>
                   </object>

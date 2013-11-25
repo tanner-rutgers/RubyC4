@@ -14,14 +14,13 @@ module Model
 
     def initialize()
       # -- Pre Condiditions -- #
-      players.each {|x| assert(x.is_a?Model::Player)}
-
 
       # -- Code -- #
 	  #Game Model Defaults
 	  @players = Array.new([Player.new("Player1", Colour.RED), Player.new("Player2", Colour.BLUE)])
 	  @board = Board.new(7, 6)
       @currentPlayersTurn = players[0]
+
       @winner = nil
 
 	  #Load settings
@@ -31,7 +30,7 @@ module Model
       # -- Post Conditions -- #
       assert(@players.is_a?Array)
       assert(!@board.nil?)
-      assert(@currentPlayersTurn == players[0])
+      assert(@currentPlayersTurn == @players[0])
 
     end
 

@@ -13,7 +13,7 @@ module Model
     def initialize(name, colour)
       # -- Pre Conditions -- #
       assert(name.is_a?(String))
-      assert(Colour.constants.include?colour)
+      #assert(Model::Colour.constants.include?(colour))
 
       # -- Code -- #
       @name = name

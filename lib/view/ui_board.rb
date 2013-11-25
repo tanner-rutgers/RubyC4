@@ -26,9 +26,9 @@ module View
 		def initializeTokens
 			@playerTokens = Array.new
 
-			0.upto(@boardModel.size[:rows]) { |i|
-				0.upto(@boardModel.size[:columns]) { |j|
-					@playerTokens.add(View::UiToken.new(@builder,@boardModel,i,j))
+			@boardModel.size[:columns].times { |i|
+				@boardModel.size[:rows].times { |j|
+					@playerTokens.push(View::UiToken.new(@builder,@boardModel,i,j))
 				}
 			}
 		end
@@ -43,7 +43,7 @@ module View
 		end
 
 		# Update given space on board
-		def update(i, j)
+		def updateSpace(i, j)
 			
 			@playerTokens.each { |token| token.update if token.i == i && token.j == j }
 		end

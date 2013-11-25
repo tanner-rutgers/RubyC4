@@ -52,8 +52,10 @@ class GameController
 	  # -- Code -- #
 	  continue = true;
 	  while(continue)
-		  push(Menu.new) # WHY? 1. This is a controller, not a view
-		  				 #      2. This is an infinite stack of menus
+		  push(Menu.new)
+
+		  # prompt user to continue or exit
+		  continue = false;
 
 
 		#####MOARCODE

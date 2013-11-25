@@ -6,7 +6,8 @@ module Model
 			return nil #returns nil if key is not valid
 		end
 		@enum[:difficulty]=1 #possible values 0, 1, 2
-		@enum[:player1name]="Player 1" #allow user to change with textbox
+		@enum[:player_name]="Player 1" #allow user to change with textbox
+		@enum[:game_type]="Connect4"
 	    # set other settings here. all other keys will return null
 	  end
 

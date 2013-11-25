@@ -54,58 +54,96 @@
               </object>
             </child>
             <child>
-              <object class="GtkMenuItem" id="difficultyMenu">
+              <object class="GtkMenuItem" id="settingsMenu">
                 <property name="visible">True</property>
-                <property name="label" translatable="yes">_Difficulty</property>
+                <property name="label" translatable="yes">_Settings</property>
                 <property name="use_underline">True</property>
                 <child type="submenu">
-                  <object class="GtkMenu" id="menu2">
+                  <object class="GtkMenu" id="menu4">
                     <property name="visible">True</property>
                     <child>
-                      <object class="GtkMenuItem" id="easyButton">
+                      <object class="GtkMenuItem" id="difficultyMenu">
                         <property name="visible">True</property>
-                        <property name="label" translatable="yes">_Easy</property>
+                        <property name="label" translatable="yes">_Difficulty</property>
                         <property name="use_underline">True</property>
+                        <child type="submenu">
+                          <object class="GtkMenu" id="menu2">
+                            <property name="visible">True</property>
+                            <child>
+                              <object class="GtkMenuItem" id="easyButton">
+                                <property name="visible">True</property>
+                                <property name="label" translatable="yes">_Easy</property>
+                                <property name="use_underline">True</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkMenuItem" id="mediumButton">
+                                <property name="visible">True</property>
+                                <property name="label" translatable="yes">_Medium</property>
+                                <property name="use_underline">True</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkMenuItem" id="hardButton">
+                                <property name="visible">True</property>
+                                <property name="label" translatable="yes">_Hard</property>
+                                <property name="use_underline">True</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
                       </object>
                     </child>
                     <child>
-                      <object class="GtkMenuItem" id="mediumButton">
+                      <object class="GtkMenuItem" id="gameTypeMenu">
                         <property name="visible">True</property>
-                        <property name="label" translatable="yes">_Medium</property>
+                        <property name="label" translatable="yes">Game_Type</property>
                         <property name="use_underline">True</property>
+                        <child type="submenu">
+                          <object class="GtkMenu" id="menu5">
+                            <property name="visible">True</property>
+                            <child>
+                              <object class="GtkMenuItem" id="connect4Button">
+                                <property name="visible">True</property>
+                                <property name="label" translatable="yes">_Connect4</property>
+                                <property name="use_underline">True</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkMenuItem" id="Otto&amp;TootButton">
+                                <property name="visible">True</property>
+                                <property name="label" translatable="yes">_Otto&amp;Toot</property>
+                                <property name="use_underline">True</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
                       </object>
                     </child>
                     <child>
-                      <object class="GtkMenuItem" id="hardButton">
+                      <object class="GtkMenuItem" id="colorMenu">
                         <property name="visible">True</property>
-                        <property name="label" translatable="yes">_Hard</property>
+                        <property name="label" translatable="yes">_Color</property>
                         <property name="use_underline">True</property>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-              </object>
-            </child>
-            <child>
-              <object class="GtkMenuItem" id="colorMenu">
-                <property name="visible">True</property>
-                <property name="label" translatable="yes">_Color</property>
-                <property name="use_underline">True</property>
-                <child type="submenu">
-                  <object class="GtkMenu" id="menu3">
-                    <property name="visible">True</property>
-                    <child>
-                      <object class="GtkMenuItem" id="opponentColorButton">
-                        <property name="visible">True</property>
-                        <property name="label" translatable="yes">_Opponent Colour</property>
-                        <property name="use_underline">True</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkMenuItem" id="yourColourButton">
-                        <property name="visible">True</property>
-                        <property name="label" translatable="yes">_Your Colour</property>
-                        <property name="use_underline">True</property>
+                        <child type="submenu">
+                          <object class="GtkMenu" id="menu3">
+                            <property name="visible">True</property>
+                            <child>
+                              <object class="GtkMenuItem" id="opponentColorButton">
+                                <property name="visible">True</property>
+                                <property name="label" translatable="yes">_Opponent Colour</property>
+                                <property name="use_underline">True</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkMenuItem" id="yourColourButton">
+                                <property name="visible">True</property>
+                                <property name="label" translatable="yes">_Your Colour</property>
+                                <property name="use_underline">True</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
                       </object>
                     </child>
                   </object>

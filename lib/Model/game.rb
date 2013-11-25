@@ -2,6 +2,7 @@ require 'test/unit'
 require_relative 'board.rb'
 require_relative 'player.rb'
 require_relative 'settings.rb'
+require_relative 'colour.rb'
 
 module Model
   class Game
@@ -11,17 +12,15 @@ module Model
 
     attr_reader :winner, :board, :players, :currentPlayersTurn
 
-    def initialize(players, board = Board.new(7, 6))
+    def initialize()
       # -- Pre Condiditions -- #
-      assert(players.is_a?Array)
-      assert(players.size >= 2)
       players.each {|x| assert(x.is_a?Model::Player)}
 
 
       # -- Code -- #
-	  @settings = Settings.new
-      @players = players
-	  @board = board
+	  @players = Array.new([Player.new("Player1", Colour.RED), Player.new("Player2", Colour.BLUE)])
+	  @settings = Settings.new()
+	  @board = Board.new(7, 6)
       @currentPlayersTurn = players[0]
       @winner = nil
 

@@ -3,6 +3,7 @@ require 'test/unit'
 require_relative 'ui_observer.rb'
 require_relative 'ui_board.rb'
 
+
 module View
     class UiGame
 
@@ -17,11 +18,13 @@ module View
         @builder = builder
         @model = model
 
-        @views.add(View::UiBoard.new(@builder, @model.board))
-        @views.add(View::UiPlayer.new(@builder, @model.players[0]))
-        @views.add(View::UiOpponent.new(@builder, @model.players[1]))
+        @views = Array.new
 
-        @builder.get_object("window1").show()
+        @views.push(View::UiBoard.new(@builder, @model.board))
+        #@views.push(View::UiPlayer.new(@builder, @model.players[0]))
+        #@views.push(View::UiOpponent.new(@builder, @model.players[1]))
+
+        @builder.get_object("mainWindow").show()
         Gtk.main()
 
         # Post-conditions / Class-invariants #

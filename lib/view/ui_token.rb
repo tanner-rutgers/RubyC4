@@ -3,6 +3,7 @@ require 'rubygems'
 require 'gtk2'
 
 require_relative 'ui_observer.rb'
+require_relative '../Model/token.rb'
 
 module View
   class UiToken
@@ -17,8 +18,8 @@ module View
       assert(boardModel.is_a?Model::Board)
       assert(i.is_a?Numeric)
       assert(j.is_a?Numeric)
-      assert(i >= 0 && i < boardModel.size[:rows])
-      assert(j >= 0 && j < boardModel.size[:columns])
+      assert(i >= 0 && i < boardModel.size[:columns])
+      assert(j >= 0 && j < boardModel.size[:rows])
 
       @builder = builder
       @boardModel = boardModel
@@ -48,7 +49,7 @@ module View
       if newColour != @colour
         @colour = newColour
         @tokenModel = Model::Token.new(@colour)
-        @builder.get_object("piece" + (@i*@boardModel.size[:rows]+@j).to_s).set_from_file(@tokenModel.imageFile)  
+        @builder.get_object("piece#{@i}#{@j}" ).set_from_file(@tokenModel.imageFile)  
       end
 
       # Draw token

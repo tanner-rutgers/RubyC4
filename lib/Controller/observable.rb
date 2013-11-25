@@ -9,7 +9,7 @@ module Controller
     def notifyAll
       @observers.each {|observer|
         observer.notify
-      }
+      } if !@observers.nil?
     end   
 
   end

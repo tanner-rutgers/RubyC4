@@ -38,6 +38,13 @@
                       </object>
                     </child>
                     <child>
+                      <object class="GtkMenuItem" id="loadButton">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">L_oad</property>
+                        <property name="use_underline">True</property>
+                      </object>
+                    </child>
+                    <child>
                       <object class="GtkSeparatorMenuItem" id="separator1">
                         <property name="visible">True</property>
                       </object>
@@ -103,7 +110,7 @@
                           <object class="GtkMenu" id="menu3">
                             <property name="visible">True</property>
                             <child>
-                              <object class="GtkMenuItem" id="opponentColorButton">
+                              <object class="GtkMenuItem" id="opponentColourButton">
                                 <property name="visible">True</property>
                                 <property name="label" translatable="yes">_Opponent Colour</property>
                                 <property name="use_underline">True</property>
@@ -725,7 +732,10 @@
   </object>
   <object class="GtkDialog" id="tokenChooserDialog">
     <property name="border_width">5</property>
+    <property name="resizable">False</property>
+    <property name="modal">True</property>
     <property name="type_hint">normal</property>
+    <property name="deletable">False</property>
     <property name="has_separator">False</property>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox1">

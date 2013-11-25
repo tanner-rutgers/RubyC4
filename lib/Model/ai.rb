@@ -2,6 +2,8 @@ require 'test/unit'
 require_relative 'player.rb'
 module Model
   class AI
+    attr_writer :difficulty
+
     def initialize(opponent,player,difficulty)
       # -- Pre Conditions -- #
       

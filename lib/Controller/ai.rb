@@ -8,17 +8,35 @@ module Controller
     include Controller::Observable
 
     
-    def initialize(player, opponent, gameModel)
+    def initialize(builder, player, opponent, gameModel)  
+      @builder = builder
       @aiPlayer = opponent
-      @ai = Model::AI.new(player, opponent, 2)
-      @gameModel = gameModel            
+      @ai = Model::AI.new(player, opponent, 1)
+      @gameModel = gameModel    
+
+      setupHandlers        
+    end
+
+    def setupHandlers
+      easyButton   =  @builder.get_object("easyButton")
+      mediumButton =  @builder.get_object("mediumButton")
+      hardButton   =  @builder.get_object("hardButton")
+
+      easyButton.signal_connect( "activate" ) { difficultyHandler(1) }
+      mediumButton.signal_connect( "activate" ) { difficultyHandler(3) }
+      hardButton.signal_connect( "activate" ) { difficultyHandler(4) }
+
+    end   
+
+    def difficultyHandler(difficulty)
+      @ai.difficulty = difficulty    
     end
     
     def notify
-
-      @gameModel.makeMove(@aiPlayer, @ai.getBestMove(@gameModel.board)) if @gameModel.currentPlayersTurn == @aiPlayer 
-
-      notifyAll          
+      Thread.new {
+        @gameModel.makeMove(@aiPlayer, @ai.getBestMove(@gameModel.board)) if @gameModel.currentPlayersTurn == @aiPlayer 
+        notifyAll  
+      }
     end
     
   end

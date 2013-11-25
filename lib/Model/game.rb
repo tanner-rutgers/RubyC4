@@ -19,6 +19,7 @@ module Model
 	    @players = Array.new([Player.new("Player1", Model::Colour::RED), Player.new("Player2",  Model::Colour::BLUE)])
 	    @settings = Settings.new()
 	    @board = Board.new(7, 6)
+
       @currentPlayersTurn = @players[0]
       @winner = nil
 

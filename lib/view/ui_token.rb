@@ -46,11 +46,11 @@ module View
       
       # Only load image file if the color has changed
       newColour = @boardModel.who(@i, @j).nil? ? :empty : @boardModel.who(@i, @j).colour
-      if newColour != @colour
-        @colour = newColour
-        @tokenModel = Model::Token.new(@colour)
-        @builder.get_object("piece#{@i}#{@j}" ).set_from_file(@tokenModel.imageFile)  
-      end
+      
+      @colour = newColour
+      @tokenModel = Model::Token.new(@colour)
+      @builder.get_object("piece#{@i}#{@j}" ).set_file(@tokenModel.imageFile)  
+
 
       # Draw token
 

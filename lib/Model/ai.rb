@@ -1,16 +1,16 @@
 require 'test/unit'
 require_relative 'player.rb'
 module Model
-    class AI
-        def initialize(opponent,player,difficulty)
-        # -- Pre Conditions -- #
-        
-        # -- Code -- #
-        @player = player
-        @opponent = opponent
-        @difficulty = difficulty
-        
-        # -- Post Conditions -- #
+  class AI
+    def initialize(opponent,player,difficulty)
+      # -- Pre Conditions -- #
+      
+      # -- Code -- #
+      @player = player
+      @opponent = opponent
+      @difficulty = difficulty
+      
+      # -- Post Conditions -- #
     end
     
     
@@ -38,7 +38,7 @@ module Model
         
         # -- Post Conditions -- #
     end
-end
+
 
     def minimax(board, depth, maximizingPlayer)
         bestValue = 0
@@ -75,4 +75,5 @@ end
             return bestValue
         end
     end
+  end
 end

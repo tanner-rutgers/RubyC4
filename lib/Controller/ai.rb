@@ -9,13 +9,15 @@ module Controller
 
     
     def initialize(player, opponent, gameModel)
-      @aiPlayer = player
-      @ai = Model::AI.new(player, opponent, 3)
+      @aiPlayer = opponent
+      @ai = Model::AI.new(player, opponent, 2)
       @gameModel = gameModel            
     end
     
     def notify
+
       @gameModel.makeMove(@aiPlayer, @ai.getBestMove(@gameModel.board)) if @gameModel.currentPlayersTurn == @aiPlayer 
+
       notifyAll          
     end
     

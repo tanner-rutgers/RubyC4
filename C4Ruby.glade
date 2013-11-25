@@ -146,6 +146,13 @@
                         </child>
                       </object>
                     </child>
+                    <child>
+                      <object class="GtkMenuItem" id="playerNameButton">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">Player_Names</property>
+                        <property name="use_underline">True</property>
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>

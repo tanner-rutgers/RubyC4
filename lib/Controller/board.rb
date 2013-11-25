@@ -12,23 +12,21 @@ module Controller
 	  include Test::Unit::Assertions
 	  include Observable
 
-	  def initialize(builder, gameModel, boardView, player)
+	  def initialize(builder, gameModel, player)
 		  #Preconditions
 		  assert(builder.is_a?Gtk::Builder)
 		  assert(gameModel.is_a?Model::Game)
-		  assert(boardView.is_a?View::UiBoard)
 		  assert(player.is_a?Model::Player)
 
 		  @builder = builder
 		  @gameModel = gameModel
-		  @boardView = boardView
 		  @player = player
+      @observers = Array.new
 		  setupHandlers
 
 		  #Postconditions
 		  assert_equal(@builder, builder)
 		  assert_equal(@gameModel, gameModel)
-		  assert_equal(@boardView, boardView)
 		  assert_equal(@player, player)
 	  end
 
@@ -44,15 +42,24 @@ module Controller
       
 		  begin 
 			  @gameModel.makeMove(@player, column)
-        @gameModel.makeMove(@gameModel.players[1], column)
 		  rescue Model::Board::ColumnFullException
-			  puts "column full"
+        puts "[Log]Tried to play in a full column"
 		  rescue Model::Game::NotYourTurnException
-			  puts "not your turn"
+        puts "[Log]Tried to play out of turn"
 		  end
 
-		  @boardView.update
+      notifyAll
 	  end
-    
+
+    def addObserver(observer)
+      @observers.push(observer)    
+    end
+
+    def notifyAll
+      @observers.each {|observer|
+        observer.notify
+      }
+    end    
+
   end
 end

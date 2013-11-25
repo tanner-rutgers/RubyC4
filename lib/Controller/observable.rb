@@ -1,11 +1,16 @@
-module Observable
+module Controller
+  module Observable
 
-  def self.addObserver
+    def addObserver(observer)
+      @observers = Array.new if @observers.nil?
+      @observers.push(observer)    
+    end
+
+    def notifyAll
+      @observers.each {|observer|
+        observer.notify
+      }
+    end   
 
   end
-
-  def self.notify
-
-  end
-
 end

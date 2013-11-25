@@ -10,7 +10,7 @@ module Controller
 
   class Board
 	  include Test::Unit::Assertions
-	  include Observable
+	  include Controller::Observable
 
 	  def initialize(builder, gameModel, player)
 		  #Preconditions
@@ -21,7 +21,6 @@ module Controller
 		  @builder = builder
 		  @gameModel = gameModel
 		  @player = player
-      @observers = Array.new
 		  setupHandlers
 
 		  #Postconditions
@@ -49,17 +48,7 @@ module Controller
 		  end
 
       notifyAll
-	  end
-
-    def addObserver(observer)
-      @observers.push(observer)    
-    end
-
-    def notifyAll
-      @observers.each {|observer|
-        observer.notify
-      }
-    end    
+	  end 
 
   end
 end

@@ -1,5 +1,6 @@
 require_relative 'Controller/game_controller.rb'
 require_relative 'view/ui_game.rb'
+require_relative 'Controller/board.rb'
 #require_relative 'Model/colour.rb'
 
 #puts Model::Colour.constants.class
@@ -15,7 +16,8 @@ yourColourButton.signal_connect( "activate" ) { @builder.get_object('tokenChoose
 
 game = Model::Game.new
 
-View::UiGame.new(@builder, game)
+gameui = View::UiGame.new(@builder, game)
+Controller::Board.new(@builder, game, gameui.get_view(View::UiBoard), game.players[0])
 
 
-Gtk.main()
+gameui.show

@@ -1,6 +1,5 @@
 require 'test/unit'
 require_relative 'player.rb'
-require_relative 'win_condition.rb'
 module Model
     class AI
         def initialize(player,opponent,difficulty)
@@ -10,12 +9,6 @@ module Model
         @player = player
         @opponent = opponent
         @difficulty = difficulty
-        @winCondition = WinCondition.new(
-                                         Model::WinCondition::PatternElement.PLAYER(self),
-                                         Model::WinCondition::PatternElement.PLAYER(self),
-                                         Model::WinCondition::PatternElement.PLAYER(self),
-                                         Model::WinCondition::PatternElement.PLAYER(self)
-                                         )
         
         # -- Post Conditions -- #
     end
@@ -91,7 +84,4 @@ end
             return bestValue
         end
     end
-def hasWon?(board)
-    hasWon = @winCondition.hasWon?(board)
-end
 end

@@ -12,12 +12,12 @@ module Model
 
     attr_reader :winner, :board, :players, :currentPlayersTurn
 
-    def initialize()
+    def initialize(players)
       # -- Pre Condiditions -- #
 
       # -- Code -- #
 	    #Game Model Defaults
-	    @players = Array.new([Player.new("Player1", Model::Colour::RED), Player.new("Player2",  Model::Colour::BLUE)])
+	    @players = players
 	    @board = Board.new(7, 6)
       @currentPlayersTurn = players[0]
 
@@ -25,7 +25,6 @@ module Model
 
 	    #Load settings
 	    #@settings = Settings.new()
-	    @players[1].name="AI-Bob"
 
       # -- Post Conditions -- #
       assert(@players.is_a?Array)

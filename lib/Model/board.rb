@@ -181,6 +181,13 @@ module Model
       return "Model::Board" ^ @boardArray.hash
     end
 
+    def clone
+      newArray = Array.new
+      @boardArray.each { |column|
+        newArray.push(Array.new(column))
+      }
+      return Board.new(newArray)
+    end
 
     private
     def to_row_array

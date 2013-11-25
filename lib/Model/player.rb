@@ -7,7 +7,7 @@ module Model
   class Player
     include Test::Unit::Assertions
 
-    attr_writer :winCondition
+    attr_writer :name, :colour, :winCondition
     attr_reader :name, :colour, :totalWins
 
     def initialize(name, colour)

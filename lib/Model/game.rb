@@ -18,11 +18,15 @@ module Model
 
 
       # -- Code -- #
+	  #Game Model Defaults
 	  @players = Array.new([Player.new("Player1", Colour.RED), Player.new("Player2", Colour.BLUE)])
-	  @settings = Settings.new()
 	  @board = Board.new(7, 6)
       @currentPlayersTurn = players[0]
       @winner = nil
+
+	  #Load settings
+	  @settings = Settings.new()
+	  @players[1].name="AI"
 
       # -- Post Conditions -- #
       assert(@players.is_a?Array)

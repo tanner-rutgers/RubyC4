@@ -28,7 +28,6 @@
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">_New</property>
                         <property name="use_underline">True</property>
-                        <signal name="activate" handler="file_new"/>
                       </object>
                     </child>
                     <child>
@@ -36,7 +35,6 @@
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">_Save</property>
                         <property name="use_underline">True</property>
-                        <signal name="activate" handler="file_save"/>
                       </object>
                     </child>
                     <child>
@@ -49,7 +47,6 @@
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">E_xit</property>
                         <property name="use_underline">True</property>
-                        <signal name="activate" handler="file_exit"/>
                       </object>
                     </child>
                   </object>
@@ -69,7 +66,6 @@
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">_Easy</property>
                         <property name="use_underline">True</property>
-                        <signal name="activate" handler="menu_difficulty" object="1"/>
                       </object>
                     </child>
                     <child>
@@ -77,7 +73,6 @@
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">_Medium</property>
                         <property name="use_underline">True</property>
-                        <signal name="activate" handler="menu_difficulty" object="2"/>
                       </object>
                     </child>
                     <child>
@@ -85,7 +80,6 @@
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">_Hard</property>
                         <property name="use_underline">True</property>
-                        <signal name="activate" handler="menu_difficulty" object="3"/>
                       </object>
                     </child>
                   </object>
@@ -105,7 +99,6 @@
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">_Opponent Colour</property>
                         <property name="use_underline">True</property>
-                        <signal name="activate" handler="color_opponent"/>
                       </object>
                     </child>
                     <child>
@@ -113,7 +106,6 @@
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">_Your Colour</property>
                         <property name="use_underline">True</property>
-                        <signal name="activate" handler="color_your"/>
                       </object>
                     </child>
                   </object>
@@ -150,7 +142,6 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
-                    <signal name="clicked" handler="column_drop" object="0"/>
                   </object>
                   <packing>
                     <property name="position">0</property>
@@ -161,7 +152,6 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
-                    <signal name="clicked" handler="column_drop" object="1"/>
                   </object>
                   <packing>
                     <property name="position">1</property>
@@ -172,7 +162,6 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
-                    <signal name="clicked" handler="column_drop" object="2"/>
                   </object>
                   <packing>
                     <property name="position">2</property>
@@ -183,7 +172,6 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
-                    <signal name="clicked" handler="column_drop" object="3"/>
                   </object>
                   <packing>
                     <property name="position">3</property>
@@ -194,7 +182,6 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
-                    <signal name="clicked" handler="column_drop" object="4"/>
                   </object>
                   <packing>
                     <property name="position">4</property>
@@ -205,7 +192,6 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
-                    <signal name="clicked" handler="column_drop" object="5"/>
                   </object>
                   <packing>
                     <property name="position">5</property>
@@ -216,7 +202,6 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
-                    <signal name="clicked" handler="column_drop" object="6"/>
                   </object>
                   <packing>
                     <property name="position">6</property>
@@ -900,7 +885,6 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_underline">True</property>
-                <signal name="clicked" handler="color_accepted"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -915,7 +899,6 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_underline">True</property>
-                <signal name="clicked" handler="color_canceled"/>
               </object>
               <packing>
                 <property name="expand">False</property>

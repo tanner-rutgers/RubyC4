@@ -7,28 +7,28 @@ module View
 		include UiObserver
 		include Test::Unit::Assertions
 
-		def initialize(builder, boardModel)
+		def initialize(builder, gameModel)
 			# Pre-conditions #
 			assert(builder.is_a?Gtk::Builder)
-			assert(boardModel.is_a?Model::Board)
+			assert(gameModel.is_a?Model::Game)
 
 			@builder = builder
-			@boardModel = boardModel
+      @gameModel = gameModel
 			initializeTokens
 			update
 
 			# Post-conditions / Class-invariants #
 			assert(!@builder.nil?, "Builder was not initialized")
-			assert(!@boardModel.nil?, "Board model not initialized")
+			assert(!@gameModel.nil?, "Game model not initialized")
 			assert(!@playerTokens.nil?, "Player tokens not initialized")
 		end
 
 		def initializeTokens
 			@playerTokens = Array.new
 
-			@boardModel.size[:columns].times { |i|
-				@boardModel.size[:rows].times { |j|
-					@playerTokens.push(View::UiToken.new(@builder,@boardModel,i,j))
+			@gameModel.board.size[:columns].times { |i|
+				@gameModel.board.size[:rows].times { |j|
+					@playerTokens.push(View::UiToken.new(@builder,@gameModel,i,j))
 				}
 			}
 		end

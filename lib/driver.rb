@@ -3,6 +3,7 @@ require_relative 'view/ui_game.rb'
 require_relative 'Controller/board.rb'
 require_relative 'Controller/colour.rb'
 require_relative 'Controller/ai.rb'
+require_relative 'Controller/file_menu.rb'
 require_relative 'Model/colour.rb'
 
 
@@ -28,5 +29,9 @@ boardController.addObserver(aiController)
 
 colourController = Controller::Colour.new(@builder, players[0], players[1])
 colourController.addObserver(game.get_view(View::UiBoard))
+
+fileMenuController = Controller::FileMenu.new(@builder, gameModel)
+fileMenuController.addObserver(game.get_view(View::UiBoard))
+fileMenuController.addObserver(game.get_view(View::UiStatusInfo))
 
 game.show

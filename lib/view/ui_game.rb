@@ -23,7 +23,7 @@ module View
         @views = Array.new
 
 
-        @views.push(View::UiBoard.new(@builder, @model.board))
+        @views.push(View::UiBoard.new(@builder, @model))
         @views.push(View::UiStatusInfo.new(@builder, @model))
 
         # Post-conditions / Class-invariants #

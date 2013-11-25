@@ -11,7 +11,7 @@ module Controller
     def initialize(builder, player, opponent, gameModel)  
       @builder = builder
       @aiPlayer = opponent
-      @ai = Model::AI.new(player, opponent, 1)
+      @ai = Model::AI.new(player, opponent, 2)
       @gameModel = gameModel    
 
       setupHandlers        
@@ -22,7 +22,7 @@ module Controller
       mediumButton =  @builder.get_object("mediumButton")
       hardButton   =  @builder.get_object("hardButton")
 
-      easyButton.signal_connect( "activate" ) { difficultyHandler(1) }
+      easyButton.signal_connect( "activate" ) { difficultyHandler(2) }
       mediumButton.signal_connect( "activate" ) { difficultyHandler(3) }
       hardButton.signal_connect( "activate" ) { difficultyHandler(4) }
 

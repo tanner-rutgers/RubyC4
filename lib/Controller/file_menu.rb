@@ -6,9 +6,9 @@ module Controller
 
     def initialize(builder, gameModel)
       @gameModel = gameModel
-
       @builder = builder         
 
+      setupHandlers
     end
     
     def setupHandlers

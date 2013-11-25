@@ -12,28 +12,28 @@ module View
 
     attr_reader :player, :imageFile
 
-    def initialize(builder,boardModel,i,j)
+    def initialize(builder,gameModel,i,j)
       #Preconditions
       assert(builder.is_a?Gtk::Builder)
-      assert(boardModel.is_a?Model::Board)
+      assert(gameModel.is_a?Model::Game)
       assert(i.is_a?Numeric)
       assert(j.is_a?Numeric)
-      assert(i >= 0 && i < boardModel.size[:columns])
-      assert(j >= 0 && j < boardModel.size[:rows])
+      assert(i >= 0 && i < gameModel.board.size[:columns])
+      assert(j >= 0 && j < gameModel.board.size[:rows])
 
       @builder = builder
-      @boardModel = boardModel
+      @gameModel = gameModel
       @i = i
       @j = j
       
-      @colour = @boardModel.who(i,j).nil? ? :empty : @boardModel.who(i,j).colour
+      @colour = @gameModel.board.who(i,j).nil? ? :empty : @gameModel.board.who(i,j).colour
       @tokenModel = Model::Token.new(@colour)
 
       update
 
       #Postconditions
       assert_equal(@builder, builder)
-      assert_equal(@boardModel, boardModel)
+      assert_equal(@gameModel, gameModel)
       assert(!@colour.nil?)
       assert(!@tokenModel.nil?)
       assert_equal(@i, i)
@@ -45,7 +45,7 @@ module View
       #NA
       
       # Only load image file if the color has changed
-      newColour = @boardModel.who(@i, @j).nil? ? :empty : @boardModel.who(@i, @j).colour
+      newColour = @gameModel.board.who(@i, @j).nil? ? :empty : @gameModel.board.who(@i, @j).colour
       
       @colour = newColour
       @tokenModel = Model::Token.new(@colour)

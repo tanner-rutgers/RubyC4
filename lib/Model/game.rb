@@ -18,13 +18,8 @@ module Model
       # -- Code -- #
 	    #Game Model Defaults
 	    @players = players
-	    @board = Board.new(7, 6)
-      @currentPlayersTurn = players[0]
-
-      @winner = nil
-
-	    #Load settings
-	    #@settings = Settings.new()
+	    
+      clearBoard
 
       # -- Post Conditions -- #
       assert(@players.is_a?Array)
@@ -81,6 +76,14 @@ module Model
     def gameOver?
       @currentPlayersTurn.nil?
     end
+
+    def clearBoard
+	    @board = Board.new(7, 6)
+      @currentPlayersTurn = players[0]
+
+      @winner = nil
+    end
+
 
     def to_s
       str = "Current Turn: #{@currentPlayersTurn} \t Game Over: #{@currentPlayersTurn.nil?} \t Winner: #{@winner}\n"

@@ -12,12 +12,12 @@ module Model
 
     attr_reader :winner, :board, :players, :currentPlayersTurn
 
-    def initialize(players)
+    def initialize()
       # -- Pre Condiditions -- #
 
       # -- Code -- #
-	    #Game Model Defaults
-	    @players = players
+	  #Game Model Defaults
+	  @players = [Model::Player.new("Player1", Model::Colour::RED), Model::Player.new("AI-Bob", Model::Colour::BLUE)]
 	    
       clearBoard
 

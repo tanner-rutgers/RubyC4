@@ -1,12 +1,11 @@
 require 'test/unit'
-require_relative 'win_condition.rb'
 
 module Model
 
   class Player
     include Test::Unit::Assertions
 
-    attr_writer :name, :winCondition
+    attr_writer :name
     attr_reader :name, :totalWins
 
     def initialize(name)
@@ -15,12 +14,7 @@ module Model
 
       # -- Code -- #
       @name = name
-      @winCondition = WinCondition.new(
-        Model::WinCondition::PatternElement.PLAYER(self),
-        Model::WinCondition::PatternElement.PLAYER(self),
-        Model::WinCondition::PatternElement.PLAYER(self),
-        Model::WinCondition::PatternElement.PLAYER(self)
-      )
+      @winCondition = [:player, :player, :player, :player]
       @totalWins = 0
 
       # -- Post Conditions -- #
@@ -45,12 +39,24 @@ module Model
     end
 
     def hasWon?(board)
-      assert(!@winCondition.nil?)
+      boardSize = board.size
+      boardSize[:columns].times do |i|
+        boardSize[:rows].times do |j|
+          lines = board.getLines(i, j, @winCondition.size)
 
-      hasWon = @winCondition.hasWon?(board)
-      @totalWins += 1 if hasWon
+          lines.each do |line|
+            hasWon = true
+            @winCondition.each_with_index do |patternElement, index|
+	      hasWon &= line[index].eql?(self)  	if patternElement == :player
+	      hasWon &= !line[index].eql?(self) 	if patternElement == :other
+	      hasWon &= line[index].is_a?(Player) 	if patternElement == :any
+            end
 
-      hasWon
+            return hasWon if hasWon
+          end
+        end
+      end
+      return false
     end
 
     def to_s

@@ -1,7 +1,6 @@
 require 'test/unit'
 require_relative 'board.rb'
 require_relative 'player.rb'
-require_relative 'settings.rb'
 require_relative 'colour.rb'
 
 module Model
@@ -18,7 +17,6 @@ module Model
       # -- Code -- #
       #Game Model Defaults
       @players = [Model::Player.new("Player1"), Model::Player.new("AI-Bob")]
-      @settings = Model::Settings.new()
       clearBoard
 
       # -- Post Conditions -- #
@@ -78,7 +76,7 @@ module Model
     end
 
     def clearBoard
-	    @board = Board.new(7, 6)
+      @board = Board.new(7, 6)
       @currentPlayersTurn = players[0]
 
       @winner = nil

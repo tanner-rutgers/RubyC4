@@ -69,7 +69,6 @@ module Model
 
     def getPlayers(gameId)
       assert(gameId.is_a?Integer)
-      
       rval =  YAML::load(@serverConnection.getPlayers(gameId, @username, @password))
       raise AccessDeniedException if rval == false
       
@@ -82,7 +81,7 @@ module Model
       rval =  YAML::load(@serverConnection.getWinner(gameId, @username, @password))
       raise AccessDeniedException if rval == false
 
-      assert(rval.is_a?Player || rval.nil?)
+      assert(rval.is_a?(Player) || rval.nil?)
       
       rval
     end

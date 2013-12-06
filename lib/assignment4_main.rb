@@ -1,3 +1,11 @@
-require_relative 'RubyC4Application.rb'
+require_relative 'Controller/game_controller.rb'
 
-RubyC4Application.new
+
+Gtk.init
+builder = Gtk::Builder::new
+builder.add_from_file(File.expand_path("../C4Ruby.glade", File.dirname(__FILE__)))
+
+clientBob = Model::Client.new("Bob", "Smith")
+puts clientBob.getBoard(51);
+
+GameController.new(builder, clientBob, "Joe", 51)

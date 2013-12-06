@@ -15,7 +15,7 @@ module View
       def initialize(builder, model)
         # Pre-conditions #
         assert(builder.is_a?(Gtk::Builder), "builder is not a Gtk::Builder")
-        assert(model.is_a?(Model::Game))
+	assert(model.is_a?(Model::Game))
 
         @builder = builder
         @model = model

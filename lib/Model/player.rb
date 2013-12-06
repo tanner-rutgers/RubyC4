@@ -70,7 +70,7 @@ module Model
     end
 
     def hash
-      return "Model::Player" ^ @name.hash
+      return "Model::Player".hash ^ @name.hash
     end
     
   end

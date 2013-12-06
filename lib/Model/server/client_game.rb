@@ -1,8 +1,8 @@
 require 'test/unit'
-require_relative 'board.rb'
-require_relative 'player.rb'
-require_relative 'settings.rb'
-require_relative 'colour.rb'
+require_relative '../game.rb'
+require_relative '../board.rb'
+require_relative '../player.rb'
+require_relative '../colour.rb'
 require_relative 'client.rb'
 
 module Model
@@ -10,14 +10,18 @@ module Model
 
     attr_reader :winner, :board, :players, :currentPlayersTurn
     
-    def initialize(client, gameId = nil)
+    def initialize(client, opponent, gameId = nil)
       # -- Pre Condiditions -- #
+      #Will be username of opponent. Not a player object.
+      assert(opponent.is_a?String)
 
       # -- Code -- #
       #Game Model Defaults
       @server = client
       @gameId = gameId
-      @gameId = @client.newGame if(gameId.nil?)
+      @gameId = @server.newGame(opponent) if(gameId.nil?)
+      
+      puts(@gameId)
       
       refresh
         
@@ -98,7 +102,7 @@ module Model
 	@board = @server.getBoard(@gameId)
 	@players = @server.getPlayers(@gameId)
 	@currentPlayersTurn = @server.whosTurn(@gameId)
-	@winner = @winner.getWinner(@gameId)
+	@winner = @server.getWinner(@gameId)
     end
     
     

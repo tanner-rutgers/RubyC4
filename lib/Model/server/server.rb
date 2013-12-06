@@ -6,18 +6,7 @@ require_relative '../player.rb'
 require_relative '../board.rb'
 
 module Model
-  class Server
-    INTERFACE = XMLRPC::interface("server") do
-      meth "string login(name,password)", ""
-      meth "string get_users()", ""
-      meth "string getBoard(gameId, name, password)", ""
-      meth "string makeMove(gameId, name, password, move)", ""
-      meth "string whosTurn(gameId,name,password)", ""
-      meth "string newGame(name,password,opponent)", ""
-      meth "string getGameList(name,password)", ""
-      meth "string getLeaderboard()", ""
-    end
-    
+  class Server    
     include Test::Unit::Assertions
     
     def initialize
@@ -65,6 +54,16 @@ module Model
       
       game_model = @db.get_game(gameId)
       return YAML::dump(game_model.currentPlayersTurn)
+    end
+    
+    def getPlayers(gameId, name, password)
+      return YAML::dump(false) if !@db.login(name, password)
+      return YAML::dump(@db.get_players(gameId))
+    end
+    
+    def getWinner(gameId, name, password)
+      return YAML::dump(false) if !@db.login(name, password)
+      return YAML::dump(@db.get_winner(gameId))
     end
 
     def newGame(name,password,opponent)

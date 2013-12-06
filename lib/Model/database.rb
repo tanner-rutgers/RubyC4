@@ -118,4 +118,18 @@ class Database
 	  return arr
 	  
 	end
+	
+	def get_players(gameId)
+	  results = @db.query("select player from games g join players p on player1 = p.id or player2 = p.id where g.id = #{gameId}")
+	  
+	  return [deserialize(results.fetch_row[0]),deserialize(results.fetch_row[0])]
+	  
+	end
+	
+	def get_winner(gameId)
+	  results = @db.query("select player from games g join players p on result=p.id where g.id = #{gameId}")
+	  
+	  return deserialize(results.fetch_row[0]) unless results.num_rows == 0
+	  
+	end
 end

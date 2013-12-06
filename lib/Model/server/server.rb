@@ -32,9 +32,8 @@ module Model
       		assert(move.is_a?Integer)
       		assert(user.is_a?User)
 		game_model = @db.login(name,password) ? @db.get_game(gameId) : nil
-		
-		game_model.makeMove(user.player,move)
-		@db.save_game(game_model) 
+		game_model.makeMove(@db.get_player(name),move)
+		@db.save_game(gameId,game_model) 
 		return game_model
     	end
 
@@ -46,9 +45,21 @@ module Model
 		assert(rval.is_a?User)
     	end
 
-    	def getGameList(user)
+	def newGame(username,password,opponent)
+		if @db.login(name,password)
+			player1 = @db.get_player(username)
+			player2 = @db.get_player(opponent)
+			game = Model::Game.new(player1,player2)
+			@db.new_game(game)
+			return true
+		end
+		return nil
+	end
+
+    	def getGameList(name,password)
       		assert(user.is_a?User)
-		return [id, player, turn, timeOfLastMove]  
+		
+		return [:id = > id, opponent, turn, timeOfLastMove]  
       		assert(rval.is_a?Array)
       		rval.each{|element| assert(element.is_a?(Integer))}
     	end

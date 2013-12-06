@@ -72,12 +72,19 @@ module Model
       return YAML::dump(@db.get_winner(gameId))
     end
 
-    def newGame(name,password,opponent)
+    def newGame(name, password, opponent, gameType)
       return YAML::dump(false) if !@db.login(name,password)
       
       player1 = @db.get_player(name)
       player2 = @db.get_player(opponent)
+                 
       game = Model::Game.new(player1,player2)
+      
+      game.players.each do |player|
+	player.winCondition = [:player, :player, :player, :player] if gameType == "connect4"
+      	player.winCondition = [:player, :other, :other, :player] if gameType == "otto"
+      end
+            
       gameId = @db.new_game(game)
       
       return YAML::dump(gameId)

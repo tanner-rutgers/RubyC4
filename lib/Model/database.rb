@@ -120,9 +120,9 @@ class Database
 	end
 	
 	def get_players(gameId)
-	  results = @db.query("select player from games g join players p on player1 = p.id or player2 = p.id where g.id = #{gameId}")
+	  results = @db.query("select game from games g where g.id = #{gameId}")
 	  
-	  return [deserialize(results.fetch_row[0]),deserialize(results.fetch_row[0])] if results.num_rows == 2
+	  return deserialize(results.fetch_row[0]).players if results.num_rows == 1
 	  return nil
 	  
 	end

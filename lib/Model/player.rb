@@ -5,7 +5,7 @@ module Model
   class Player
     include Test::Unit::Assertions
     
-    attr_accessor :name
+    attr_accessor :name, :winCondition
 
     def initialize(name)
       # -- Pre Conditions -- #

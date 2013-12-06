@@ -31,8 +31,8 @@ module Model
     end
     
     ## ---- Gameplay Commands ---- ##
-    def newGame(opponentUsername)
-      rval = YAML::load(@serverConnection.newGame(@username, @password, opponentUsername))
+    def newGame(opponentUsername, gameType)
+      rval = YAML::load(@serverConnection.newGame(@username, @password, opponentUsername, gameType))
       raise AccessDeniedException if rval == false
       return rval
     end   
@@ -100,6 +100,15 @@ module Model
       
       assert(rval.is_a?Array)
       rval.each{|element| assert(element.is_a?(Hash))}
+      
+      rval
+    end
+    
+    def getUserList
+      rval =  YAML::load(@serverConnection.get_users)
+      raise AccessDeniedException if rval == false
+      
+      rval.delete_if {|element| element == @username}
       
       rval
     end

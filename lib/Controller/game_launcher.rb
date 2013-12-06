@@ -12,49 +12,57 @@ require_relative 'file_menu.rb'
 require_relative 'refresh.rb'
 
 
-class GameController
+class GameLauncher
   include Test::Unit::Assertions
 
-  def initialize(builder, client, opponent, gameId = nil, aiGame = false)  
+  def initialize(builder, client, opponent, gameType = :connect4, gameId = nil, aiGame = false)  
     @builder = builder
     
     # -- Code -- #
-    @gameModel = Model::ClientGame.new(client, opponent, gameId) unless aiGame
-    @gameModel = Model::Game.new(Model::Player.new("Bob"), Model::Player.new(opponent)) if aiGame  
+    if(aiGame)
+      @gameModel = Model::Game.new(Model::Player.new("Bob"), Model::Player.new(opponent))
+      @gameModel.players.each do |player|
+	player.winCondition = [:player, :player, :player, :player] if gameType == :connect4
+	player.winCondition = [:player, :other, :other, :player] if gameType == :otto
+      end
+    else
+	@gameModel = Model::ClientGame.new(client, opponent, gameType, gameId)
+    end
     
-    game = View::UiGame.new(@builder, @gameModel)
+    @game = View::UiGame.new(@builder, @gameModel)
     
     boardController = Controller::Board.new(@builder, @gameModel, aiGame ? @gameModel.players[0] : client.getPlayer)
-    boardController.addObserver(game.get_view(View::UiBoard)) 
-    boardController.addObserver(game.get_view(View::UiStatusInfo))
+    boardController.addObserver(@game.get_view(View::UiBoard)) 
+    boardController.addObserver(@game.get_view(View::UiStatusInfo))
 
     if(aiGame)
       aiController = Controller::AI.new(@builder, @gameModel.players[0], @gameModel.players[1], @gameModel)
-      aiController.addObserver(game.get_view(View::UiBoard))
-      aiController.addObserver(game.get_view(View::UiStatusInfo))
+      aiController.addObserver(@game.get_view(View::UiBoard))
+      aiController.addObserver(@game.get_view(View::UiStatusInfo))
       #When someone makes a move it will notify the AI controller it needs to make the next move.
       boardController.addObserver(aiController)
     else
       refreshController = Controller::Refresh.new(@builder, client.getPlayer, @gameModel)
-      refreshController.addObserver(game.get_view(View::UiBoard))
-      refreshController.addObserver(game.get_view(View::UiStatusInfo))
+      refreshController.addObserver(@game.get_view(View::UiBoard))
+      refreshController.addObserver(@game.get_view(View::UiStatusInfo))
       #When someone makes a move it will notify the refresher to start refreshing again..
       boardController.addObserver(refreshController)
       #Start refreshing immediately. -- Will stop immediately if it's currently the users turn, otherwise will continue until it becomes his turn
       refreshController.notify
     end    
    
-    colourController = Controller::Colour.new(@builder, game.get_view(View::UiBoard).playerColourMap, @gameModel.players[0], @gameModel.players[1])
-    colourController.addObserver(game.get_view(View::UiBoard))
+    colourController = Controller::Colour.new(@builder, @game.get_view(View::UiBoard).playerColourMap, @gameModel.players[0], @gameModel.players[1])
+    colourController.addObserver(@game.get_view(View::UiBoard))
 
     fileMenuController = Controller::FileMenu.new(@builder, @gameModel)
-    fileMenuController.addObserver(game.get_view(View::UiBoard))
-    fileMenuController.addObserver(game.get_view(View::UiStatusInfo))
-
-    game.show
+    fileMenuController.addObserver(@game.get_view(View::UiBoard))
+    fileMenuController.addObserver(@game.get_view(View::UiStatusInfo))
 
     # -- Post Conditions -- #
   end
 
+  def show
+      @game.show  
+  end
 end
 

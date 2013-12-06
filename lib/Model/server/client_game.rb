@@ -10,16 +10,17 @@ module Model
 
     attr_reader :winner, :board, :players, :currentPlayersTurn, :moveComplete
     
-    def initialize(client, opponent, gameId = nil)
+    def initialize(client, opponent, gameType, gameId = nil)
       # -- Pre Condiditions -- #
       #Will be username of opponent. Not a player object.
       assert(opponent.is_a?String)
-
+      assert(gameType == :connect4 || gameType == :otto)
+      
       # -- Code -- #
       #Game Model Defaults
       @server = client
       @gameId = gameId
-      @gameId = @server.newGame(opponent) if(gameId.nil?)
+      @gameId = @server.newGame(opponent, gameType) if(gameId.nil?)
       @moveComplete = true
       
       puts(@gameId)

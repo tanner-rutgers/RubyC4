@@ -46,6 +46,7 @@ module Controller
     		client = Model::Client.new(username, password)
     		
 		gamesList = View::UiGameList.new(@builder, client)
+    leaderboard = View::UILeaderboard.new(@builder, client)
 		newGameController = Controller::NewGame.new(@builder, client)
 		newGameController.addObserver(gamesList)
 		Controller::GamesList.new(@builder, client, newGameController)

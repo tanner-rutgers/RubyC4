@@ -5,8 +5,7 @@ module Model
   class Player
     include Test::Unit::Assertions
 
-    attr_writer :name
-    attr_reader :name, :totalWins
+    attr_accessor :name
 
     def initialize(name)
       # -- Pre Conditions -- #
@@ -15,11 +14,9 @@ module Model
       # -- Code -- #
       @name = name
       @winCondition = [:player, :player, :player, :player]
-      @totalWins = 0
 
       # -- Post Conditions -- #
       assert_equal(@name,name)
-      assert(@totalWins.is_a?Numeric)
     end
 
     def makeMove(board,colNumber)
@@ -59,8 +56,22 @@ module Model
       return false
     end
 
+    # -- Object Methods -- #
     def to_s
       "#{@name}"
     end
+    
+    def eql? (other)
+      other.is_a?(Model::Player) && self == other
+    end
+
+    def == (other)
+      other.respond_to?(:name) && other.name == self.name
+    end
+
+    def hash
+      return "Model::Player" ^ @name.hash
+    end
+    
   end
 end

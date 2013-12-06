@@ -20,7 +20,9 @@ module Model
       @username = username
       @password = password
       @serverConnection = XMLRPC::Client.new("localhost","/RPC2", 50500).proxy("server")
-            
+      
+      raise AccessDeniedException if !@serverConnection.login(username, password)
+      
       #preconditions
       assert_equal(@username, username)
       assert_equal(@password, password)
@@ -28,15 +30,20 @@ module Model
     end
     
     ## ---- Gameplay Commands ---- ##
-    def newGame
-      @serverConnection.newGame(@username, @password)
+    def newGame(opponentUsername)
+      rval = @serverConnection.newGame(@username, @password, opponentUsername)
+      raise AccessDeniedException if rval == false
+
     end   
 
     def makeMove(gameId, move)
       assert(gameId.is_a?Integer)
       assert(move.is_a?Integer)
       
-      @serverConnection.makeMove(gameId, @username, @password, move)
+      #Make move and raise exception if an credentials are bad.
+      rval = @serverConnection.makeMove(gameId, @username, @password, move)
+      raise AccessDeniedException if rval == false
+	
     end
     
     def getBoard(gameId)
@@ -45,25 +52,28 @@ module Model
       rval = @serverConnection.getBoard(gameId, @username, @password)
 
       assert(rval.is_a?(Game) || rval.nil?)
+      raise AccessDeniedException if rval == false
       
-      rval
+      return rval
     end
 
     def whosTurn(gameId)
       assert(gameId.is_a?Integer)
       
       rval = @serverConnection.whosTurn(gameId, @username, @password)
-      
-      assert(rval.is_a?Player)
-      
-      rval
+      raise AccessDeniedException if rval == false
+
+      assert(rval.is_a?Player || rval.nil?)
+
+      return rval
     end
 
     def getPlayers(gameId)
       assert(gameId.is_a?Integer)
       
       rval = @serverConnection.getPlayers(gameId, @username, @password)
-            
+      raise AccessDeniedException if rval == false
+      
       rval
     end
     
@@ -71,7 +81,8 @@ module Model
       assert(gameId.is_a?Integer)
       
       rval = @serverConnection.getWinner(gameId, @username, @password)
-      
+      raise AccessDeniedException if rval == false
+
       assert(rval.is_a?Player || rval.nil?)
       
       rval

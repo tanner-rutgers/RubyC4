@@ -924,6 +924,21 @@
         <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child>
+          <object class="GtkLabel" id="loginMessage">
+            <property name="visible">True</property>
+            <property name="xalign">0.43999999761581421</property>
+            <property name="label" translatable="yes">Login with desired credentials to create a new account.
+If you already have an account, login with your existing credentials.</property>
+            <property name="justify">center</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="padding">8</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
           <object class="GtkTable" id="table2">
             <property name="visible">True</property>
             <property name="n_rows">2</property>
@@ -959,6 +974,7 @@
               <object class="GtkEntry" id="loginPassword">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <property name="visibility">False</property>
                 <property name="invisible_char">&#x25CF;</property>
               </object>
               <packing>
@@ -970,18 +986,21 @@
             </child>
           </object>
           <packing>
-            <property name="position">1</property>
+            <property name="position">2</property>
           </packing>
         </child>
         <child>
           <object class="GtkLabel" id="loginFailure">
             <property name="visible">True</property>
-            <property name="label" translatable="yes">Login failed. Please try again.</property>
+            <property name="label" translatable="yes">Incorrect password for provided username.
+Please try again.</property>
+            <property name="justify">center</property>
           </object>
           <packing>
             <property name="expand">False</property>
             <property name="fill">False</property>
-            <property name="position">2</property>
+            <property name="padding">8</property>
+            <property name="position">3</property>
           </packing>
         </child>
         <child internal-child="action_area">

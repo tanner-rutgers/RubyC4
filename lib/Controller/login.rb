@@ -8,7 +8,7 @@ module Controller
   class Login
   	include Test::Unit::Assertions
     include Controller::Observable
-
+    attr_reader :client
     
     def initialize(builder)
       # Pre conditions #
@@ -16,6 +16,7 @@ module Controller
       
       @builder = builder
       @view = View::UiLogin.new(builder)
+
 
       setupHandlers
  
@@ -40,9 +41,10 @@ module Controller
     	password = @builder.get_object("loginPassword").text
 
     	begin
-    		client = Model::Client.new(username, password)
+    		@client = Model::Client.new(username, password)
     		# Launch new launchWindow controller
     		@view.hide
+            
     	rescue Model::Client::AccessDeniedException
     		@view.update
     	end

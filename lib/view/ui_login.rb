@@ -20,6 +20,9 @@ module View
 
 		def update
 			@builder.get_object("loginFailure").show()
+			@builder.get_object("loginUsername").delete_text(0,-1)
+			@builder.get_object("loginPassword").delete_text(0,-1)
+			@builder.get_object("loginUsername").grab_focus
 		end
 
 		def show

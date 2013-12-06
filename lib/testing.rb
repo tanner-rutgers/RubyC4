@@ -18,7 +18,6 @@ clientBob.makeMove(gameId, 3)
 clientJoe.makeMove(gameId, 4)
 clientBob.makeMove(gameId, 3)
 clientJoe.makeMove(gameId, 4)
-clientBob.makeMove(gameId, 3) #Bob wins
 
 puts(gameId)  #int primary key in database
 puts(clientBob.getBoard(gameId))  #get board from server

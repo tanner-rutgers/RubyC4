@@ -8,7 +8,7 @@ require_relative 'client.rb'
 module Model
   class ClientGame < Game
 
-    attr_reader :winner, :board, :players, :currentPlayersTurn
+    attr_reader :winner, :board, :players, :currentPlayersTurn, :moveComplete
     
     def initialize(client, opponent, gameId = nil)
       # -- Pre Condiditions -- #
@@ -20,6 +20,7 @@ module Model
       @server = client
       @gameId = gameId
       @gameId = @server.newGame(opponent) if(gameId.nil?)
+      @moveComplete = true
       
       puts(@gameId)
       
@@ -36,7 +37,6 @@ module Model
       assert(player.is_a?Model::Player)
       assert(@players.include?(player))
 
-      @currentPlayersTurn = @server.whosTurn(@gameId)
 
       # -- Code -- #
       return @currentPlayersTurn == player
@@ -51,47 +51,24 @@ module Model
       assert(player.is_a?Player)
       assert(column.is_a?Integer)
       
-      @currentPlayersTurn = @server.whosTurn(@gameId)
-      
-      raise NotYourTurnException if !currentTurn?(player)
-
-      @server.makeMove(@gameId, player, column)
+      @server.makeMove(@gameId, column)
       endTurn()
     end
 
     # returns true if current player won on his turn, or if he filled the board and there is no winner.
     # if there is no winner @currentPlayersTurn will be nil.
     def endTurn
-      @currentPlayersTurn = @server.whosTurn(@gameId)
-      @board = @server.getBoard(@gameId)
-      @winner = @server.getWinner(@gameId)
-      
+      refresh
+      @moveComplete = true
       return gameOver?
     end
 
     def gameOver?
-      @currentPlayersTurn = @server.whosTurn(@gameId)
       @currentPlayersTurn.nil?
     end
 
     def clearBoard
       @server.clearBoard
-    end
-
-    # -- Override the getters to contact the server -- #
-    def winner
-	@winner = @winner.getBoard(@gameId)
-	return @winner
-    end
-    
-    def board
-	@board = @server.getBoard(@gameId)
-	return @board
-    end
-    
-    def players
-	@players = @server.getPlayers(@gameId)
-	return @players
     end
     
     def currentPlayersTurn
@@ -103,6 +80,20 @@ module Model
 	@players = @server.getPlayers(@gameId)
 	@currentPlayersTurn = @server.whosTurn(@gameId)
 	@winner = @server.getWinner(@gameId)
+    end
+    
+    #Makes move on client only.
+    def pseudoMakeMove(player, column)
+      assert(player.is_a?Player)
+      assert(column.is_a?Integer)
+
+      #Pretend to add the piece on client while we wait for server to make the real move      
+      raise NotYourTurnException if !currentTurn?(player)
+      
+      @board.addPiece(column, player)
+      self.class.superclass.instance_method(:endTurn).bind(self).call
+      #Move has not propogated to server yet.
+      @moveComplete = false
     end
     
     

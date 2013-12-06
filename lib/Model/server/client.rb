@@ -66,6 +66,13 @@ module Model
 
       return rval
     end
+    
+    def getPlayer
+	rval = YAML::load(@serverConnection.getPlayer(@username, @password))
+	raise AccessDeniedException if rval == false
+	
+	return rval
+    end
 
     def getPlayers(gameId)
       assert(gameId.is_a?Integer)

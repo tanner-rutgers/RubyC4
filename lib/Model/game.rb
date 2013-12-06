@@ -16,9 +16,9 @@ module Model
       # -- Pre Condiditions -- #
 
       # -- Code -- #
-	  #Game Model Defaults
-	  @players = [Model::Player.new("Player1", Model::Colour::RED), Model::Player.new("AI-Bob", Model::Colour::BLUE)]
-	  @settings = Model::Settings.new()
+      #Game Model Defaults
+      @players = [Model::Player.new("Player1"), Model::Player.new("AI-Bob")]
+      @settings = Model::Settings.new()
       clearBoard
 
       # -- Post Conditions -- #

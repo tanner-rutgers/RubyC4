@@ -1048,32 +1048,6 @@ Please try again.</property>
       <action-widget response="3">cancelButton</action-widget>
     </action-widgets>
   </object>
-  <object class="GtkListStore" id="gamesListStore">
-    <columns>
-      <!-- column-name Opponent -->
-      <column type="gchararray"/>
-      <!-- column-name Type -->
-      <column type="gchararray"/>
-      <!-- column-name Turn -->
-      <column type="gchararray"/>
-      <!-- column-name Last -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">Frggr</col>
-        <col id="1" translatable="yes">Connect 4</col>
-        <col id="2" translatable="yes">Your Turn</col>
-        <col id="3" translatable="yes">01/01/2013</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Jayo</col>
-        <col id="1" translatable="yes">OTTO/TOOT</col>
-        <col id="2" translatable="yes">Their Turn</col>
-        <col id="3" translatable="yes">02/01/2013</col>
-      </row>
-    </data>
-  </object>
   <object class="GtkListStore" id="userListStore">
     <columns>
       <!-- column-name Username -->
@@ -1085,6 +1059,36 @@ Please try again.</property>
       </row>
       <row>
         <col id="0" translatable="yes">Jayo</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="gamesListStore">
+    <columns>
+      <!-- column-name GameId -->
+      <column type="gint"/>
+      <!-- column-name Opponent -->
+      <column type="gchararray"/>
+      <!-- column-name Type -->
+      <column type="gchararray"/>
+      <!-- column-name Turn -->
+      <column type="gchararray"/>
+      <!-- column-name Last -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0">0</col>
+        <col id="1" translatable="yes">Frggr</col>
+        <col id="2" translatable="yes">Connect 4</col>
+        <col id="3" translatable="yes">Your Turn</col>
+        <col id="4" translatable="yes">01/01/2013</col>
+      </row>
+      <row>
+        <col id="0">0</col>
+        <col id="1" translatable="yes">Jayo</col>
+        <col id="2" translatable="yes">OTTO/TOOT</col>
+        <col id="3" translatable="yes">Their Turn</col>
+        <col id="4" translatable="yes">02/01/2013</col>
       </row>
     </data>
   </object>

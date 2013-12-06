@@ -8,22 +8,23 @@ module Controller
     include Controller::Observable
 
     
-    def initialize(builder, player, opponent, gameModel)  
+    def initialize(builder, player, gameModel)  
       @builder = builder
       @player = player
-      @opponent = opponent
       @gameModel = gameModel    
-
+      @refreshing = false
     end
 
     def notify
       Thread.new {
-	while(@gameModel.currentPlayersTurn == opponent) 
-	  sleep(1)
+	@refreshing = true
+	while(@gameModel.currentPlayersTurn != @player && !@gameModel.currentPlayersTurn.nil?)
+	  sleep(5)
+	  @gameModel.refresh
 	end
-	@gameModel.refresh
+	@refreshing = false
 	notifyAll  
-      }
+      } if @gameModel.moveComplete && !@refreshing 
     end
     
   end

@@ -12,6 +12,7 @@ module Model
     def initialize
       @db = Database.new
     end
+    
     def login(name,password)
       #preconditions
       assert(name.is_a?String)
@@ -54,6 +55,11 @@ module Model
       
       game_model = @db.get_game(gameId)
       return YAML::dump(game_model.currentPlayersTurn)
+    end
+    
+    def getPlayer(name, password)
+      return YAML::dump(false) if !@db.login(name, password)
+      return YAML::dump(@db.get_player(name))
     end
     
     def getPlayers(gameId, name, password)

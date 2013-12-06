@@ -1,5 +1,5 @@
 require "mysql"
-require "json"
+require "yaml"
 require_relative "player.rb"
 
 class Database
@@ -41,10 +41,10 @@ class Database
 	end	
 	def db_save_game(id,game,result)
 
-		@db.query("replace into games (id,game,result) values (#{id},\'#{game}\',#{result})")
+		@db.query("update games set game=\'#{game}\', result=\'#{result}\' where id=#{id}")
 	end
 	def serialize(s)
-		Marshal.dump(s)	
+		YAML::dump(s)	
 	end
 	def get_users
 		result = @db.query("select name from players")
@@ -55,7 +55,7 @@ class Database
         	arr
 	end
 	def deserialize(s)
-		Marshal.load(s) unless s.nil?
+		YAML::load(s) unless s.nil?
 	end
 	def get_games(playerId = nil)
 		return @db.query("select * from games") if playerId.nil?
@@ -122,7 +122,8 @@ class Database
 	def get_players(gameId)
 	  results = @db.query("select player from games g join players p on player1 = p.id or player2 = p.id where g.id = #{gameId}")
 	  
-	  return [deserialize(results.fetch_row[0]),deserialize(results.fetch_row[0])]
+	  return [deserialize(results.fetch_row[0]),deserialize(results.fetch_row[0])] if results.num_rows == 2
+	  return nil
 	  
 	end
 	

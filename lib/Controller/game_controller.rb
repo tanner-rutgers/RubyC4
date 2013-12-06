@@ -23,8 +23,8 @@ class GameController
     @gameModel = Model::Game.new(Model::Player.new("Bob"), Model::Player.new(opponent)) if aiGame  
     
     game = View::UiGame.new(@builder, @gameModel)
-
-    boardController = Controller::Board.new(@builder, @gameModel, @gameModel.players[0])
+    
+    boardController = Controller::Board.new(@builder, @gameModel, aiGame ? @gameModel.players[0] : client.getPlayer)
     boardController.addObserver(game.get_view(View::UiBoard)) 
     boardController.addObserver(game.get_view(View::UiStatusInfo))
 
@@ -35,11 +35,13 @@ class GameController
       #When someone makes a move it will notify the AI controller it needs to make the next move.
       boardController.addObserver(aiController)
     else
-      refreshController = Controller::Refresh.new(@builder, @gameModel.players[0], @gameModel.players[1], @gameModel)
+      refreshController = Controller::Refresh.new(@builder, client.getPlayer, @gameModel)
       refreshController.addObserver(game.get_view(View::UiBoard))
       refreshController.addObserver(game.get_view(View::UiStatusInfo))
-      #When someone makes a move it will notify the AI controller it needs to make the next move.
+      #When someone makes a move it will notify the refresher to start refreshing again..
       boardController.addObserver(refreshController)
+      #Start refreshing immediately. -- Will stop immediately if it's currently the users turn, otherwise will continue until it becomes his turn
+      refreshController.notify
     end    
    
     colourController = Controller::Colour.new(@builder, game.get_view(View::UiBoard).playerColourMap, @gameModel.players[0], @gameModel.players[1])

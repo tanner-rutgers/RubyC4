@@ -1,10 +1,9 @@
 require 'test/unit'
 
 require_relative 'ui_observer.rb'
-require_relative '../Model/server/client.rb'
 
 module View
-	class ui_login.rb
+	class UiLogin
 		include UiObserver
 		include Test::Unit::Assertions
 
@@ -13,18 +12,23 @@ module View
         	assert(builder.is_a?(Gtk::Builder), "builder is not a Gtk::Builder")
 
 			@builder = builder
+			show
 
 			# Post-conditions #
 			assert_equal(@builder,builder, "builder was not initialized")
 		end
 
 		def update
-			@builder.getObject("loginFailure").show()
+			@builder.get_object("loginFailure").show()
 		end
 
 		def show
-			@builder.getObject("loginFailure").hide()
-			@builder.getObject("loginWindow").show()
+			@builder.get_object("loginFailure").hide()
+			@builder.get_object("loginWindow").show()
+		end
+
+		def hide
+			@builder.get_object("loginWindow").hide()
 		end
 
 	end

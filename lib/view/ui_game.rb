@@ -20,7 +20,7 @@ module View
         @builder = builder
         @model = model
         
-        @builder.get_object("mainWindow").signal_connect( "destroy" ) { Gtk.main_quit }
+        @builder.get_object("gameWindow").signal_connect( "destroy" ) { Gtk.main_quit }
 
         @views = Array.new
         @views.push(View::UiBoard.new(@builder, @model))
@@ -47,7 +47,7 @@ module View
       end
 
     def show
-        @builder.get_object("mainWindow").show()
+        @builder.get_object("gameWindow").show()
         Gtk.main()
     end
 

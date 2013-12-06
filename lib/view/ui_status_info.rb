@@ -1,41 +1,40 @@
 require 'test/unit'
 require_relative 'ui_observer.rb'
-require_relative 'ui_token.rb'
 
 module View
-	class UiStatusInfo
-		include UiObserver
-		include Test::Unit::Assertions
+  class UiStatusInfo
+    include UiObserver
+    include Test::Unit::Assertions
 
-		def initialize(builder, gameModel)
-			# Pre-conditions #
-			assert(builder.is_a?Gtk::Builder)
-			assert(gameModel.is_a?Model::Game)
+    def initialize(builder, gameModel)
+      # Pre-conditions #
+      assert(builder.is_a?Gtk::Builder)
+      assert(gameModel.is_a?Model::Game)
 
-			@statusLabel = builder.get_object('statusLabel')
-			@gameModel = gameModel
-      
-			update
+      @statusLabel = builder.get_object('statusLabel')
+      @gameModel = gameModel
 
-			# Post-conditions / Class-invariants #
-			assert(!@statusLabel.nil?, "Status Label was not initialized")
-			assert(!@gameModel.nil?, "Game model not initialized")
+      update
 
-		end
+      # Post-conditions / Class-invariants #
+      assert(!@statusLabel.nil?, "Status Label was not initialized")
+      assert(!@gameModel.nil?, "Game model not initialized")
+
+    end
 
 
-		# Update info in status bar
-		def update
-			# Pre-conditions #
+    # Update info in status bar
+    def update
+      # Pre-conditions #
 
       statusText = "#{@gameModel.winner.name} Wins!"                  if  @gameModel.gameOver?	&& !@gameModel.winner.nil?		
       statusText = "Draw!"                                            if  @gameModel.gameOver?	&&  @gameModel.winner.nil?		
       statusText = "#{@gameModel.currentPlayersTurn.name}'s Turn..."  if !@gameModel.gameOver?		
 
-			@statusLabel.set_text(statusText)
+      @statusLabel.set_text(statusText)
 
-			# Post-conditions #	
-		end
+    # Post-conditions #	
+    end
 
-	end
+  end
 end

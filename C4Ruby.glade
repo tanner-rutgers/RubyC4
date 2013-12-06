@@ -3,7 +3,7 @@
   <requires lib="gtk+" version="2.16"/>
   <!-- interface-naming-policy project-wide -->
   <!-- interface-local-resource-path ./resources -->
-  <object class="GtkWindow" id="gameWIndow">
+  <object class="GtkWindow" id="gameWindow">
     <property name="border_width">2</property>
     <property name="title" translatable="yes">C4Ruby</property>
     <property name="resizable">False</property>

@@ -1,23 +1,20 @@
 require 'test/unit'
 require_relative 'win_condition.rb'
-require_relative 'colour.rb'
 
 module Model
 
   class Player
     include Test::Unit::Assertions
 
-    attr_writer :name, :colour, :winCondition
-    attr_reader :name, :colour, :totalWins
+    attr_writer :name, :winCondition
+    attr_reader :name, :totalWins
 
-    def initialize(name, colour)
+    def initialize(name)
       # -- Pre Conditions -- #
       assert(name.is_a?(String))
-      #assert(Model::Colour.constants.include?(colour))
 
       # -- Code -- #
       @name = name
-      @colour = colour
       @winCondition = WinCondition.new(
         Model::WinCondition::PatternElement.PLAYER(self),
         Model::WinCondition::PatternElement.PLAYER(self),
@@ -28,7 +25,6 @@ module Model
 
       # -- Post Conditions -- #
       assert_equal(@name,name)
-      assert_equal(@colour,colour)
       assert(@totalWins.is_a?Numeric)
     end
 

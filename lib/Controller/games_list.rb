@@ -19,7 +19,7 @@ module Controller
 
       newButton.signal_connect( "activate" ) { newButtonAction }
       exitButton.signal_connect( "activate" ) { Gtk.main_quit }
-      launchButton.signal_connect "clicked" ) {launchButtonAction}
+      launchButton.signal_connect ( "clicked" ) {launchButtonAction}
     end
 
     def newButtonAction

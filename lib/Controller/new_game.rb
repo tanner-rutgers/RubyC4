@@ -23,7 +23,6 @@ module Controller
       dialog.run do |response|
         case response
           when @@RESPONSE_ACCEPT
-            
 	    
 	    opponent = getOpponentName
 	    opponent = "AI-Bob" if isAI?
@@ -61,8 +60,8 @@ module Controller
       listStore.clear
       
       @client.getUserList.each do |player|
-	listStore.append.set_value(0, player)
-      end
+      listStore.append.set_value(0, player)
+    end
       
       
     end

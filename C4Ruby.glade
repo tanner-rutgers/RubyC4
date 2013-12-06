@@ -1318,10 +1318,11 @@ Please try again.</property>
                     <property name="can_focus">True</property>
                     <property name="model">gamesListStore</property>
                     <property name="search_column">0</property>
+                    <property name="fixed_height_mode">True</property>
                     <child>
                       <object class="GtkTreeViewColumn" id="treeviewcolumn4">
                         <property name="sizing">fixed</property>
-                        <property name="fixed_width">150</property>
+                        <property name="fixed_width">100</property>
                         <property name="title">Opponent</property>
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext4"/>
@@ -1360,7 +1361,7 @@ Please try again.</property>
                     <child>
                       <object class="GtkTreeViewColumn" id="treeviewcolumn7">
                         <property name="sizing">fixed</property>
-                        <property name="fixed_width">100</property>
+                        <property name="fixed_width">200</property>
                         <property name="title">Last Move</property>
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext7"/>

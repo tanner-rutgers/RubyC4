@@ -1,14 +1,16 @@
 require 'test/unit'
 
 require_relative 'observable.rb'
-require_relative '../view/ui_login.rb'
 require_relative '../Model/server/client.rb'
+require_relative '../view/ui_login.rb'
+require_relative '../view/ui_game_list.rb'
+require_relative '../Controller/new_game.rb'
+require_relative '../Controller/games_list.rb'
 
 module Controller
   class Login
-  	include Test::Unit::Assertions
+    include Test::Unit::Assertions
     include Controller::Observable
-    attr_reader :client
     
     def initialize(builder)
       # Pre conditions #
@@ -41,8 +43,15 @@ module Controller
     	password = @builder.get_object("loginPassword").text
 
     	begin
-    		@client = Model::Client.new(username, password)
-    		# Launch new launchWindow controller
+    		client = Model::Client.new(username, password)
+    		
+		gamesList = View::UiGameList.new(@builder, client)
+		newGameController = Controller::NewGame.new(@builder, client)
+		newGameController.addObserver(gamesList)
+		Controller::GamesList.new(@builder, client, newGameController)
+		
+		@builder.get_object("launchWindow").show
+		
     		@view.hide
             
     	rescue Model::Client::AccessDeniedException

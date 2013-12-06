@@ -28,11 +28,11 @@ module View
 
 			@client.getGameList.each do |game|
 				entry = listStore.append
-				entry.set_value(0, game.get(:id))
-				entry.set_value(1, game.get(:opponent).name)
-				entry.set_value(2, game.get(:type))
-				entry.set_value(3, game.get(:turn).name)
-				entry.set_value(4, game.get(:timestamp))
+				entry.set_value(0, game[:id].to_i)
+				entry.set_value(1, game[:opponent].name)
+				entry.set_value(2, game[:type] == :connect4 ? "Connect 4" : "OTTO/TOOT")
+				entry.set_value(3, game[:turn].nil? ? "Game Over" : game[:turn].name )
+				entry.set_value(4, game[:timestamp])
 			end
 		end
 

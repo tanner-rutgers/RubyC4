@@ -26,8 +26,8 @@ module View
 			leaderboard = @client.getLeaderboard
 			0.upto(9) do |i|
 				entry = leaderboard[i]
-				name = entry.nil? ? "" : entry.get(:name)
-				wins = entry.nil? ? "" : "(#{entry.get(:wins)})"
+				name = entry.nil? ? "" : entry[:name]
+				wins = entry.nil? ? "" : "(#{entry[:wins]})"
 				@builder.get_object("leaderLabelRank#{(i+1)}").set_text("#{name} #{wins}");
 			end
 		end

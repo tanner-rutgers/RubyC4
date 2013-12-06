@@ -4,6 +4,7 @@ require_relative 'observable.rb'
 require_relative '../Model/server/client.rb'
 require_relative '../view/ui_login.rb'
 require_relative '../view/ui_game_list.rb'
+require_relative '../view/ui_leaderboard.rb'
 require_relative '../Controller/new_game.rb'
 require_relative '../Controller/games_list.rb'
 
@@ -46,7 +47,7 @@ module Controller
     		client = Model::Client.new(username, password)
     		
 		gamesList = View::UiGameList.new(@builder, client)
-    leaderboard = View::UILeaderboard.new(@builder, client)
+    leaderboard = View::UiLeaderboard.new(@builder, client)
 		newGameController = Controller::NewGame.new(@builder, client)
 		newGameController.addObserver(gamesList)
 		Controller::GamesList.new(@builder, client, newGameController)

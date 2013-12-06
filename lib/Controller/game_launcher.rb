@@ -8,7 +8,6 @@ require_relative '../view/ui_game.rb'
 require_relative 'board.rb'
 require_relative 'colour.rb'
 require_relative 'ai.rb'
-require_relative 'file_menu.rb'
 require_relative 'refresh.rb'
 
 
@@ -22,8 +21,8 @@ class GameLauncher
     if(aiGame)
       @gameModel = Model::Game.new(Model::Player.new("Bob"), Model::Player.new(opponent))
       @gameModel.players.each do |player|
-	player.winCondition = [:player, :player, :player, :player] if gameType == :connect4
-	player.winCondition = [:player, :other, :other, :player] if gameType == :otto
+	    player.winCondition = [:player, :player, :player, :player] if gameType == :connect4
+	    player.winCondition = [:player, :other, :other, :player] if gameType == :otto
       end
     else
 	@gameModel = Model::ClientGame.new(client, opponent, gameType, gameId)

@@ -9,14 +9,14 @@ module Model
 
     class NotYourTurnException < StandardError; end
 
-    attr_reader :winner, :board, :players, :currentPlayersTurn
+    attr_reader :winner, :board, :players, :currentPlayersTurn, :id
 
-    def initialize()
+    def initialize(player1,player2)
       # -- Pre Condiditions -- #
 
       # -- Code -- #
       #Game Model Defaults
-      @players = [Model::Player.new("Player1"), Model::Player.new("AI-Bob")]
+      @players = [player1, player2]
       clearBoard
 
       # -- Post Conditions -- #

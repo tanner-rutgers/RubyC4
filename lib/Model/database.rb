@@ -68,9 +68,12 @@ class Database
 		arr = Array.new
 		
 		results.each_hash do |x| 
+		  game = deserialize(x["game"]);
+		  type = game.players[0].winCondition.include?(:other) ? :otto : :connect4;
 		  arr.push( {
 		             :id => x["id"], 
-		             :opponent => deserialize(x["player"]), 
+		             :opponent => deserialize(x["player"]),
+		             :type => type, 
 		             :turn => deserialize(x["game"]).currentPlayersTurn, 
 		             :timestamp => x["timestamp"]
 		            }

@@ -1,10 +1,10 @@
 require 'test/unit'
-
+require 'xmlrpc/utils.rb'
 module Model
 
   class Player
     include Test::Unit::Assertions
-
+    
     attr_accessor :name
 
     def initialize(name)

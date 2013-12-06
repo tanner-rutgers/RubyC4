@@ -32,18 +32,16 @@ class Database
 	end
 	def get_game(id)
 		row = @db.query("select * from games where id = #{id}").fetch_row
-		unserialize(row[1])
+		deserialize(row[1]) unless row.nil?
 	end
 
 	def save_game(id, game_model)
-		players = [game_model.players[0],game_model.players[1].id]
-		result = game_model.gameOver? ? game_model.winner.id : "null"
-		game = "test"
-		db_save_game(id,game,players,result)
+		result = game_model.gameOver? ? get_id(game_model.winner.name) : "null"
+		db_save_game(id, serialize(game_model), result)
 	end	
-	def db_save_game(id,game,players,result)
+	def db_save_game(id,game,result)
 
-		@db.query("replace into games (id,game,player1,player2,result) values (#{id},\'#{game}\',#{players[0]},#{players[1]},#{result})")
+		@db.query("replace into games (id,game,result) values (#{id},\'#{game}\',#{result})")
 	end
 	def serialize(s)
 		Marshal.dump(s)	
@@ -57,7 +55,7 @@ class Database
         	arr
 	end
 	def deserialize(s)
-		Marshal.load(s)
+		Marshal.load(s) unless s.nil?
 	end
 	def get_games(playerId = nil)
 		return @db.query("select * from games") if playerId.nil?
@@ -68,7 +66,18 @@ class Database
 	def getGameList(playerId)
 		results = @db.query("select * from games join players p on player1=p.id or player2 = p.id where (player1=#{playerId} or player2=#{playerId}) and p.id <> #{playerId}")
 		arr = Array.new
-		results.each_hash{ |x| arr.push( {:id => x[:id], :opponent => x[:player], :turn => deserialize(x[:game]).currentPlayersTurn, :timestamp => x[:timestamp]})}
+		
+		results.each_hash do |x| 
+		  arr.push( {
+		             :id => x["id"], 
+		             :opponent => deserialize(x["player"]), 
+		             :turn => deserialize(x["game"]).currentPlayersTurn, 
+		             :timestamp => x["timestamp"]
+		            }
+		          )
+		end
+		
+		return arr
 	end
 		
 	def get_timestamp(id)
@@ -88,6 +97,25 @@ class Database
 	def new_game(game)
 		player1Id = get_id(game.players[0].name)
 		player2Id = get_id(game.players[1].name)
-		@db.query("insert into games (game,player1,player2) values (\'#{serialize(game)}\',#{player1Id},#{player2Id})")	
+		@db.query("insert into games (game,player1,player2) values (\'#{serialize(game)}\',#{player1Id},#{player2Id})")
+		#return the id of the game we just created.
+		return @db.insert_id
+	end
+	
+	def get_leaderboard
+	  results = @db.query("select p.name, count(*) as wins from games join players p on result=p.id group by p.name")
+	  
+	  arr = Array.new
+	
+	  results.each_hash do |x| 
+	    arr.push( {
+			:name => x["name"], 
+			:wins => x["wins"]
+		      }
+		    )
+	  end
+	  
+	  return arr
+	  
 	end
 end

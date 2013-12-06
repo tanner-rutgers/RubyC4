@@ -1,11 +1,13 @@
 require 'test/unit'
+require 'xmlrpc/utils.rb'
+
 require_relative 'player.rb'
 
 module Model
   class Board
-
+  
     include Test::Unit::Assertions
-
+    
     class ColumnFullException < StandardError; end
 
     attr_reader :boardArray

@@ -1,5 +1,6 @@
 require 'test/unit'
 require 'xmlrpc/client'
+require 'yaml'
 require_relative '../game.rb'
 require_relative '../board.rb'
 require_relative '../player.rb'
@@ -21,7 +22,7 @@ module Model
       @password = password
       @serverConnection = XMLRPC::Client.new("localhost","/RPC2", 50500).proxy("server")
       
-      raise AccessDeniedException if !@serverConnection.login(username, password)
+      raise AccessDeniedException if !YAML::load(@serverConnection.login(username, password))
       
       #preconditions
       assert_equal(@username, username)
@@ -31,9 +32,9 @@ module Model
     
     ## ---- Gameplay Commands ---- ##
     def newGame(opponentUsername)
-      rval = @serverConnection.newGame(@username, @password, opponentUsername)
+      rval = YAML::load(@serverConnection.newGame(@username, @password, opponentUsername))
       raise AccessDeniedException if rval == false
-
+      return rval
     end   
 
     def makeMove(gameId, move)
@@ -41,7 +42,7 @@ module Model
       assert(move.is_a?Integer)
       
       #Make move and raise exception if an credentials are bad.
-      rval = @serverConnection.makeMove(gameId, @username, @password, move)
+      rval =  YAML::load(@serverConnection.makeMove(gameId, @username, @password, move))
       raise AccessDeniedException if rval == false
 	
     end
@@ -49,9 +50,7 @@ module Model
     def getBoard(gameId)
       assert(gameId.is_a?Integer)
             
-      rval = @serverConnection.getBoard(gameId, @username, @password)
-
-      assert(rval.is_a?(Game) || rval.nil?)
+      rval = YAML::load(@serverConnection.getBoard(gameId, @username, @password))
       raise AccessDeniedException if rval == false
       
       return rval
@@ -60,10 +59,10 @@ module Model
     def whosTurn(gameId)
       assert(gameId.is_a?Integer)
       
-      rval = @serverConnection.whosTurn(gameId, @username, @password)
+      rval =  YAML::load(@serverConnection.whosTurn(gameId, @username, @password))
       raise AccessDeniedException if rval == false
 
-      assert(rval.is_a?Player || rval.nil?)
+      assert(rval.is_a?(Player) || rval.nil?)
 
       return rval
     end
@@ -71,7 +70,7 @@ module Model
     def getPlayers(gameId)
       assert(gameId.is_a?Integer)
       
-      rval = @serverConnection.getPlayers(gameId, @username, @password)
+      rval =  YAML::load(@serverConnection.getPlayers(gameId, @username, @password))
       raise AccessDeniedException if rval == false
       
       rval
@@ -80,7 +79,7 @@ module Model
     def getWinner(gameId)
       assert(gameId.is_a?Integer)
       
-      rval = @serverConnection.getWinner(gameId, @username, @password)
+      rval =  YAML::load(@serverConnection.getWinner(gameId, @username, @password))
       raise AccessDeniedException if rval == false
 
       assert(rval.is_a?Player || rval.nil?)
@@ -91,20 +90,20 @@ module Model
     
     ## ---- UI Info Commands ---- ##
     def getGameList
-      rval = @serverConnection.getGameList(@username, @password)
+      rval =  YAML::load(@serverConnection.getGameList(@username, @password))
       
       assert(rval.is_a?Array)
-      rval.each{|element| assert(element.is_a?(Integer))}
+      rval.each{|element| assert(element.is_a?(Hash))}
       
       rval
     end
 
     def getLeaderboard
-      rval = @serverConnection.getLeaderboard(@username, @password)
+      rval = YAML::load(@serverConnection.getLeaderboard)
 
       #post-conditions
       assert(rval.is_a?Array)
-      rval.each{|element| assert(element.is_a?(Array) && element.size == 2)}
+      rval.each{|element| assert(element.is_a?(Hash))}
       
       rval
     end

@@ -32,13 +32,6 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkMenuItem" id="concedeButton">
-                        <property name="visible">True</property>
-                        <property name="label" translatable="yes">_Concede</property>
-                        <property name="use_underline">True</property>
-                      </object>
-                    </child>
-                    <child>
                       <object class="GtkSeparatorMenuItem" id="separator1">
                         <property name="visible">True</property>
                       </object>

@@ -64,16 +64,9 @@ module Model
       return gameOver?
     end
 
-    def gameOver?
-      @currentPlayersTurn.nil?
-    end
 
     def clearBoard
       @server.clearBoard
-    end
-    
-    def currentPlayersTurn
-	@currentPlayersTurn = @server.whosTurn(@gameId)
     end
     
     def refresh

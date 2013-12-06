@@ -54,10 +54,6 @@ class GameLauncher
     colourController = Controller::Colour.new(@builder, @game.get_view(View::UiBoard).playerColourMap, @gameModel.players[0], @gameModel.players[1])
     colourController.addObserver(@game.get_view(View::UiBoard))
 
-    fileMenuController = Controller::FileMenu.new(@builder, @gameModel)
-    fileMenuController.addObserver(@game.get_view(View::UiBoard))
-    fileMenuController.addObserver(@game.get_view(View::UiStatusInfo))
-
     # -- Post Conditions -- #
   end
 

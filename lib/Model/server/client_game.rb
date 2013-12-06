@@ -3,16 +3,104 @@ require_relative 'board.rb'
 require_relative 'player.rb'
 require_relative 'settings.rb'
 require_relative 'colour.rb'
+require_relative 'client.rb'
 
 module Model
   class ClientGame < Game
 
-    #All methods from "Game" will need to be rewritten, to contact the server for this information. Contracts will not change.
+    attr_reader :winner, :board, :players, :currentPlayersTurn
+    
+    def initialize(client, gameId = nil)
+      # -- Pre Condiditions -- #
 
-
-    def to_s
-      str = "Current Turn: #{@currentPlayersTurn} \t Game Over: #{@currentPlayersTurn.nil?} \t Winner: #{@winner}\n"
-      str += @board.to_s
+      # -- Code -- #
+      #Game Model Defaults
+      @server = client
+      @gameId = gameId
+      @gameId = @client.newGame if(gameId.nil?)
+      
+      refresh
+        
+      # -- Post Conditions -- #
+      assert(@players.is_a?Array)
+      assert(!@board.nil?)
     end
+
+
+    def currentTurn?(player)
+      # -- Pre Conditions -- #
+      assert(player.is_a?Model::Player)
+      assert(@players.include?(player))
+
+      @currentPlayersTurn = @server.whosTurn(@gameId)
+
+      # -- Code -- #
+      return @currentPlayersTurn == player
+
+      # -- Post Conditions -- #
+      #    None
+    end
+
+    # Drops players value in the board, and then ends that players turn.
+    # @returns true of the move is a game ending move, otherwise false
+    def makeMove(player, column)
+      assert(player.is_a?Player)
+      assert(column.is_a?Integer)
+      
+      @currentPlayersTurn = @server.whosTurn(@gameId)
+      
+      raise NotYourTurnException if !currentTurn?(player)
+
+      @server.makeMove(@gameId, player, column)
+      endTurn()
+    end
+
+    # returns true if current player won on his turn, or if he filled the board and there is no winner.
+    # if there is no winner @currentPlayersTurn will be nil.
+    def endTurn
+      @currentPlayersTurn = @server.whosTurn(@gameId)
+      @board = @server.getBoard(@gameId)
+      @winner = @server.getWinner(@gameId)
+      
+      return gameOver?
+    end
+
+    def gameOver?
+      @currentPlayersTurn = @server.whosTurn(@gameId)
+      @currentPlayersTurn.nil?
+    end
+
+    def clearBoard
+      @server.clearBoard
+    end
+
+    # -- Override the getters to contact the server -- #
+    def winner
+	@winner = @winner.getBoard(@gameId)
+	return @winner
+    end
+    
+    def board
+	@board = @server.getBoard(@gameId)
+	return @board
+    end
+    
+    def players
+	@players = @server.getPlayers(@gameId)
+	return @players
+    end
+    
+    def currentPlayersTurn
+	@currentPlayersTurn = @server.whosTurn(@gameId)
+    end
+    
+    def refresh
+	@board = @server.getBoard(@gameId)
+	@players = @server.getPlayers(@gameId)
+	@currentPlayersTurn = @server.whosTurn(@gameId)
+	@winner = @winner.getWinner(@gameId)
+    end
+    
+    
   end
 end

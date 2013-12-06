@@ -15,6 +15,8 @@ module View
 			@builder = builder
 			@client = client
 
+			update
+
 			# Post conditions #
 			assert_equal(@builder, builder, "builder was not initialized")
 			assert_equal(@client, client, "client was not initialized")

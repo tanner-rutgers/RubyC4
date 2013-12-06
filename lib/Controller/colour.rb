@@ -18,9 +18,10 @@ module Controller
         "whiteRadio"  => Model::Colour::WHITE
     }
 
-    def initialize(builder, player, opponent)
+    def initialize(builder, playerMap, player, opponent)
       @builder = builder
       @player = player
+      @playerMap = playerMap
       @opponent = opponent
 
       setupHandlers
@@ -40,7 +41,8 @@ module Controller
       dialog.run { |response|
         case response
           when @@RESPONSE_ACCEPT
-            player.colour = getColour
+            
+            @playerMap[player] = getColour
             notifyAll   
         end
         dialog.hide      

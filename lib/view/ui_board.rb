@@ -12,6 +12,8 @@ module View
     @@colourMap = Hash[Model::Colour.constants.collect{ |colour| [Model::Colour.const_get(colour), "#{@@resources_path}/#{Model::Colour.const_get(colour)}.png"] }]
     @@colourMap[:empty] = "#{@@resources_path}/empty.png"
     
+    attr_reader :playerColourMap
+    
     def initialize(builder, gameModel)
       # Pre-conditions #
       assert(builder.is_a?Gtk::Builder)
@@ -21,10 +23,10 @@ module View
       @builder = builder
       @gameModel = gameModel
       
-      @playerMap = Hash.new
+      @playerColourMap = Hash.new
             
       @gameModel.players.each_with_index do |player, i|
-	@playerMap[player] = @@colourMap[Model::Colour.const_get(Model::Colour.constants[i])]
+	@playerColourMap[player] = Model::Colour.const_get(Model::Colour.constants[i])
       end
 
       update
@@ -32,7 +34,7 @@ module View
       # Post-conditions / Class-invariants #
       assert(!@builder.nil?, "Builder was not initialized")
       assert(!@gameModel.nil?, "Game model not initialized")
-      assert(!@playerMap.nil?, "Player map not initialized")
+      assert(!@playerColourMap.nil?, "Player colour map not initialized")
     end
 
     # Update all spaces on board
@@ -42,11 +44,16 @@ module View
 	  
           player = @gameModel.board.who(i, j)
 	  imageFile = @@colourMap[:empty]
-	  imageFile = @playerMap[player] if !player.nil?
+	  imageFile = @@colourMap[@playerColourMap[player]] if !player.nil?
           @builder.get_object("piece#{i}#{j}" ).set_file(imageFile)  
 
 	end
       end
+    end
+    
+    def setColour(player, colour)
+	@playerMap[player] = @@colourMap[Model::Colour.const_get(colour)]
+	
     end
   end
 end

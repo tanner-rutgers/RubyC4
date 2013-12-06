@@ -36,7 +36,7 @@ include Test::Unit::Assertions
     #When someone makes a move it will notify the AI controller it needs to make the next move.
     boardController.addObserver(aiController)
 
-    colourController = Controller::Colour.new(@builder, @gameModel.players[0], @gameModel.players[1])
+    colourController = Controller::Colour.new(@builder, game.get_view(View::UiBoard).playerColourMap, @gameModel.players[0], @gameModel.players[1])
     colourController.addObserver(game.get_view(View::UiBoard))
 
     fileMenuController = Controller::FileMenu.new(@builder, @gameModel)

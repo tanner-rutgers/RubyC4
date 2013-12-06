@@ -13,11 +13,11 @@ module Controller
     def initialize(builder, client)
       @builder = builder
       @client = client
-
-      setupListStore
     end
     
     def openNewGameDialog
+      setupListStore
+      
       dialog = @builder.get_object('newGameWindow')
       
       dialog.run do |response|

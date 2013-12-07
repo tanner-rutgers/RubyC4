@@ -23,16 +23,10 @@ module Controller
       dialog.run do |response|
         case response
           when @@RESPONSE_ACCEPT
-	    
-	    opponent = getOpponentName
-	    opponent = "AI-Bob" if isAI?
-	    
-	    if(!opponent.nil?)
-	      launcher = GameLauncher.new(@builder, @client, opponent, getGameType, nil, isAI?)
-	      launcher.show
-	      notifyAll
-	    end
-	    
+	    dialog.hide      
+	    GameLauncher::AILauncher(@builder, @client, getGameType).show if isAI?
+	    GameLauncher::NewGameLauncher(@builder, @client, getOpponentName, getGameType).show unless isAI? || getOpponentName.nil?
+	    notifyAll
 	    
         end
         dialog.hide      

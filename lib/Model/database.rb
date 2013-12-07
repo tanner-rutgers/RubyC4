@@ -41,7 +41,7 @@ class Database
 	end	
 	def db_save_game(id,game,result)
 
-		@db.query("update games set game=\'#{game}\', result=\'#{result}\' where id=#{id}")
+		@db.query("update games set game=\'#{game}\', result=\'#{result}\', timestamp=NOW() where id=#{id}")
 	end
 	def serialize(s)
 		YAML::dump(s)	

@@ -10,7 +10,7 @@ module Model
 
     attr_reader :winner, :board, :players, :currentPlayersTurn, :id, :gameType
 
-    def initialize(player1,player2, gameType)
+    def initialize(player1, player2, gameType)
       # -- Pre Condiditions -- #
       assert(gameType == :connect4 || gameType == :otto)
 

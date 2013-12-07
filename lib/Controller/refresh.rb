@@ -22,6 +22,7 @@ module Controller
 	  sleep(5)
 	  @gameModel.refresh
 	end
+      	@gameModel.refresh
 	@refreshing = false
 	notifyAll  
       } if @gameModel.moveComplete && !@refreshing 

@@ -31,8 +31,7 @@ module Model
     
     ## ---- Gameplay Commands ---- ##
     def newGame(opponentUsername, gameType)
-      puts "asdf"
-      rval = YAML::load(@serverConnection.newGame(@username, @password, opponentUsername, gameType))
+      rval = YAML::load(serverConnection.newGame(@username, @password, opponentUsername, gameType))
 
       raise AccessDeniedException if rval == false
       return rval

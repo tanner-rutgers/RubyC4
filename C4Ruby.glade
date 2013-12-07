@@ -1107,7 +1107,6 @@ Please try again.</property>
                     <property name="receives_default">False</property>
                     <property name="active">True</property>
                     <property name="draw_indicator">True</property>
-                    <property name="group">gameTypeOTTO</property>
                   </object>
                   <packing>
                     <property name="left_attach">1</property>

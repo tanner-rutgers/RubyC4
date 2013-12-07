@@ -1265,6 +1265,13 @@ Please try again.</property>
                       </object>
                     </child>
                     <child>
+                      <object class="GtkMenuItem" id="refreshButton">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">_Refresh</property>
+                        <property name="use_underline">True</property>
+                      </object>
+                    </child>
+                    <child>
                       <object class="GtkSeparatorMenuItem" id="menuitem2">
                         <property name="visible">True</property>
                       </object>

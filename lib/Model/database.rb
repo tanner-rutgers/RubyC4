@@ -106,7 +106,7 @@ class Database
 	end
 	
 	def get_leaderboard
-	  results = @db.query("select p.name, count(*) as wins from games join players p on result=p.id group by p.name order by wins")
+	  results = @db.query("select p.name, count(*) as wins from games join players p on result=p.id group by p.name order by wins DESC")
 	  
 	  arr = Array.new
 	

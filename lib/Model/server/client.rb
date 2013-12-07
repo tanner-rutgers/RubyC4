@@ -138,7 +138,7 @@ module Model
       
       begin
 	@server.login(@username, @password)
-      rescue XMLRPC::FaultException => e
+      rescue Errno::EPIPE => e
 	puts "Restarting server connection"
 	@server = XMLRPC::Client.new("localhost","/RPC2", 50500).proxy("server") if @server.nil?
       end

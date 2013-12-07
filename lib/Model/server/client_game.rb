@@ -75,7 +75,7 @@ module Model
 	@players = @server.getPlayers(@gameId)
 	@currentPlayersTurn = @server.whosTurn(@gameId)
 	@winner = @server.getWinner(@gameId)
-    @gameType=@server.getGameType(@gameId)
+	@gameType=@server.getGameType(@gameId)
     end
     
     #Makes move on client only.

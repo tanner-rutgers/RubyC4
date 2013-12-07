@@ -16,56 +16,99 @@ class GameLauncher
 
   @@refresher = nil;
   
-  def initialize(builder, client, opponent, gameType = :connect4, gameId = nil, aiGame = false)  
-    
-    #Only allow one refresher at a time.
+  def self.AILauncher(builder, client, gameType)
     @@refresher.kill unless @@refresher.nil?
-     
-    @builder = builder
-    
-   
+
     # -- Code -- #
-    if(aiGame)
-      @gameModel = Model::Game.new(Model::Player.new("Bob"), Model::Player.new(opponent))
-      @gameModel.players.each do |player|
-	    player.winCondition = [:player, :player, :player, :player] if gameType == :connect4
-	    player.winCondition = [:player, :other, :other, :player] if gameType == :otto
-      end
-    else
-	@gameModel = Model::ClientGame.new(client, opponent, gameType, gameId)
+    gameModel = Model::Game.new(client.getPlayer, Model::Player.new("AI-Bob"))
+    gameModel.players.each do |player|
+	  player.winCondition = [:player, :player, :player, :player] if gameType == :connect4
+	  player.winCondition = [:player, :other, :other, :player] if gameType == :otto
     end
     
-    @game = View::UiGame.new(@builder, @gameModel)
+    game = View::UiGame.new(builder, gameModel)
     
-    boardController = Controller::Board.new(@builder, @gameModel, aiGame ? @gameModel.players[0] : client.getPlayer)
-    boardController.addObserver(@game.get_view(View::UiBoard)) 
-    boardController.addObserver(@game.get_view(View::UiStatusInfo))
+    boardController = Controller::Board.new(builder, gameModel, gameModel.players[0])
+    boardController.addObserver(game.get_view(View::UiBoard)) 
+    boardController.addObserver(game.get_view(View::UiStatusInfo))
 
-    if(aiGame)
-      aiController = Controller::AI.new(@builder, @gameModel.players[0], @gameModel.players[1], @gameModel)
-      aiController.addObserver(@game.get_view(View::UiBoard))
-      aiController.addObserver(@game.get_view(View::UiStatusInfo))
-      #When someone makes a move it will notify the AI controller it needs to make the next move.
-      boardController.addObserver(aiController)
-    else
-      refreshController = Controller::Refresh.new(@builder, client.getPlayer, @gameModel)
-      refreshController.addObserver(@game.get_view(View::UiBoard))
-      refreshController.addObserver(@game.get_view(View::UiStatusInfo))
-      #When someone makes a move it will notify the refresher to start refreshing again..
-      boardController.addObserver(refreshController)
-      #Start refreshing immediately. -- Will stop immediately if it's currently the users turn, otherwise will continue until it becomes his turn
-      refreshController.notify
-      @@refresher = refreshController;
-    end    
+    aiController = Controller::AI.new(builder, gameModel.players[0], gameModel.players[1], gameModel)
+    aiController.addObserver(game.get_view(View::UiBoard))
+    aiController.addObserver(game.get_view(View::UiStatusInfo))
+    #When someone makes a move it will notify the AI controller it needs to make the next move.
+    boardController.addObserver(aiController)
    
-    colourController = Controller::Colour.new(@builder, @game.get_view(View::UiBoard).playerColourMap, @gameModel.players[0], @gameModel.players[1])
-    colourController.addObserver(@game.get_view(View::UiBoard))
+    colourController = Controller::Colour.new(builder, game.get_view(View::UiBoard).playerColourMap, gameModel.players[0], gameModel.players[1])
+    colourController.addObserver(game.get_view(View::UiBoard))
     
-    # -- Post Conditions -- #
+    return GameLauncher.new(game)
+    
   end
 
+  def self.NewGameLauncher(builder, client, opponent, gameType)
+    @@refresher.kill unless @@refresher.nil?
+     
+   
+   
+    gameModel = Model::ClientGame.new(client, opponent, gameType)
+    
+    game = View::UiGame.new(builder, gameModel)
+    
+    boardController = Controller::Board.new(builder, gameModel, client.getPlayer)
+    boardController.addObserver(game.get_view(View::UiBoard)) 
+    boardController.addObserver(game.get_view(View::UiStatusInfo))
+
+    refreshController = Controller::Refresh.new(builder, client.getPlayer, gameModel)
+    refreshController.addObserver(game.get_view(View::UiBoard))
+    refreshController.addObserver(game.get_view(View::UiStatusInfo))
+    #When someone makes a move it will notify the refresher to start refreshing again..
+    boardController.addObserver(refreshController)
+    #Start refreshing immediately. -- Will stop immediately if it's currently the users turn, otherwise will continue until it becomes his turn
+    refreshController.notify
+    @@refresher = refreshController;
+     
+   
+    colourController = Controller::Colour.new(builder, game.get_view(View::UiBoard).playerColourMap, gameModel.players[0], gameModel.players[1])
+    colourController.addObserver(game.get_view(View::UiBoard))
+    
+    return GameLauncher.new(game)
+  end
+  
+  def self.ExistingGameLauncher(builder, client, gameId)
+    @@refresher.kill unless @@refresher.nil?   
+   
+    gameModel = Model::ClientGame.new(client, "", :connect4, gameId)
+    
+    game = View::UiGame.new(builder, gameModel)
+    
+    boardController = Controller::Board.new(builder, gameModel, client.getPlayer)
+    boardController.addObserver(game.get_view(View::UiBoard)) 
+    boardController.addObserver(game.get_view(View::UiStatusInfo))
+
+    refreshController = Controller::Refresh.new(builder, client.getPlayer, gameModel)
+    refreshController.addObserver(game.get_view(View::UiBoard))
+    refreshController.addObserver(game.get_view(View::UiStatusInfo))
+    #When someone makes a move it will notify the refresher to start refreshing again..
+    boardController.addObserver(refreshController)
+    #Start refreshing immediately. -- Will stop immediately if it's currently the users turn, otherwise will continue until it becomes his turn
+    refreshController.notify
+    @@refresher = refreshController;
+     
+   
+    colourController = Controller::Colour.new(builder, game.get_view(View::UiBoard).playerColourMap, gameModel.players[0], gameModel.players[1])
+    colourController.addObserver(game.get_view(View::UiBoard))
+    
+    return GameLauncher.new(game)
+  end
+  
   def show
       @game.show  
   end
+  
+  private
+  def initialize(game)  
+    @game = game
+  end
+
 end
 

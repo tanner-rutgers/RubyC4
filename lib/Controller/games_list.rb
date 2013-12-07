@@ -28,7 +28,7 @@ module Controller
     
     def launchButtonAction
       gameInfo = getGameInfo;
-      GameLauncher.new(@builder, @client, gameInfo[:opponent], gameInfo[:type], gameInfo[:gameId]).show
+      GameLauncher::ExistingGameLauncher(@builder, @client, gameInfo[:gameId]).show
     end
     
     def getGameInfo

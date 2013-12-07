@@ -8,7 +8,7 @@ require_relative 'client.rb'
 module Model
   class ClientGame < Game
 
-    attr_reader :winner, :board, :players, :currentPlayersTurn, :moveComplete
+    attr_reader :winner, :board, :players, :currentPlayersTurn, :moveComplete, :gameType
     
     def initialize(client, opponent, gameType, gameId = nil)
       # -- Pre Condiditions -- #
@@ -22,6 +22,7 @@ module Model
       @gameId = gameId
       @gameId = @server.newGame(opponent, gameType) if(gameId.nil?)
       @moveComplete = true
+      @gameType = gameType
       
       puts(@gameId)
       

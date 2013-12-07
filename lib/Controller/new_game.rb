@@ -24,7 +24,6 @@ module Controller
         case response
           when @@RESPONSE_ACCEPT
 	    dialog.hide      
-
 	    GameLauncher::AILauncher(@builder, @client, getGameType).show if isAI?
 	    GameLauncher::NewGameLauncher(@builder, @client, getOpponentName, getGameType).show unless isAI? || getOpponentName.nil?
 	    notifyAll

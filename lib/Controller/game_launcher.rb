@@ -78,7 +78,6 @@ class GameLauncher
     @@refresher.kill unless @@refresher.nil?   
    
     gameModel = Model::ClientGame.new(client, "", :connect4, gameId)
-    
     game = View::UiGame.new(builder, gameModel)
     
     boardController = Controller::Board.new(builder, gameModel, client.getPlayer)

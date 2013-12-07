@@ -20,19 +20,17 @@ module Model
       
       @username = username
       @password = password
-      @serverConnection = XMLRPC::Client.new("localhost","/RPC2", 50500).proxy("server")
       
-      raise AccessDeniedException if !YAML::load(@serverConnection.login(username, password))
+      raise AccessDeniedException if !YAML::load(serverConnection.login(username, password))
       
       #preconditions
       assert_equal(@username, username)
       assert_equal(@password, password)
-      assert(!@serverConnection.nil?)
     end
     
     ## ---- Gameplay Commands ---- ##
     def newGame(opponentUsername, gameType)
-      rval = YAML::load(@serverConnection.newGame(@username, @password, opponentUsername, gameType))
+      rval = YAML::load(serverConnection.newGame(@username, @password, opponentUsername, gameType))
       raise AccessDeniedException if rval == false
       return rval
     end   
@@ -42,7 +40,7 @@ module Model
       assert(move.is_a?Integer)
       
       #Make move and raise exception if an credentials are bad.
-      rval =  YAML::load(@serverConnection.makeMove(gameId, @username, @password, move))
+      rval =  YAML::load(serverConnection.makeMove(gameId, @username, @password, move))
       raise AccessDeniedException if rval == false
 	
     end
@@ -50,7 +48,7 @@ module Model
     def getBoard(gameId)
       assert(gameId.is_a?Integer)
             
-      rval = YAML::load(@serverConnection.getBoard(gameId, @username, @password))
+      rval = YAML::load(serverConnection.getBoard(gameId, @username, @password))
       raise AccessDeniedException if rval == false
       
       return rval
@@ -59,7 +57,7 @@ module Model
     def whosTurn(gameId)
       assert(gameId.is_a?Integer)
       
-      rval =  YAML::load(@serverConnection.whosTurn(gameId, @username, @password))
+      rval =  YAML::load(serverConnection.whosTurn(gameId, @username, @password))
       raise AccessDeniedException if rval == false
 
       assert(rval.is_a?(Player) || rval.nil?)
@@ -68,7 +66,7 @@ module Model
     end
     
     def getPlayer
-	rval = YAML::load(@serverConnection.getPlayer(@username, @password))
+	rval = YAML::load(serverConnection.getPlayer(@username, @password))
 	raise AccessDeniedException if rval == false
 	
 	return rval
@@ -76,7 +74,7 @@ module Model
 
     def getPlayers(gameId)
       assert(gameId.is_a?Integer)
-      rval =  YAML::load(@serverConnection.getPlayers(gameId, @username, @password))
+      rval =  YAML::load(serverConnection.getPlayers(gameId, @username, @password))
       raise AccessDeniedException if rval == false
       
       rval
@@ -85,7 +83,7 @@ module Model
     def getWinner(gameId)
       assert(gameId.is_a?Integer)
       
-      rval =  YAML::load(@serverConnection.getWinner(gameId, @username, @password))
+      rval =  YAML::load(serverConnection.getWinner(gameId, @username, @password))
       raise AccessDeniedException if rval == false
 
       assert(rval.is_a?(Player) || rval.nil?)
@@ -96,7 +94,7 @@ module Model
     
     ## ---- UI Info Commands ---- ##
     def getGameList
-      rval =  YAML::load(@serverConnection.getGameList(@username, @password))
+      rval =  YAML::load(serverConnection.getGameList(@username, @password))
       
       assert(rval.is_a?Array)
       rval.each{|element| assert(element.is_a?(Hash))}
@@ -105,7 +103,7 @@ module Model
     end
     
     def getUserList
-      rval =  YAML::load(@serverConnection.get_users)
+      rval =  YAML::load(serverConnection.get_users)
       raise AccessDeniedException if rval == false
       
       rval.delete_if {|element| element == @username}
@@ -114,13 +112,26 @@ module Model
     end
 
     def getLeaderboard
-      rval = YAML::load(@serverConnection.getLeaderboard)
+      rval = YAML::load(serverConnection.getLeaderboard)
 
       #post-conditions
       assert(rval.is_a?Array)
       rval.each{|element| assert(element.is_a?(Hash))}
       
       rval
+    end
+    
+    def serverConnection
+      @server = XMLRPC::Client.new("localhost","/RPC2", 50500).proxy("server") if @server.nil?
+      
+      begin
+	@server.login(@username, @password)
+      rescue XMLRPC::FaultException => e
+	puts "Restarting server connection"
+	@server = XMLRPC::Client.new("localhost","/RPC2", 50500).proxy("server") if @server.nil?
+      end
+      
+      return @server
     end
     
   end

@@ -45,7 +45,7 @@ class GameLauncher
     
   end
 
-  def self.NewGameLauncher(builder, client, opponent, gameType)
+  def self.NewGameLauncher(builder, client, opponent, gameType, gamesList)
     @@refresher.kill unless @@refresher.nil?
      
    
@@ -57,6 +57,7 @@ class GameLauncher
     boardController = Controller::Board.new(builder, gameModel, client.getPlayer)
     boardController.addObserver(game.get_view(View::UiBoard)) 
     boardController.addObserver(game.get_view(View::UiStatusInfo))
+    boardController.addObserver(gamesList)
 
     refreshController = Controller::Refresh.new(builder, client.getPlayer, gameModel)
     refreshController.addObserver(game.get_view(View::UiBoard))
@@ -74,7 +75,7 @@ class GameLauncher
     return GameLauncher.new(game)
   end
   
-  def self.ExistingGameLauncher(builder, client, gameId)
+  def self.ExistingGameLauncher(builder, client, gameId, gamesList)
     @@refresher.kill unless @@refresher.nil?   
    
     gameModel = Model::ClientGame.new(client, "", :connect4, gameId)
@@ -83,6 +84,7 @@ class GameLauncher
     boardController = Controller::Board.new(builder, gameModel, client.getPlayer)
     boardController.addObserver(game.get_view(View::UiBoard)) 
     boardController.addObserver(game.get_view(View::UiStatusInfo))
+    boardController.addObserver(gamesList)
 
     refreshController = Controller::Refresh.new(builder, client.getPlayer, gameModel)
     refreshController.addObserver(game.get_view(View::UiBoard))

@@ -32,28 +32,35 @@ module Controller
     end
 
     def setupHandlers
+      @builder.get_object("gameWindow").signal_connect("delete-event") {boardClosedAction}
+
       @gameModel.board.size[:columns].times { |i|
 	      @builder.get_object("columnButton" + i.to_s).signal_connect("clicked") { dropButtonClicked(i) }
       }
     end
 
+    def boardClosedAction
+      @builder.get_object("gameWindow").hide
+      notifyAll
+    end
+
     def dropButtonClicked(column)
       
       begin 
-	@buttonLock = true
+	    @buttonLock = true
 	
-	if(@gameModel.respond_to?("pseudoMakeMove"))
-	  @gameModel.pseudoMakeMove(@player, column)
-	  notifyAll
-	end
-	
-	@gameModel.makeMove(@player, column)
-	notifyAll
-	
+        if(@gameModel.respond_to?("pseudoMakeMove"))
+          @gameModel.pseudoMakeMove(@player, column)
+          notifyAll
+        end
+
+        @gameModel.makeMove(@player, column)
+        notifyAll
+
       rescue Model::Board::ColumnFullException
-	puts "[Log]Tried to play in a full column"
+            puts "[Log]Tried to play in a full column"
       rescue Model::Game::NotYourTurnException
-	puts "[Log]Tried to play out of turn"
+            puts "[Log]Tried to play out of turn"
       end unless @buttonLock
 
       

@@ -46,13 +46,12 @@ module Controller
     	begin
     		client = Model::Client.new(username, password)
     		
-		gamesList = View::UiGameList.new(@builder, client)
-		leaderboard = View::UiLeaderboard.new(@builder, client)
-		newGameController = Controller::NewGame.new(@builder, client)
-		newGameController.addObserver(gamesList)
-		Controller::GamesList.new(@builder, client, newGameController)
+		    gamesList = View::UiGameList.new(@builder, client)
+		    leaderboard = View::UiLeaderboard.new(@builder, client)
+		    newGameController = Controller::NewGame.new(@builder, client, gamesList)
+		    Controller::GamesList.new(@builder, client, newGameController, gamesList)
 		
-		@builder.get_object("launchWindow").show
+		    @builder.get_object("launchWindow").show
 		
     		@view.hide
             

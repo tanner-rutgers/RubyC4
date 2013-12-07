@@ -13,13 +13,13 @@ module Controller
     include Test::Unit::Assertions
     include Controller::Observable
     
-    def initialize(builder)
+    def initialize(builder, serverip)
       # Pre conditions #
 	  assert(builder.is_a?(Gtk::Builder), "builder is not a GTK builder")  
       
       @builder = builder
       @view = View::UiLogin.new(builder)
-
+      @serverip = serverip
 
       setupHandlers
  
@@ -44,7 +44,7 @@ module Controller
     	password = @builder.get_object("loginPassword").text
 
     	begin
-    		client = Model::Client.new(username, password)
+    		client = Model::Client.new(username, password, @serverip)
     		
 		    gamesList = View::UiGameList.new(@builder, client)
 		    leaderboard = View::UiLeaderboard.new(@builder, client)

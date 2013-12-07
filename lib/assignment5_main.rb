@@ -8,6 +8,6 @@ Gtk.init
 builder = Gtk::Builder::new
 builder.add_from_file(File.expand_path("../C4Ruby.glade", File.dirname(__FILE__)))
 
-Controller::Login.new(builder)
+Controller::Login.new(builder, "129.128.211.53")
 
 Gtk.main()

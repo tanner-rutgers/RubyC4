@@ -7,18 +7,19 @@ require_relative '../player.rb'
 
 module Model
   class Client
-    include Test::Unit::Assertions
+    include Test::Unit::Assertions 
 
     attr_reader :username
     class AccessDeniedException < StandardError;
     end   
     
       
-    def initialize(username, password)
+    def initialize(username, password, serverip)
       #preconditions
       assert(username.is_a?String)
       assert(password.is_a?String)
       
+      @serverip = serverip
       @instance_lock = Mutex.new
       @username = username
       @password = password
@@ -167,13 +168,13 @@ module Model
     
     def serverConnection
       
-      @server = XMLRPC::Client.new("129.128.211.53","/RPC2", 50500).proxy("server") if @server.nil?
+      @server = XMLRPC::Client.new(@serverip,"/RPC2", 50500).proxy("server") if @server.nil?
       
       begin
         @server.login(@username, @password)
       rescue Errno::EPIPE => e
         puts "Restarting server connection"
-        @server = XMLRPC::Client.new("129.128.211.53","/RPC2", 50500).proxy("server") if @server.nil?
+        @server = XMLRPC::Client.new(@serverip,"/RPC2", 50500).proxy("server") if @server.nil?
       end
 
       

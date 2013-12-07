@@ -52,7 +52,7 @@ class GameLauncher
    
     colourController = Controller::Colour.new(@builder, @game.get_view(View::UiBoard).playerColourMap, @gameModel.players[0], @gameModel.players[1])
     colourController.addObserver(@game.get_view(View::UiBoard))
-
+    
     # -- Post Conditions -- #
   end
 

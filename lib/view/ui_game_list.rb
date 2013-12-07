@@ -28,6 +28,7 @@ module View
 
 			@client.getGameList.each do |game|
 				entry = listStore.append
+				puts(game[:id].to_i)
 				entry.set_value(0, game[:id].to_i)
 				entry.set_value(1, game[:opponent].name)
 				entry.set_value(2, game[:type] == :connect4 ? "Connect 4" : "OTTO/TOOT")

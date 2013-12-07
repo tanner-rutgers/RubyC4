@@ -19,8 +19,6 @@ module View
 
         @builder = builder
         @model = model
-        
-	    @builder.get_object("gameWindow").signal_connect("delete-event") {@builder.get_object("gameWindow").hide}
 
         @views = Array.new
         @views.push(View::UiBoard.new(@builder, @model))

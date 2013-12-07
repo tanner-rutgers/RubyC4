@@ -10,9 +10,10 @@ module Controller
     @@RESPONSE_ACCEPT = 0
     @@RESPONSE_CANCEL = 3
     
-    def initialize(builder, client)
+    def initialize(builder, client, gamesList)
       @builder = builder
       @client = client
+      @gamesList = gamesList
     end
     
     def openNewGameDialog
@@ -23,11 +24,13 @@ module Controller
       dialog.run do |response|
         case response
           when @@RESPONSE_ACCEPT
-	    dialog.hide      
-	    GameLauncher::AILauncher(@builder, @client, getGameType).show if isAI?
-	    GameLauncher::NewGameLauncher(@builder, @client, getOpponentName, getGameType).show unless isAI? || getOpponentName.nil?
-	    notifyAll
-	    
+	          dialog.hide
+	          gameLauncher = GameLauncher::AILauncher(@builder, @client, getGameType) if isAI?
+	          gameLauncher = GameLauncher::NewGameLauncher(@builder, @client, getOpponentName, getGameType, @gamesList) unless isAI? || getOpponentName.nil?
+	          
+
+	          gameLauncher.show
+	    	    notifyAll
         end
         dialog.hide      
       end

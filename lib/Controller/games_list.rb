@@ -3,11 +3,11 @@ require_relative 'observable.rb'
 module Controller
   class GamesList
 
-    def initialize(builder, client, newGameController)
+    def initialize(builder, client, newGameController, gamesList)
       @builder = builder
       @client = client
       @newGameController = newGameController
-
+      @gamesList = gamesList
 
       setupHandlers
     end
@@ -30,7 +30,7 @@ module Controller
     
     def launchButtonAction
       gameInfo = getGameInfo;
-      GameLauncher::ExistingGameLauncher(@builder, @client, gameInfo[:gameId]).show
+      GameLauncher::ExistingGameLauncher(@builder, @client, gameInfo[:gameId], @gamesList).show
     end
     
     def getGameInfo

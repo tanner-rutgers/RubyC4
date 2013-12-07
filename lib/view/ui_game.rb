@@ -19,9 +19,7 @@ module View
 
         @builder = builder
         @model = model
-        
-        @builder.get_object("gameWindow").signal_connect( "destroy" ) { Gtk.main_quit }
-
+       
         @views = Array.new
         @views.push(View::UiBoard.new(@builder, @model))
         @views.push(View::UiStatusInfo.new(@builder, @model))

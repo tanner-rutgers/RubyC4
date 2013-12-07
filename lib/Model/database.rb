@@ -64,7 +64,7 @@ class Database
 	end
 
 	def getGameList(playerId)
-		results = @db.query("select * from games join players p on player1=p.id or player2 = p.id where (player1=#{playerId} or player2=#{playerId}) and p.id <> #{playerId}")
+		results = @db.query("select g.id as id, g.game as game, p.player as player, g.timestamp as timestamp from games g join players p on g.player1=p.id or g.player2 = p.id where (g.player1=#{playerId} or g.player2=#{playerId}) and p.id <> #{playerId} order by timestamp DESC")
 		arr = Array.new
 		
 		results.each_hash do |x| 

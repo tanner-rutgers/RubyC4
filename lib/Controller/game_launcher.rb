@@ -14,9 +14,16 @@ require_relative 'refresh.rb'
 class GameLauncher
   include Test::Unit::Assertions
 
+  @@refresher = nil;
+  
   def initialize(builder, client, opponent, gameType = :connect4, gameId = nil, aiGame = false)  
+    
+    #Only allow one refresher at a time.
+    @@refresher.kill unless @@refresher.nil?
+     
     @builder = builder
     
+   
     # -- Code -- #
     if(aiGame)
       @gameModel = Model::Game.new(Model::Player.new("Bob"), Model::Player.new(opponent))
@@ -48,6 +55,7 @@ class GameLauncher
       boardController.addObserver(refreshController)
       #Start refreshing immediately. -- Will stop immediately if it's currently the users turn, otherwise will continue until it becomes his turn
       refreshController.notify
+      @@refresher = refreshController;
     end    
    
     colourController = Controller::Colour.new(@builder, @game.get_view(View::UiBoard).playerColourMap, @gameModel.players[0], @gameModel.players[1])

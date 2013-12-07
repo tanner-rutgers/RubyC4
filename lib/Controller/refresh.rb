@@ -16,7 +16,7 @@ module Controller
     end
 
     def notify
-      Thread.new {
+      @refreshThread = Thread.new {
 	@refreshing = true
 	while(@gameModel.currentPlayersTurn != @player && !@gameModel.currentPlayersTurn.nil?)
 	  sleep(5)
@@ -25,6 +25,10 @@ module Controller
 	@refreshing = false
 	notifyAll  
       } if @gameModel.moveComplete && !@refreshing 
+    end
+    
+    def kill
+      Thread.kill(@refreshThread) unless @refreshThread.nil?
     end
     
   end

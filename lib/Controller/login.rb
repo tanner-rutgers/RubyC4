@@ -49,7 +49,7 @@ module Controller
 		    gamesList = View::UiGameList.new(@builder, client)
 		    leaderboard = View::UiLeaderboard.new(@builder, client)
 		    newGameController = Controller::NewGame.new(@builder, client, gamesList)
-		    Controller::GamesList.new(@builder, client, newGameController, gamesList)
+		    Controller::GamesList.new(@builder, client, newGameController, gamesList, leaderboard)
 		
 		    @builder.get_object("launchWindow").show
 		

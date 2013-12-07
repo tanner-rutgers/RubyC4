@@ -1316,7 +1316,7 @@ Please try again.</property>
                   <object class="GtkScrolledWindow" id="scrolledwindow1">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="hscrollbar_policy">never</property>
+                    <property name="hscrollbar_policy">automatic</property>
                     <property name="vscrollbar_policy">automatic</property>
                     <child>
                       <object class="GtkTreeView" id="treeview2">
@@ -1324,10 +1324,10 @@ Please try again.</property>
                         <property name="can_focus">True</property>
                         <property name="model">gamesListStore</property>
                         <property name="headers_clickable">False</property>
-                        <property name="search_column">0</property>
                         <property name="fixed_height_mode">True</property>
                         <child>
                           <object class="GtkTreeViewColumn" id="treeviewcolumn4">
+                            <property name="resizable">True</property>
                             <property name="sizing">fixed</property>
                             <property name="fixed_width">100</property>
                             <property name="title">Opponent</property>
@@ -1354,6 +1354,7 @@ Please try again.</property>
                         </child>
                         <child>
                           <object class="GtkTreeViewColumn" id="treeviewcolumn6">
+                            <property name="resizable">True</property>
                             <property name="sizing">fixed</property>
                             <property name="fixed_width">100</property>
                             <property name="title">Turn</property>
@@ -1368,8 +1369,9 @@ Please try again.</property>
                         <child>
                           <object class="GtkTreeViewColumn" id="treeviewcolumn7">
                             <property name="sizing">fixed</property>
-                            <property name="fixed_width">200</property>
+                            <property name="fixed_width">150</property>
                             <property name="title">Last Move</property>
+                            <property name="alignment">2.2351741291171123e-10</property>
                             <child>
                               <object class="GtkCellRendererText" id="cellrenderertext7"/>
                               <attributes>
@@ -1420,7 +1422,7 @@ Please try again.</property>
                 <child>
                   <object class="GtkLabel" id="label5">
                     <property name="visible">True</property>
-                    <property name="xpad">64</property>
+                    <property name="xpad">50</property>
                     <property name="ypad">7</property>
                     <property name="label" translatable="yes">Leaderboard</property>
                     <property name="justify">center</property>
@@ -1447,8 +1449,13 @@ Please try again.</property>
                     <child>
                       <object class="GtkLabel" id="label6">
                         <property name="visible">True</property>
+                        <property name="xalign">0</property>
                         <property name="label" translatable="yes">1</property>
                       </object>
+                      <packing>
+                        <property name="x_options"></property>
+                        <property name="x_padding">10</property>
+                      </packing>
                     </child>
                     <child>
                       <object class="GtkLabel" id="label7">
@@ -1458,6 +1465,7 @@ Please try again.</property>
                       <packing>
                         <property name="top_attach">1</property>
                         <property name="bottom_attach">2</property>
+                        <property name="x_options"></property>
                       </packing>
                     </child>
                     <child>
@@ -1468,6 +1476,7 @@ Please try again.</property>
                       <packing>
                         <property name="top_attach">2</property>
                         <property name="bottom_attach">3</property>
+                        <property name="x_options"></property>
                       </packing>
                     </child>
                     <child>
@@ -1478,6 +1487,7 @@ Please try again.</property>
                       <packing>
                         <property name="top_attach">3</property>
                         <property name="bottom_attach">4</property>
+                        <property name="x_options"></property>
                       </packing>
                     </child>
                     <child>
@@ -1488,6 +1498,7 @@ Please try again.</property>
                       <packing>
                         <property name="top_attach">4</property>
                         <property name="bottom_attach">5</property>
+                        <property name="x_options"></property>
                       </packing>
                     </child>
                     <child>
@@ -1498,6 +1509,7 @@ Please try again.</property>
                       <packing>
                         <property name="top_attach">5</property>
                         <property name="bottom_attach">6</property>
+                        <property name="x_options"></property>
                       </packing>
                     </child>
                     <child>
@@ -1508,6 +1520,7 @@ Please try again.</property>
                       <packing>
                         <property name="top_attach">6</property>
                         <property name="bottom_attach">7</property>
+                        <property name="x_options"></property>
                       </packing>
                     </child>
                     <child>
@@ -1518,6 +1531,7 @@ Please try again.</property>
                       <packing>
                         <property name="top_attach">7</property>
                         <property name="bottom_attach">8</property>
+                        <property name="x_options"></property>
                       </packing>
                     </child>
                     <child>
@@ -1528,6 +1542,7 @@ Please try again.</property>
                       <packing>
                         <property name="top_attach">8</property>
                         <property name="bottom_attach">9</property>
+                        <property name="x_options"></property>
                       </packing>
                     </child>
                     <child>
@@ -1538,17 +1553,19 @@ Please try again.</property>
                       <packing>
                         <property name="top_attach">9</property>
                         <property name="bottom_attach">10</property>
+                        <property name="x_options"></property>
                       </packing>
                     </child>
                     <child>
                       <object class="GtkLabel" id="leaderLabelRank1">
                         <property name="visible">True</property>
-                        <property name="xpad">47</property>
                         <property name="label" translatable="yes">Empty</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
                         <property name="right_attach">2</property>
+                        <property name="x_options"></property>
+                        <property name="x_padding">5</property>
                       </packing>
                     </child>
                     <child>
@@ -1561,6 +1578,7 @@ Please try again.</property>
                         <property name="right_attach">2</property>
                         <property name="top_attach">1</property>
                         <property name="bottom_attach">2</property>
+                        <property name="x_options"></property>
                       </packing>
                     </child>
                     <child>
@@ -1573,6 +1591,7 @@ Please try again.</property>
                         <property name="right_attach">2</property>
                         <property name="top_attach">2</property>
                         <property name="bottom_attach">3</property>
+                        <property name="x_options"></property>
                       </packing>
                     </child>
                     <child>
@@ -1585,6 +1604,7 @@ Please try again.</property>
                         <property name="right_attach">2</property>
                         <property name="top_attach">3</property>
                         <property name="bottom_attach">4</property>
+                        <property name="x_options"></property>
                       </packing>
                     </child>
                     <child>
@@ -1597,6 +1617,7 @@ Please try again.</property>
                         <property name="right_attach">2</property>
                         <property name="top_attach">4</property>
                         <property name="bottom_attach">5</property>
+                        <property name="x_options"></property>
                       </packing>
                     </child>
                     <child>
@@ -1609,6 +1630,7 @@ Please try again.</property>
                         <property name="right_attach">2</property>
                         <property name="top_attach">5</property>
                         <property name="bottom_attach">6</property>
+                        <property name="x_options"></property>
                       </packing>
                     </child>
                     <child>
@@ -1621,6 +1643,7 @@ Please try again.</property>
                         <property name="right_attach">2</property>
                         <property name="top_attach">6</property>
                         <property name="bottom_attach">7</property>
+                        <property name="x_options"></property>
                       </packing>
                     </child>
                     <child>
@@ -1633,6 +1656,7 @@ Please try again.</property>
                         <property name="right_attach">2</property>
                         <property name="top_attach">7</property>
                         <property name="bottom_attach">8</property>
+                        <property name="x_options"></property>
                       </packing>
                     </child>
                     <child>
@@ -1645,6 +1669,7 @@ Please try again.</property>
                         <property name="right_attach">2</property>
                         <property name="top_attach">8</property>
                         <property name="bottom_attach">9</property>
+                        <property name="x_options"></property>
                       </packing>
                     </child>
                     <child>
@@ -1657,6 +1682,7 @@ Please try again.</property>
                         <property name="right_attach">2</property>
                         <property name="top_attach">9</property>
                         <property name="bottom_attach">10</property>
+                        <property name="x_options"></property>
                       </packing>
                     </child>
                   </object>
@@ -1666,7 +1692,6 @@ Please try again.</property>
                 </child>
               </object>
               <packing>
-                <property name="expand">False</property>
                 <property name="position">2</property>
               </packing>
             </child>

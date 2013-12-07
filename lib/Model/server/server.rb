@@ -56,6 +56,16 @@ module Model
       game_model = @db.get_game(gameId)
       return YAML::dump(game_model.currentPlayersTurn)
     end
+
+    def getGameType(gameId,name,password)
+      assert(gameId.is_a?Integer)
+      
+      return YAML::dump(false) if !@db.login(name,password)
+      
+      game_model = @db.get_game(gameId)
+      
+      return YAML::dump(game_model.gameType)
+    end
     
     def getPlayer(name, password)
       return YAML::dump(false) if !@db.login(name, password)
@@ -73,6 +83,8 @@ module Model
     end
 
     def newGame(name, password, opponent, gameType)
+      gameType=:connect4 if gameType=="connect4"      
+      gameType=:otto if gameType=="otto"
       return YAML::dump(false) if !@db.login(name,password)
       
       player1 = @db.get_player(name)
@@ -80,8 +92,8 @@ module Model
       game = Model::Game.new(player1,player2, gameType)
       
       game.players.each do |player|
-	player.winCondition = [:player, :player, :player, :player] if gameType == "connect4"
-      	player.winCondition = [:player, :other, :other, :player] if gameType == "otto"
+	player.winCondition = [:player, :player, :player, :player] if gameType == :connect4
+      	player.winCondition = [:player, :other, :other, :player] if gameType == :otto
       end
             
       gameId = @db.new_game(game)

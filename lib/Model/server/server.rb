@@ -77,7 +77,6 @@ module Model
       
       player1 = @db.get_player(name)
       player2 = @db.get_player(opponent)
-      puts "fag"
       game = Model::Game.new(player1,player2, gameType)
       
       game.players.each do |player|

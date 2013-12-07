@@ -19,6 +19,7 @@ module Model
       assert(username.is_a?String)
       assert(password.is_a?String)
       
+      @instance_lock = Mutex.new
       @username = username
       @password = password
       
@@ -134,13 +135,15 @@ module Model
     end
     
     def serverConnection
-      @server = XMLRPC::Client.new("localhost","/RPC2", 50500).proxy("server") if @server.nil?
-      
-      begin
-	@server.login(@username, @password)
-      rescue Errno::EPIPE => e
-	puts "Restarting server connection"
-	@server = XMLRPC::Client.new("localhost","/RPC2", 50500).proxy("server") if @server.nil?
+      @instance_lock.synchronize do
+        @server = XMLRPC::Client.new("localhost","/RPC2", 50500).proxy("server") if @server.nil?
+        
+        begin
+	        @server.login(@username, @password)
+        rescue Errno::EPIPE => e
+	        puts "Restarting server connection"
+	        @server = XMLRPC::Client.new("localhost","/RPC2", 50500).proxy("server") if @server.nil?
+        end
       end
       
       return @server

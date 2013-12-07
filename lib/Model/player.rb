@@ -45,7 +45,7 @@ module Model
             hasWon = true
             @winCondition.each_with_index do |patternElement, index|
 	      hasWon &= line[index].eql?(self)  	if patternElement == :player
-	      hasWon &= !line[index].eql?(self) 	if patternElement == :other
+	      hasWon &= line[index].is_a?(Player) && !line[index].eql?(self) 	if patternElement == :other
 	      hasWon &= line[index].is_a?(Player) 	if patternElement == :any
             end
 

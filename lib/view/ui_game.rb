@@ -15,12 +15,12 @@ module View
       def initialize(builder, model)
         # Pre-conditions #
         assert(builder.is_a?(Gtk::Builder), "builder is not a Gtk::Builder")
-	assert(model.is_a?(Model::Game))
+	    assert(model.is_a?(Model::Game))
 
         @builder = builder
         @model = model
         
-	@builder.get_object("gameWindow").signal_connect("delete-event") {@builder.get_object("gameWindow").hide}
+	    @builder.get_object("gameWindow").signal_connect("delete-event") {@builder.get_object("gameWindow").hide}
 
         @views = Array.new
         @views.push(View::UiBoard.new(@builder, @model))
@@ -47,6 +47,8 @@ module View
       end
 
     def show
+        puts @model.gameType
+        @builder.get_object("gameWindow").set_title(@model.gameType==:connect4 ? "Connect 4": "Otto&Toot")
         @builder.get_object("gameWindow").show()
         Gtk.main()
     end

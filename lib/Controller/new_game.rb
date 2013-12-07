@@ -45,6 +45,7 @@ module Controller
     end
     
     def getGameType
+      puts @builder.get_object("gameTypeOTTO").active?
       return :otto if @builder.get_object("gameTypeOTTO").active?
       return :connect4
     end

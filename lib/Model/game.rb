@@ -8,13 +8,15 @@ module Model
 
     class NotYourTurnException < StandardError; end
 
-    attr_reader :winner, :board, :players, :currentPlayersTurn, :id
+    attr_reader :winner, :board, :players, :currentPlayersTurn, :id, :gameType
 
-    def initialize(player1,player2)
+    def initialize(player1,player2, gameType)
       # -- Pre Condiditions -- #
+      assert(gameType == :connect4 || gameType == :otto)
 
       # -- Code -- #
       #Game Model Defaults
+      @gameType = gameType
       @players = [player1, player2]
       clearBoard
 

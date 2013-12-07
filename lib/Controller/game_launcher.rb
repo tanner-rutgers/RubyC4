@@ -16,7 +16,7 @@ class GameLauncher
 
   @@refresher = nil;
   
-  def initialize(builder, client, opponent, gameType = :connect4, gameId = nil, aiGame = false)  
+  def initialize(builder, client, opponent, gameType, gameId = nil, aiGame = false)  
     
     #Only allow one refresher at a time.
     @@refresher.kill unless @@refresher.nil?
@@ -26,13 +26,13 @@ class GameLauncher
    
     # -- Code -- #
     if(aiGame)
-      @gameModel = Model::Game.new(Model::Player.new("Bob"), Model::Player.new(opponent))
+      @gameModel = Model::Game.new(Model::Player.new(client.username), Model::Player.new(opponent), gameType)
       @gameModel.players.each do |player|
 	    player.winCondition = [:player, :player, :player, :player] if gameType == :connect4
 	    player.winCondition = [:player, :other, :other, :player] if gameType == :otto
       end
     else
-	@gameModel = Model::ClientGame.new(client, opponent, gameType, gameId)
+	  @gameModel = Model::ClientGame.new(client, opponent, gameType, gameId)
     end
     
     @game = View::UiGame.new(@builder, @gameModel)
